@@ -1,26 +1,252 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════
+   Vextiv Studio — Design Tokens
+   ═══════════════════════════════════════════════ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* === ACCENT === */
+  --accent: #C8F04D;
+  --accent-rgb: 200, 240, 77;
+
+  /* === BACKGROUNDS === */
+  --bg-base: #080808;
+  --bg-surface-0: #0a0a0a;
+  --bg-surface-1: #0f0f0f;
+  --bg-surface-2: #111111;
+  --bg-surface-3: #131313;
+  --bg-surface-4: #141414;
+  --bg-surface-5: #161616;
+
+  /* Per-card tinted backgrounds */
+  --bg-card-warm: #131210;
+  --bg-card-cool: #10111A;
+  --bg-card-green: #0f1412;
+
+  /* Section alternating */
+  --bg-section-hero: #080808;
+  --bg-section-services: #0a0a0a;
+  --bg-section-why: #0d0d0d;
+
+  /* === TEXT === */
+  --text-primary: #F0EEE8;
+  --text-secondary: rgba(240, 238, 232, 0.55);
+  --text-muted: rgba(240, 238, 232, 0.45);
+  --text-very-muted: rgba(240, 238, 232, 0.30);
+  --text-ultra-muted: rgba(240, 238, 232, 0.25);
+  --text-accent: #C8F04D;
+
+  /* === ACCENT FILL VARIANTS === */
+  --accent-fill-08: rgba(200, 240, 77, 0.08);
+  --accent-fill-10: rgba(200, 240, 77, 0.10);
+  --accent-fill-12: rgba(200, 240, 77, 0.12);
+  --accent-fill-20: rgba(200, 240, 77, 0.20);
+  --accent-fill-25: rgba(200, 240, 77, 0.25);
+  --accent-fill-35: rgba(200, 240, 77, 0.35);
+
+  /* === ACCENT BORDERS === */
+  --accent-border-card: rgba(200, 240, 77, 0.15);
+  --accent-border-hover: rgba(200, 240, 77, 0.20);
+  --accent-border-active: rgba(200, 240, 77, 0.25);
+  --accent-border-cta: rgba(200, 240, 77, 0.35);
+  --accent-focus: rgba(200, 240, 77, 0.40);
+
+  /* === DEFAULT BORDERS === */
+  --border-subtle: rgba(255, 255, 255, 0.04);
+  --border-default: rgba(255, 255, 255, 0.06);
+  --border-medium: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.10);
+  --border-hover: rgba(255, 255, 255, 0.13);
+
+  /* === PLATFORM COLORS === */
+  --instagram: #E1306C;
+  --facebook: #1877F2;
+  --linkedin: #0A66C2;
+  --whatsapp: #25D366;
+  --error: #FF6B6B;
+
+  /* === TYPOGRAPHY === */
+  --font-display: var(--font-syne), sans-serif;
+  --font-body: var(--font-dm-sans), sans-serif;
+
+  /* Font size scale */
+  --text-2xs: 12px;
+  --text-xs: 13px;
+  --text-sm: 14px;
+  --text-base: 15px;
+  --text-md: 17px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 32px;
+  --text-4xl: 48px;
+  --text-hero: clamp(44px, 7vw, 88px);
+  --text-section: clamp(32px, 4vw, 52px);
+  --text-portfolio: clamp(22px, 3vw, 32px);
+
+  /* Line heights */
+  --leading-base: 1.6;
+  --leading-body: 1.7;
+  --leading-tight: 1.5;
+
+  /* Letter spacing */
+  --tracking-hero: -0.035em;
+  --tracking-heading: -0.03em;
+  --tracking-eyebrow: 0.18em;
+  --tracking-eyebrow-wide: 0.20em;
+  --tracking-logo: -0.04em;
+  --tracking-number: 0.1em;
+
+  /* === GRADIENTS === */
+  --gradient-hero-glow: radial-gradient(ellipse 600px 400px at 25% 55%, rgba(200, 240, 77, 0.07) 0%, transparent 70%);
+  --gradient-accent-line: linear-gradient(to bottom, transparent, #C8F04D 40%, transparent);
+  --gradient-card-image: linear-gradient(to bottom, rgba(8, 8, 8, 0.05) 0%, rgba(8, 8, 8, 0.00) 40%, rgba(8, 8, 8, 0.85) 100%);
+  --gradient-navbar-shine: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.18) 50%, transparent);
+  --gradient-dot-grid: radial-gradient(circle, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  --dot-grid-size: 28px 28px;
 }
+
+/* ═══════════════════════════════════════════════
+   Tailwind v4 — Theme Token Mappings
+   Maps every CSS variable to a named Tailwind token
+   ═══════════════════════════════════════════════ */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* --- COLORS --- */
+  --color-accent: var(--accent);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-tx-muted: var(--text-muted);
+  --color-text-very-muted: var(--text-very-muted);
+  --color-text-ultra-muted: var(--text-ultra-muted);
+  --color-text-accent: var(--text-accent);
+  --color-error: var(--error);
+  --color-instagram: var(--instagram);
+  --color-facebook: var(--facebook);
+  --color-linkedin: var(--linkedin);
+  --color-whatsapp: var(--whatsapp);
+
+  /* --- BACKGROUNDS --- */
+  --color-bg-base: var(--bg-base);
+  --color-bg-surface-0: var(--bg-surface-0);
+  --color-bg-surface-1: var(--bg-surface-1);
+  --color-bg-surface-2: var(--bg-surface-2);
+  --color-bg-surface-3: var(--bg-surface-3);
+  --color-bg-surface-4: var(--bg-surface-4);
+  --color-bg-surface-5: var(--bg-surface-5);
+  --color-bg-card-warm: var(--bg-card-warm);
+  --color-bg-card-cool: var(--bg-card-cool);
+  --color-bg-card-green: var(--bg-card-green);
+  --color-bg-section-hero: var(--bg-section-hero);
+  --color-bg-section-services: var(--bg-section-services);
+  --color-bg-section-why: var(--bg-section-why);
+
+  /* --- ACCENT FILLS (for background-color use) --- */
+  --color-accent-fill-08: var(--accent-fill-08);
+  --color-accent-fill-10: var(--accent-fill-10);
+  --color-accent-fill-12: var(--accent-fill-12);
+  --color-accent-fill-20: var(--accent-fill-20);
+  --color-accent-fill-25: var(--accent-fill-25);
+  --color-accent-fill-35: var(--accent-fill-35);
+
+  /* --- BORDERS --- */
+  --color-border-subtle: var(--border-subtle);
+  --color-border-default: var(--border-default);
+  --color-border-medium: var(--border-medium);
+  --color-border-strong: var(--border-strong);
+  --color-border-hover: var(--border-hover);
+  --color-border-accent-card: var(--accent-border-card);
+  --color-border-accent-hover: var(--accent-border-hover);
+  --color-border-accent-active: var(--accent-border-active);
+  --color-border-accent-cta: var(--accent-border-cta);
+  --color-border-accent-focus: var(--accent-focus);
+
+  /* --- FONT FAMILIES --- */
+  --font-display: var(--font-syne), sans-serif;
+  --font-body: var(--font-dm-sans), sans-serif;
+
+  /* --- FONT SIZES --- */
+  --text-2xs: 12px;
+  --text-xs-ui: 13px;
+  --text-sm-ui: 14px;
+  --text-base-ui: 15px;
+  --text-md-ui: 17px;
+  --text-lg-ui: 18px;
+  --text-xl-ui: 20px;
+  --text-2xl-ui: 24px;
+  --text-3xl-ui: 32px;
+  --text-4xl-ui: 48px;
+  --text-hero: clamp(44px, 7vw, 88px);
+  --text-section: clamp(32px, 4vw, 52px);
+  --text-portfolio: clamp(22px, 3vw, 32px);
+
+  /* --- LETTER SPACING --- */
+  --tracking-hero: -0.035em;
+  --tracking-heading: -0.03em;
+  --tracking-eyebrow: 0.18em;
+  --tracking-eyebrow-wide: 0.20em;
+  --tracking-logo: -0.04em;
+  --tracking-number: 0.1em;
+
+  /* --- LINE HEIGHTS --- */
+  --leading-base: 1.6;
+  --leading-body: 1.7;
+  --leading-tight-ui: 1.5;
+
+  /* --- FONT WEIGHTS --- */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ═══════════════════════════════════════════════
+   Global Base Styles
+   ═══════════════════════════════════════════════ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 400;
+  line-height: var(--leading-body);
+  color: var(--text-primary);
+  background-color: var(--bg-base);
+}
+
+/* Focus visible — applied globally */
+:focus-visible {
+  outline: 2px solid var(--accent-focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Remove focus outline for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
 }
