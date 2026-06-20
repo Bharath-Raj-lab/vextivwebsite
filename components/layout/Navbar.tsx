@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useReducer, useRef } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -36,9 +36,15 @@ function Logo() {
 export default function Navbar() {
   const pathname        = usePathname();
   const prefersReduced  = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useReducer((_: boolean, v: boolean) => v, false);
   const [isOpen,   setIsOpen]   = useReducer((_: boolean, v: boolean) => v, false);
   const closeRef = useRef<HTMLButtonElement>(null);
+
+  // Set mounted flag on client side
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Scroll listener
   useEffect(() => {
@@ -65,9 +71,18 @@ export default function Navbar() {
   }, [isOpen]);
 
   // Entrance animation (respects prefers-reduced-motion)
+  const isReduced = mounted && prefersReduced;
+
   const entranceVariants = {
-    hidden:  { opacity: 0, y: prefersReduced ? 0 : -8 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+    hidden:  { opacity: isReduced ? 1 : 0, y: isReduced ? 0 : -8 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { 
+        duration: isReduced ? 0 : 0.4, 
+        ease: "easeOut" 
+      } 
+    },
   };
 
   return (
@@ -81,8 +96,8 @@ export default function Navbar() {
         className={`navbar${scrolled ? " navbar--scrolled" : ""}`}
         role="banner"
         variants={entranceVariants}
-        initial="hidden"
-        animate="visible"
+        initial={false}
+        animate={mounted ? "visible" : "hidden"}
       >
         <nav className="navbar__inner" aria-label="Main navigation">
           {/* Logo */}
@@ -127,9 +142,9 @@ export default function Navbar() {
               role="dialog"
               aria-label="Navigation menu"
               className="navbar__mobile-overlay"
-              initial={{ opacity: 0, y: prefersReduced ? 0 : -12 }}
-              animate={{ opacity: 1, y: 0, transition: { duration: 0.25, ease: "easeOut" } }}
-              exit={{ opacity: 0, y: prefersReduced ? 0 : -8, transition: { duration: 0.2 } }}
+              initial={{ opacity: isReduced ? 1 : 0, y: isReduced ? 0 : -12 }}
+              animate={{ opacity: 1, y: 0, transition: { duration: isReduced ? 0 : 0.25, ease: "easeOut" } }}
+              exit={{ opacity: isReduced ? 1 : 0, y: isReduced ? 0 : -8, transition: { duration: isReduced ? 0 : 0.2 } }}
             >
               {/* Close button inside overlay */}
               <button
