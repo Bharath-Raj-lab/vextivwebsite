@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vextiv - Geological Exploration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,500;1,600&display=swap');
+        
+        /* Base styles handled by Tailwind theme configuration below */
+        
+        .hero-zoom {
+            animation: zoomOut 12s ease-out forwards;
+        }
+        
+        .hero-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s ease-out forwards;
+        }
+        
+        .hero-fade {
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        @keyframes zoomOut {
+            from { transform: scale(1.15); }
+            to { transform: scale(1); }
+        }
+        
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "surface-container-highest": "#353534",
+                            "on-error": "#690005",
+                            "on-tertiary-container": "#2b2b2b",
+                            "surface-variant": "#353534",
+                            "on-error-container": "#ffdad6",
+                            "on-primary": "#2d3800",
+                            "inverse-on-surface": "#313030",
+                            "tertiary": "#c8c6c6",
+                            "background": "#131313",
+                            "on-tertiary-fixed-variant": "#474747",
+                            "tertiary-fixed-dim": "#c8c6c6",
+                            "primary-fixed-dim": "#b2d534",
+                            "on-surface": "#e5e2e1",
+                            "outline": "#8f9280",
+                            "secondary-fixed-dim": "#c8c6c5",
+                            "primary-fixed": "#cdef4d",
+                            "surface-container-lowest": "#0e0e0e",
+                            "on-tertiary": "#303030",
+                            "on-surface-variant": "#c5c8b2",
+                            "on-primary-fixed-variant": "#435200",
+                            "on-background": "#e5e2e1",
+                            "on-secondary-fixed": "#1c1b1b",
+                            "secondary": "#c8c6c5",
+                            "primary": "#c8f04d",
+                            "surface-container-low": "#1c1b1b",
+                            "inverse-surface": "#e5e2e1",
+                            "surface-container": "#201f1f",
+                            "on-secondary-container": "#b7b5b4",
+                            "surface-bright": "#3a3939",
+                            "secondary-container": "#474746",
+                            "secondary-fixed": "#e5e2e1",
+                            "on-primary-fixed": "#181e00",
+                            "on-primary-container": "#273000",
+                            "error": "#ffb4ab",
+                            "tertiary-fixed": "#e4e2e1",
+                            "surface-tint": "#c8f04d",
+                            "primary-container": "#596e00",
+                            "surface-dim": "#131313",
+                            "inverse-primary": "#596e00",
+                            "on-secondary": "#313030",
+                            "outline-variant": "#45483a",
+                            "tertiary-container": "#939292",
+                            "on-tertiary-fixed": "#1b1c1c",
+                            "on-secondary-fixed-variant": "#474746",
+                            "surface-container-high": "#2a2a2a",
+                            "error-container": "#93000a",
+                            "surface": "#131313"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "1rem",
+                            "lg": "2rem",
+                            "xl": "3rem",
+                            "full": "9999px"
+                    },
+                    "spacing": {
+                            "margin-mobile": "16px",
+                            "md": "24px",
+                            "base": "8px",
+                            "lg": "48px",
+                            "margin-desktop": "64px",
+                            "xs": "4px",
+                            "sm": "12px",
+                            "xl": "80px",
+                            "gutter": "24px"
+                    },
+                    "fontFamily": {
+                            "headline-lg": ["Inter", "sans-serif"],
+                            "body-lg": ["Inter", "sans-serif"],
+                            "headline-md": ["Inter", "sans-serif"],
+                            "display-lg-mobile": ["Playfair Display", "serif"],
+                            "display-lg": ["Playfair Display", "serif"],
+                            "display-md": ["Playfair Display", "serif"],
+                            "body-md": ["Inter", "sans-serif"],
+                            "label-caps": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                            "headline-lg": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                            "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                            "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                            "display-lg-mobile": ["32px", {"lineHeight": "1.1", "fontWeight": "500"}],
+                            "display-lg": ["48px", {"lineHeight": "1.1", "fontWeight": "500"}],
+                            "display-md": ["36px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                            "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                            "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden m-0 p-0 selection:bg-primary/30 selection:text-primary-fixed">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-transparent flex justify-between items-center px-margin-mobile md:px-margin-desktop py-base max-w-full backdrop-blur-xl bg-surface/80 border-b border-white/5 shadow-sm">
+<div class="flex items-center gap-sm">
+<svg class="text-primary" fill="none" height="24" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2L2 7L12 12L22 7L12 2Z" fill="currentColor"></path>
+<path d="M2 17L12 22L22 17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M2 12L12 17L22 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="font-display-md text-display-md italic text-on-surface">Vextiv</span>
+</div>
+<div class="hidden md:flex gap-md bg-surface-container/50 px-md py-xs rounded-full backdrop-blur-md border border-white/5">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-md text-body-md" href="#">Explorer</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md hover:bg-white/5 hover:backdrop-blur-2xl transition-all duration-300 rounded-sm px-1" href="#">Archives</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md hover:bg-white/5 hover:backdrop-blur-2xl transition-all duration-300 rounded-sm px-1" href="#">Research</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-body-md text-body-md hover:bg-white/5 hover:backdrop-blur-2xl transition-all duration-300 rounded-sm px-1" href="#">Timeline</a>
+</div>
+<div class="hidden md:flex items-center">
+<button class="bg-primary text-on-primary px-md py-sm rounded-full font-label-caps text-label-caps hover:bg-primary-fixed transition-colors shadow-[0_0_24px_rgba(200,240,77,0.1)]">
+                Sign Up
+            </button>
+</div>
+<button class="md:hidden text-on-surface p-sm">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</nav>
+<!-- Main Hero Section -->
+<main class="relative h-[1024px] w-full overflow-hidden bg-surface-container-lowest">
+<!-- Base Layer (Dark/Ancient) -->
+<div class="absolute inset-0 z-10 hero-zoom">
+<div class="w-full h-full bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBngOpFUDYYGbDTWVIm66xVitFZV6MesdSvNws6lG4DuCaPYoMNhAQg5KsK2I1BPsenNJPt2UmsWPvgCqlCpARmH9J_3fSENx0e3O72xit6JFD8qPpl0y5kkK64GXYDBsRsWfE5D-rPsHq40XcXwYvcuEF800tBs-NwAHcGPnTB4dAxe3k_UhSIZyBakGIRuhBI5c-fjuuv_GcwPtufns3RrpaHuAUeUijJXbHWQFegGfQq3WbSsLNHVkdZgkeJhFAy_cXWsCH9u-o5');"></div>
+<!-- Vignette Overlay -->
+<div class="absolute inset-0 bg-radial-vignette bg-gradient-to-t from-background via-transparent to-surface-container-lowest/80"></div>
+</div>
+<!-- Reveal Layer (Bright/Interactive) -->
+<div class="absolute inset-0 z-30 pointer-events-none opacity-0 transition-opacity duration-1000" id="reveal-layer" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGzZ4PRuc5i039RkTbCvMV4MA_Zmu0QybEYq-KE8MY2BVXf3ZVWeLyBe67cyvt3thM-1kHY_eI38fUEgUWFFp-pYaeFo8R2S6Fof-2j_lXJhIgQuduJM-g-yE3-9xDjkFPrr9jG0lg47-5F-Z7yD8W3oVnZz7xBN7E6MTjoEHO00OIl98-UJYcu-jRNSdbV5DWxiIWONe7Ra6Sh_-ev4ujihRA4SM0etN5DcK79nVYQbBfTMMVab-ZFF0cBEBBGNhsRXEfqBElDivN'); background-size: cover; background-position: center; mix-blend-mode: screen;"></div>
+<!-- Content Overlay -->
+<div class="relative z-50 h-full w-full flex flex-col justify-between pt-32 pb-margin-mobile md:pb-margin-desktop px-margin-mobile md:px-margin-desktop">
+<!-- Center Heading -->
+<div class="absolute top-[20%] md:top-[14%] left-1/2 -translate-x-1/2 text-center w-full max-w-4xl px-4 pointer-events-none">
+<h1 class="flex flex-col items-center">
+<span class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg italic text-on-surface hero-reveal" style="animation-delay: 0.1s;">Layers hold</span>
+<span class="font-headline-lg md:font-display-lg text-headline-lg md:text-display-lg font-bold text-on-surface hero-reveal tracking-tight" style="animation-delay: 0.3s; color: white;">tales of time</span>
+</h1>
+</div>
+<!-- Bottom Content Blocks -->
+<div class="flex flex-col sm:flex-row justify-between items-end w-full mt-auto gap-lg">
+<!-- Bottom Left (Hidden on very small screens) -->
+<div class="hidden sm:block max-w-sm hero-fade" style="animation-delay: 0.7s;">
+<p class="font-body-md text-body-md text-on-surface-variant border-l-2 border-primary/30 pl-sm">
+                        Every layer of sediment records a chapter of Earth's history. From igneous intrusions to metamorphic pressure zones, discover the deep narrative embedded in stone.
+                    </p>
+</div>
+<!-- Bottom Right CTA -->
+<div class="w-full sm:w-auto flex flex-col gap-sm sm:items-end text-left sm:text-right hero-fade bg-surface/30 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none p-4 sm:p-0 rounded-lg sm:rounded-none border sm:border-none border-white/5" style="animation-delay: 0.85s;">
+<p class="font-body-md text-body-md text-on-surface-variant max-w-[280px]">
+                        Our interactive maps let you peel back the surface topology.
+                    </p>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-full font-label-caps text-label-caps hover:bg-primary-fixed transition-colors shadow-[0_0_32px_rgba(200,240,77,0.15)] flex items-center justify-center gap-xs w-full sm:w-auto mt-2">
+                        Start Digging
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer - using JSON structure -->
+<footer class="w-full py-xl border-t border-white/5 bg-surface-container-lowest relative z-40">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop">
+<div class="flex flex-col gap-sm">
+<span class="font-display-md text-display-md italic text-on-surface mb-md">Vextiv</span>
+<p class="font-body-md text-body-md text-on-surface-variant">© 2024 Vextiv Geological Research Institute. All rights reserved.</p>
+</div>
+<div class="flex flex-col gap-sm">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary w-fit" href="#">Stratigraphy</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary w-fit" href="#">Mineralogy</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary w-fit" href="#">Field Studies</a>
+</div>
+<div class="flex flex-col gap-sm">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary w-fit" href="#">Peer Reviews</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary w-fit" href="#">Ethical Sourcing</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary w-fit" href="#">Contact</a>
+</div>
+</div>
+</footer>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const revealLayer = document.getElementById('reveal-layer');
+            const mainContent = document.querySelector('main');
+            
+            // Simple fade in of reveal layer after initial animation to allow interaction
+            setTimeout(() => {
+                revealLayer.style.opacity = '1';
+                // Initialize mask completely hidden
+                revealLayer.style.webkitMaskImage = 'radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%)';
+                revealLayer.style.maskImage = 'radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%)';
+            }, 1000);
+
+            // Cursor interaction
+            let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+            let smooth = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+            let isHovering = false;
+            
+            // Mask gradient parameters
+            const size = 300;
+            
+            mainContent.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+                isHovering = true;
+            });
+            
+            mainContent.addEventListener('mouseleave', () => {
+                isHovering = false;
+            });
+
+            function updateMask() {
+                // Lerp mouse position
+                smooth.x += (mouse.x - smooth.x) * 0.1;
+                smooth.y += (mouse.y - smooth.y) * 0.1;
+
+                if (isHovering && revealLayer.style.opacity !== '0') {
+                    const maskStr = `radial-gradient(${size}px circle at ${smooth.x}px ${smooth.y}px, 
+                        rgba(0,0,0,1) 0%, 
+                        rgba(0,0,0,0.8) 40%, 
+                        rgba(0,0,0,0.5) 60%, 
+                        rgba(0,0,0,0.2) 75%, 
+                        rgba(0,0,0,0.05) 88%, 
+                        rgba(0,0,0,0) 100%)`;
+                        
+                    revealLayer.style.webkitMaskImage = maskStr;
+                    revealLayer.style.maskImage = maskStr;
+                } else if (revealLayer.style.opacity !== '0') {
+                    // Slowly fade out mask if not hovering
+                     revealLayer.style.webkitMaskImage = 'radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%)';
+                     revealLayer.style.maskImage = 'radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%)';
+                }
+
+                requestAnimationFrame(updateMask);
+            }
+
+            // Start animation loop
+            updateMask();
+        });
+    </script>
+</body></html>

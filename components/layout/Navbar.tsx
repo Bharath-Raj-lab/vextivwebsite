@@ -19,7 +19,7 @@ const NAV_LINKS = [
 // ─── Logo ─────────────────────────────────────────────────────────────────────
 function Logo() {
   return (
-    <Link href="/" className="navbar__logo" aria-label="Vextiv Studio — home">
+    <Link href="/" className="navbar__brand" aria-label="Vextiv Studio — home">
       <Image 
         src="/logo.svg" 
         alt="Vextiv Studio" 
@@ -27,7 +27,11 @@ function Logo() {
         height={32} 
         style={{ width: "auto", height: "32px" }} 
         priority 
+        className="navbar__brand-logo"
       />
+      <span className="navbar__brand-text">
+        Ve<span className="navbar__brand-accent">x</span>tiv
+      </span>
     </Link>
   );
 }
@@ -36,17 +40,8 @@ function Logo() {
 export default function Navbar() {
   const pathname        = usePathname();
   const prefersReduced  = useReducedMotion();
-  const [scrolled, setScrolled] = useReducer((_: boolean, v: boolean) => v, false);
   const [isOpen,   setIsOpen]   = useReducer((_: boolean, v: boolean) => v, false);
   const closeRef = useRef<HTMLButtonElement>(null);
-
-  // Scroll listener
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -66,8 +61,8 @@ export default function Navbar() {
 
   // Entrance animation (respects prefers-reduced-motion)
   const entranceVariants = {
-    hidden:  { opacity: 0, y: prefersReduced ? 0 : -8 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+    hidden:  { opacity: 0, y: prefersReduced ? 0 : -8, x: "-50%" },
+    visible: { opacity: 1, y: 0, x: "-50%", transition: { duration: 0.4, ease: "easeOut" } },
   };
 
   return (
@@ -78,45 +73,57 @@ export default function Navbar() {
       </a>
 
       <motion.header
-        className={`navbar${scrolled ? " navbar--scrolled" : ""}`}
+        className="navbar"
         role="banner"
         variants={entranceVariants}
         initial="hidden"
         animate="visible"
       >
         <nav className="navbar__inner" aria-label="Main navigation">
-          {/* Logo */}
+          {/* Logo + Text */}
           <Logo />
 
-          {/* Desktop nav links */}
-          <ul className="navbar__links" role="list">
-            {NAV_LINKS.map(({ label, href }) => (
-              <li key={href}>
-                <Link
-                  href={href}
-                  className={`navbar__link${pathname === href ? " navbar__link--active" : ""}`}
-                >
-                  {label}
-                </Link>
-              </li>
-            ))}
+          {/* Center Navigation Capsule */}
+          <ul className="navbar__links-capsule" role="list">
+            {NAV_LINKS.map(({ label, href }) => {
+              const isActive = pathname === href;
+              return (
+                <li key={href} style={{ position: "relative" }}>
+                  <Link
+                    href={href}
+                    className={`navbar__capsule-link${isActive ? " navbar__capsule-link--active" : ""}`}
+                  >
+                    {isActive && (
+                      <motion.div
+                        layoutId="active-nav-pill"
+                        className="navbar__capsule-link-bg"
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      />
+                    )}
+                    <span className="navbar__capsule-link-text">{label}</span>
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
 
-          {/* Desktop CTA */}
-          <Link href="/contact" className="navbar__cta" aria-label="Book a call with Vextiv">
-            Book a Call
-          </Link>
+          {/* Right Side: CTA Capsule & Mobile Hamburger */}
+          <div className="navbar__actions">
+            <Link href="/contact" className="navbar__cta-capsule" aria-label="Book a call with Vextiv">
+              Book a Call
+            </Link>
 
-          {/* Hamburger */}
-          <button
-            className="navbar__hamburger"
-            aria-label={isOpen ? "Close menu" : "Open menu"}
-            aria-expanded={isOpen}
-            aria-controls="mobile-menu"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X size={20} strokeWidth={2} /> : <Menu size={20} strokeWidth={2} />}
-          </button>
+            {/* Hamburger */}
+            <button
+              className="navbar__hamburger"
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <X size={20} strokeWidth={2} /> : <Menu size={20} strokeWidth={2} />}
+            </button>
+          </div>
         </nav>
 
         {/* Mobile overlay */}
@@ -131,7 +138,6 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0, transition: { duration: 0.25, ease: "easeOut" } }}
               exit={{ opacity: 0, y: prefersReduced ? 0 : -8, transition: { duration: 0.2 } }}
             >
-              {/* Close button inside overlay */}
               <button
                 ref={closeRef}
                 className="navbar__mobile-close"
@@ -141,7 +147,7 @@ export default function Navbar() {
                 <X size={22} strokeWidth={2} />
               </button>
 
-              <nav aria-label="Mobile navigation">
+              <nav aria-label="Mobile navigation" style={{ width: "100%" }}>
                 <ul className="navbar__mobile-links" role="list">
                   {NAV_LINKS.map(({ label, href }) => (
                     <li key={href}>
@@ -155,13 +161,6 @@ export default function Navbar() {
                     </li>
                   ))}
                 </ul>
-                <Link
-                  href="/contact"
-                  className="navbar__mobile-cta"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Book a Call
-                </Link>
               </nav>
             </motion.div>
           )}
@@ -183,7 +182,7 @@ export default function Navbar() {
           font-weight: 600;
           border-radius: 4px;
           text-decoration: none;
-          z-index: 100;
+          z-index: 1000;
           transition: top 0.15s;
         }
         .navbar__skip-link:focus-visible {
@@ -197,99 +196,148 @@ export default function Navbar() {
         /* Navbar wrapper */
         .navbar {
           position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          z-index: 40;
-          background: transparent;
-          border-bottom: 1px solid transparent;
-          transition: background 300ms ease, border-color 300ms ease;
-        }
-        .navbar--scrolled {
-          background: var(--bg-base);
-          border-color: var(--border-default);
+          top: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 100%;
+          max-width: 1500px;
+          padding: 0 clamp(24px, 4vw, 64px);
+          z-index: 100;
+          pointer-events: none;
         }
 
         /* Inner layout */
         .navbar__inner {
+          position: relative;
           display: flex;
           align-items: center;
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 24px;
-          height: 64px;
-          gap: 32px;
+          justify-content: space-between;
+          width: 100%;
+          pointer-events: auto;
         }
 
-        /* Logo */
-        .navbar__logo {
-          font-family: var(--font-display);
-          font-weight: 800;
-          letter-spacing: var(--tracking-logo);
-          color: var(--text-primary);
+        /* Brand Area (Left) */
+        .navbar__brand {
+          display: flex;
+          align-items: center;
+          gap: 12px;
           text-decoration: none;
-          font-size: 22px;
+          transition: opacity 200ms;
           flex-shrink: 0;
         }
-        .navbar__logo:focus-visible {
+        .navbar__brand:hover {
+          opacity: 0.85;
+        }
+        .navbar__brand:focus-visible {
           outline: 2px solid var(--accent-focus);
           outline-offset: 4px;
           border-radius: 4px;
         }
-
-        /* Desktop nav links */
-        .navbar__links {
-          display: flex;
-          align-items: center;
-          gap: 28px;
-          list-style: none;
-          margin-left: auto;
+        .navbar__brand-text {
+          font-family: var(--font-display, sans-serif);
+          font-weight: 600;
+          font-size: 20px;
+          color: #ffffff;
+          letter-spacing: 0.5px;
         }
-        .navbar__link {
-          font-family: var(--font-body);
-          font-size: var(--text-xs);
-          font-weight: 400;
-          color: var(--text-very-muted);
-          text-decoration: none;
-          transition: color 200ms;
-          white-space: nowrap;
-        }
-        .navbar__link:hover {
-          color: var(--text-primary);
-        }
-        .navbar__link--active {
+        .navbar__brand-accent {
           color: var(--accent);
         }
-        .navbar__link:focus-visible {
-          outline: 2px solid var(--accent-focus);
-          outline-offset: 4px;
-          border-radius: 4px;
+
+        /* Center Navigation Capsule */
+        .navbar__links-capsule {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          list-style: none;
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          height: 52px;
+          padding: 0 16px;
+          border-radius: 9999px;
+          background: rgba(20, 20, 20, 0.75);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.2);
         }
 
-        /* CTA */
-        .navbar__cta {
-          display: inline-flex;
+        .navbar__capsule-link {
+          position: relative;
+          display: flex;
           align-items: center;
           justify-content: center;
-          padding: 10px 20px;
-          background: var(--accent);
-          color: var(--bg-base);
-          font-family: var(--font-body);
-          font-size: var(--text-xs);
+          height: 36px;
+          padding: 0 16px;
+          font-family: var(--font-body, sans-serif);
+          font-size: 14px;
           font-weight: 500;
-          border-radius: 6px;
+          color: rgba(255, 255, 255, 0.65);
+          text-decoration: none;
+          border-radius: 9999px;
+          transition: color 200ms, background-color 200ms;
+        }
+
+        .navbar__capsule-link:hover {
+          color: #ffffff;
+          background-color: rgba(255, 255, 255, 0.06);
+        }
+
+        .navbar__capsule-link--active {
+          color: #ffffff;
+        }
+
+        .navbar__capsule-link-bg {
+          position: absolute;
+          inset: 0;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 9999px;
+          z-index: 0;
+        }
+
+        .navbar__capsule-link-text {
+          position: relative;
+          z-index: 1;
+        }
+
+        .navbar__capsule-link:focus-visible {
+          outline: 2px solid var(--accent-focus);
+          outline-offset: 2px;
+        }
+
+        /* Right Actions */
+        .navbar__actions {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+
+        /* Book a Call Capsule */
+        .navbar__cta-capsule {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 52px;
+          padding: 0 24px;
+          background: var(--accent);
+          color: #000000;
+          font-family: var(--font-body, sans-serif);
+          font-size: 14px;
+          font-weight: 600;
+          border-radius: 9999px;
           text-decoration: none;
           white-space: nowrap;
-          flex-shrink: 0;
-          transition: opacity 200ms;
+          box-shadow: 0 4px 16px -4px rgba(var(--accent-rgb, 0, 255, 0), 0.3);
+          transition: transform 200ms, filter 200ms;
         }
-        .navbar__cta:hover {
-          opacity: 0.9;
+        .navbar__cta-capsule:hover {
+          transform: scale(1.03);
+          filter: brightness(1.1);
         }
-        .navbar__cta:focus-visible {
+        .navbar__cta-capsule:focus-visible {
           outline: 2px solid var(--accent-focus);
           outline-offset: 4px;
-          border-radius: 6px;
         }
 
         /* Hamburger — hidden on desktop */
@@ -297,24 +345,23 @@ export default function Navbar() {
           display: none;
           align-items: center;
           justify-content: center;
-          width: 40px;
-          height: 40px;
-          background: transparent;
-          border: 1px solid var(--border-default);
-          border-radius: 8px;
-          color: var(--text-primary);
+          width: 52px;
+          height: 52px;
+          background: rgba(20, 20, 20, 0.75);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 9999px;
+          color: #ffffff;
           cursor: pointer;
-          flex-shrink: 0;
-          margin-left: auto;
-          transition: border-color 200ms;
+          transition: background-color 200ms;
         }
         .navbar__hamburger:hover {
-          border-color: var(--border-hover);
+          background-color: rgba(255, 255, 255, 0.1);
         }
         .navbar__hamburger:focus-visible {
           outline: 2px solid var(--accent-focus);
           outline-offset: 2px;
-          border-radius: 8px;
         }
 
         /* Mobile overlay */
@@ -322,10 +369,12 @@ export default function Navbar() {
           position: fixed;
           inset: 0;
           background: var(--bg-base);
-          z-index: 50;
+          z-index: 40;
           display: flex;
           flex-direction: column;
           padding: 24px;
+          padding-top: 100px; /* Space for floating navbar */
+          pointer-events: auto;
         }
 
         .navbar__mobile-close {
@@ -333,97 +382,113 @@ export default function Navbar() {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 40px;
-          height: 40px;
+          width: 48px;
+          height: 48px;
           background: transparent;
-          border: 1px solid var(--border-default);
-          border-radius: 8px;
-          color: var(--text-primary);
+          border: 1px solid rgba(255,255,255,0.1);
+          border-radius: 9999px;
+          color: #ffffff;
           cursor: pointer;
           margin-bottom: 32px;
-          transition: border-color 200ms;
+          transition: background-color 200ms;
         }
         .navbar__mobile-close:hover {
-          border-color: var(--border-hover);
+          background-color: rgba(255,255,255,0.05);
         }
         .navbar__mobile-close:focus-visible {
           outline: 2px solid var(--accent-focus);
           outline-offset: 2px;
-          border-radius: 8px;
         }
 
         .navbar__mobile-links {
           list-style: none;
           display: flex;
           flex-direction: column;
-          gap: 4px;
+          gap: 8px;
         }
 
         .navbar__mobile-link {
-          display: block;
-          padding: 16px 8px;
+          display: flex;
+          align-items: center;
+          padding: 16px 24px;
+          min-height: 48px;
           font-family: var(--font-body);
           font-size: 18px;
-          font-weight: 400;
-          color: var(--text-muted);
+          font-weight: 500;
+          color: #000000;
           text-decoration: none;
-          border-bottom: 1px solid var(--border-subtle);
-          transition: color 200ms;
+          background: #ffffff;
+          border-radius: 9999px;
+          transition: color 200ms, background-color 200ms;
         }
         .navbar__mobile-link:hover {
-          color: var(--text-primary);
+          color: #000000;
+          background: var(--accent);
         }
         .navbar__mobile-link--active {
-          color: var(--accent);
+          color: #000000;
+          background: var(--accent);
         }
         .navbar__mobile-link:focus-visible {
           outline: 2px solid var(--accent-focus);
           outline-offset: 2px;
-          border-radius: 4px;
         }
 
-        .navbar__mobile-cta {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-top: 32px;
-          padding: 16px 24px;
-          background: var(--accent);
-          color: var(--bg-base);
-          font-family: var(--font-body);
-          font-size: 16px;
-          font-weight: 500;
-          border-radius: 8px;
-          text-decoration: none;
-          transition: opacity 200ms;
-        }
-        .navbar__mobile-cta:hover {
-          opacity: 0.9;
-        }
-        .navbar__mobile-cta:focus-visible {
-          outline: 2px solid var(--accent-focus);
-          outline-offset: 4px;
-          border-radius: 8px;
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+          .navbar__brand-text {
+            display: none;
+          }
+          .navbar__links-capsule {
+            padding: 0 8px;
+          }
+          .navbar__capsule-link {
+            padding: 0 12px;
+          }
         }
 
-        /* Responsive — show hamburger, hide desktop links + CTA */
-        @media (max-width: 767px) {
-          .navbar__links,
-          .navbar__cta {
+        @media (max-width: 860px) {
+          .navbar__links-capsule {
             display: none;
           }
           .navbar__hamburger {
             display: flex;
           }
+          .navbar__brand-text {
+            display: block; /* Show text again since capsule is gone */
+          }
         }
 
-        @media (min-width: 768px) {
+        @media (max-width: 767px) {
+          .navbar {
+            width: 100%;
+            padding: 0 16px;
+          }
+          .navbar__cta-capsule {
+            display: flex; /* Keeping it visible on mobile */
+            height: 44px;
+            padding: 0 16px;
+            font-size: 13px;
+          }
           .navbar__hamburger {
-            display: none;
+            width: 44px;
+            height: 44px;
           }
-          .navbar__mobile-overlay {
-            display: none;
-          }
+        }
+
+        /* Extremely small screens */
+        @media (max-width: 420px) {
+           .navbar__brand-text {
+             display: block;
+             font-size: 16px;
+           }
+           .navbar__brand-logo {
+             height: 24px !important;
+             width: auto !important;
+           }
+           .navbar__actions {
+             gap: 8px;
+           }
         }
       `}</style>
     </>

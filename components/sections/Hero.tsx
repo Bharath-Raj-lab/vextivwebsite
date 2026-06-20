@@ -1,0 +1,542 @@
+"use client";
+
+import { useEffect, useRef, useCallback } from "react";
+import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
+import { trackEvent } from "@/lib/analytics";
+import { ArrowRight } from "lucide-react";
+
+// ─── Component ────────────────────────────────────────────────────────────────
+export default function Hero() {
+  const prefersReduced = useReducedMotion();
+  const heroRef = useRef<HTMLElement>(null);
+  const revealRef = useRef<HTMLDivElement>(null);
+  const mouseRef = useRef({ x: 0, y: 0 });
+  const smoothRef = useRef({ x: 0, y: 0 });
+  const isHoveringRef = useRef(false);
+  const rafRef = useRef<number>(0);
+
+  // ── Cursor-reveal interaction ──────────────────────────────────────────────
+  const updateMask = useCallback(() => {
+    const reveal = revealRef.current;
+    if (!reveal) return;
+
+    smoothRef.current.x += (mouseRef.current.x - smoothRef.current.x) * 0.08;
+    smoothRef.current.y += (mouseRef.current.y - smoothRef.current.y) * 0.08;
+
+    if (isHoveringRef.current) {
+      const size = 320;
+      const maskStr = `radial-gradient(${size}px circle at ${smoothRef.current.x}px ${smoothRef.current.y}px,
+        rgba(0,0,0,1) 0%,
+        rgba(0,0,0,0.8) 35%,
+        rgba(0,0,0,0.5) 55%,
+        rgba(0,0,0,0.2) 70%,
+        rgba(0,0,0,0.05) 85%,
+        rgba(0,0,0,0) 100%)`;
+      reveal.style.maskImage = maskStr;
+      reveal.style.webkitMaskImage = maskStr;
+    } else {
+      const hideMask =
+        "radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%)";
+      reveal.style.maskImage = hideMask;
+      reveal.style.webkitMaskImage = hideMask;
+    }
+
+    rafRef.current = requestAnimationFrame(updateMask);
+  }, []);
+
+  useEffect(() => {
+    if (prefersReduced) return;
+
+    const hero = heroRef.current;
+    const reveal = revealRef.current;
+    if (!hero || !reveal) return;
+
+    // Init reveal visible after zoom begins
+    const showTimer = setTimeout(() => {
+      reveal.style.opacity = "1";
+      const hideMask =
+        "radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%)";
+      reveal.style.maskImage = hideMask;
+      reveal.style.webkitMaskImage = hideMask;
+    }, 800);
+
+    // Mouse handlers (desktop)
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseRef.current.x = e.clientX;
+      mouseRef.current.y = e.clientY;
+      isHoveringRef.current = true;
+    };
+
+    const handleMouseLeave = () => {
+      isHoveringRef.current = false;
+    };
+
+    // Touch handlers (mobile) — finger acts as cursor
+    const handleTouchStart = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      mouseRef.current.x = touch.clientX;
+      mouseRef.current.y = touch.clientY;
+      smoothRef.current.x = touch.clientX;
+      smoothRef.current.y = touch.clientY;
+      isHoveringRef.current = true;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      mouseRef.current.x = touch.clientX;
+      mouseRef.current.y = touch.clientY;
+      isHoveringRef.current = true;
+    };
+
+    const handleTouchEnd = () => {
+      isHoveringRef.current = false;
+    };
+
+    hero.addEventListener("mousemove", handleMouseMove);
+    hero.addEventListener("mouseleave", handleMouseLeave);
+    hero.addEventListener("touchstart", handleTouchStart, { passive: true });
+    hero.addEventListener("touchmove", handleTouchMove, { passive: true });
+    hero.addEventListener("touchend", handleTouchEnd);
+
+    rafRef.current = requestAnimationFrame(updateMask);
+
+    return () => {
+      clearTimeout(showTimer);
+      cancelAnimationFrame(rafRef.current);
+      hero.removeEventListener("mousemove", handleMouseMove);
+      hero.removeEventListener("mouseleave", handleMouseLeave);
+      hero.removeEventListener("touchstart", handleTouchStart);
+      hero.removeEventListener("touchmove", handleTouchMove);
+      hero.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [prefersReduced, updateMask]);
+
+  // ── Animation variants ─────────────────────────────────────────────────────
+  const fadeUp = {
+    hidden: { opacity: 0, y: prefersReduced ? 0 : 28 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        delay: 0.3 + i * 0.18,
+        ease: [0.25, 0.46, 0.45, 0.94],
+      },
+    }),
+  };
+
+  const fadeIn = {
+    hidden: { opacity: 0 },
+    visible: (i: number) => ({
+      opacity: 1,
+      transition: {
+        duration: 0.9,
+        delay: 0.5 + i * 0.15,
+        ease: "easeOut",
+      },
+    }),
+  };
+
+  return (
+    <section
+      id="hero"
+      className="hero"
+      ref={heroRef}
+      aria-labelledby="hero-heading"
+    >
+      {/* ── Base layer (dark, with zoom animation) ─────────────────────── */}
+      <div
+        className={`hero__base-layer ${prefersReduced ? "" : "hero__base-layer--animate"}`}
+      >
+        <div
+          className="hero__base-img"
+          role="img"
+          aria-hidden="true"
+        />
+      </div>
+
+      {/* ── Vignette overlay ───────────────────────────────────────────── */}
+      <div className="hero__vignette" aria-hidden="true" />
+
+      {/* ── Reveal layer (cursor-driven) ───────────────────────────────── */}
+      <div
+        ref={revealRef}
+        className="hero__reveal-layer"
+        aria-hidden="true"
+      />
+
+      {/* ── Content ────────────────────────────────────────────────────── */}
+      <div className="hero__content">
+        {/* Center headline */}
+        <div className="hero__headline-wrap">
+          <h1 id="hero-heading" className="hero__headline">
+            <motion.span
+              className="hero__headline-italic"
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={0}
+            >
+              We Build Digital
+            </motion.span>
+            <motion.span
+              className="hero__headline-bold"
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={1}
+            >
+              Experiences That Grow
+            </motion.span>
+          </h1>
+        </div>
+
+        {/* Bottom content row */}
+        <div className="hero__bottom">
+          {/* Left description */}
+          <motion.div
+            className="hero__bottom-left"
+            variants={fadeIn}
+            initial="hidden"
+            animate="visible"
+            custom={2}
+          >
+            <p className="hero__description">
+              Websites, Branding, Content &amp; QR Systems designed to attract
+              customers and drive growth for restaurants, startups, and local
+              businesses.
+            </p>
+          </motion.div>
+
+          {/* Right CTA block */}
+          <motion.div
+            className="hero__bottom-right"
+            variants={fadeIn}
+            initial="hidden"
+            animate="visible"
+            custom={3}
+          >
+            <p className="hero__cta-desc">
+              Crafted digital solutions that convert visitors into loyal customers.
+            </p>
+            <div className="hero__ctas">
+              <Link
+                href="/contact"
+                className="hero__cta-primary"
+                onClick={() =>
+                  trackEvent("cta_click", { label: "Start a Project" })
+                }
+              >
+                Start a Project
+                <ArrowRight size={16} strokeWidth={2} aria-hidden="true" />
+              </Link>
+              <Link
+                href="/work"
+                className="hero__cta-secondary"
+                onClick={() =>
+                  trackEvent("cta_click", { label: "View Our Work" })
+                }
+              >
+                View Our Work
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* ─── Styles ──────────────────────────────────────────────────────── */}
+      <style>{`
+        /* ═══ HERO SECTION ═══════════════════════════════════════════════ */
+        .hero {
+          position: relative;
+          height: 100vh;
+          min-height: 600px;
+          max-height: 1200px;
+          width: 100%;
+          overflow: hidden;
+          background: var(--bg-section-hero);
+        }
+
+        /* ── Base layer (dark background image with zoom) ────────────── */
+        .hero__base-layer {
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+        }
+
+        .hero__base-layer--animate {
+          animation: heroZoomOut 14s ease-out forwards;
+        }
+
+        .hero__base-img {
+          width: 100%;
+          height: 100%;
+          background-image: url('/assets/hero-bg-dark.png');
+          background-size: cover;
+          background-position: center;
+        }
+
+        @keyframes heroZoomOut {
+          from { transform: scale(1.15); }
+          to   { transform: scale(1); }
+        }
+
+        /* ── Vignette gradient overlay ───────────────────────────────── */
+        .hero__vignette {
+          position: absolute;
+          inset: 0;
+          z-index: 2;
+          background: linear-gradient(
+            to top,
+            var(--bg-base) 0%,
+            rgba(8, 8, 8, 0.6) 25%,
+            transparent 50%,
+            rgba(8, 8, 8, 0.35) 100%
+          );
+          pointer-events: none;
+        }
+
+        /* ── Reveal layer (cursor-driven) ────────────────────────────── */
+        .hero__reveal-layer {
+          position: absolute;
+          inset: 0;
+          z-index: 3;
+          pointer-events: none;
+          opacity: 0;
+          transition: opacity 0.8s ease;
+          background-image: url('/assets/hero-bg-reveal.png');
+          background-size: cover;
+          background-position: center;
+          mix-blend-mode: screen;
+          will-change: mask-image, -webkit-mask-image;
+        }
+
+        /* ── Content container ───────────────────────────────────────── */
+        .hero__content {
+          position: relative;
+          z-index: 10;
+          height: 100%;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          padding: 140px clamp(24px, 4vw, 64px) 64px;
+        }
+
+        /* ── Headline ────────────────────────────────────────────────── */
+        .hero__headline-wrap {
+          position: absolute;
+          top: 18%;
+          left: 50%;
+          transform: translateX(-50%);
+          text-align: center;
+          width: 100%;
+          max-width: 900px;
+          padding: 0 24px;
+          pointer-events: none;
+        }
+
+        .hero__headline {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 4px;
+        }
+
+        .hero__headline-italic {
+          font-family: var(--font-display);
+          font-size: clamp(36px, 6vw, 72px);
+          font-weight: 700;
+          font-style: italic;
+          line-height: 1.1;
+          color: var(--text-primary);
+          letter-spacing: -0.03em;
+        }
+
+        .hero__headline-bold {
+          font-family: var(--font-display);
+          font-size: clamp(36px, 6vw, 72px);
+          font-weight: 800;
+          line-height: 1.1;
+          color: #ffffff;
+          letter-spacing: -0.04em;
+        }
+
+        /* ── Bottom content row ──────────────────────────────────────── */
+        .hero__bottom {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+          width: 100%;
+          margin-top: auto;
+          gap: 48px;
+        }
+
+        /* Left description */
+        .hero__bottom-left {
+          max-width: 420px;
+        }
+
+        .hero__description {
+          font-family: var(--font-body);
+          font-size: var(--text-md);
+          font-weight: 400;
+          line-height: 1.65;
+          color: var(--text-secondary);
+          border-left: 2px solid rgba(200, 240, 77, 0.3);
+          padding-left: 16px;
+        }
+
+        /* Right CTA block */
+        .hero__bottom-right {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 16px;
+          text-align: right;
+        }
+
+        .hero__cta-desc {
+          font-family: var(--font-body);
+          font-size: var(--text-md);
+          font-weight: 400;
+          line-height: 1.6;
+          color: var(--text-secondary);
+          max-width: 280px;
+        }
+
+        /* CTAs */
+        .hero__ctas {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          flex-wrap: wrap;
+          justify-content: flex-end;
+        }
+
+        .hero__cta-primary {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 14px 32px;
+          background: var(--accent);
+          color: var(--bg-base);
+          font-family: var(--font-body);
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          border-radius: 9999px;
+          text-decoration: none;
+          transition: background 250ms ease, transform 250ms ease, box-shadow 250ms ease;
+          box-shadow: 0 0 32px rgba(200, 240, 77, 0.15);
+        }
+        .hero__cta-primary:hover {
+          background: #d4f76a;
+          transform: translateY(-2px);
+          box-shadow: 0 0 48px rgba(200, 240, 77, 0.25);
+        }
+        .hero__cta-primary:focus-visible {
+          outline: 2px solid var(--accent-focus);
+          outline-offset: 4px;
+        }
+
+        .hero__cta-secondary {
+          display: inline-flex;
+          align-items: center;
+          padding: 14px 28px;
+          background: transparent;
+          color: var(--text-primary);
+          font-family: var(--font-body);
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          border: 1px solid var(--border-medium);
+          border-radius: 9999px;
+          text-decoration: none;
+          transition: border-color 250ms ease, color 250ms ease, background 250ms ease;
+        }
+        .hero__cta-secondary:hover {
+          border-color: var(--border-hover);
+          color: var(--accent);
+          background: rgba(255, 255, 255, 0.03);
+        }
+        .hero__cta-secondary:focus-visible {
+          outline: 2px solid var(--accent-focus);
+          outline-offset: 4px;
+        }
+
+        /* ── Responsive ──────────────────────────────────────────────── */
+        @media (max-width: 1024px) {
+          .hero__content {
+            padding: 120px 40px 48px;
+          }
+          .hero__headline-wrap {
+            top: 16%;
+          }
+        }
+
+        @media (max-width: 767px) {
+          .hero {
+            min-height: 100vh;
+            max-height: none;
+          }
+
+          .hero__content {
+            padding: 100px 20px 32px;
+          }
+
+          .hero__headline-wrap {
+            top: 14%;
+            padding: 0 16px;
+          }
+
+          .hero__headline-italic,
+          .hero__headline-bold {
+            font-size: clamp(28px, 8vw, 42px);
+          }
+
+          .hero__bottom {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 24px;
+          }
+
+          .hero__bottom-left {
+            max-width: 100%;
+          }
+
+          .hero__bottom-right {
+            align-items: stretch;
+            text-align: left;
+            background: rgba(10, 10, 10, 0.5);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 20px;
+          }
+
+          .hero__cta-desc {
+            max-width: 100%;
+          }
+
+          .hero__ctas {
+            flex-direction: column;
+            justify-content: stretch;
+          }
+
+          .hero__cta-primary,
+          .hero__cta-secondary {
+            width: 100%;
+            justify-content: center;
+          }
+
+          /* Reveal layer visible on mobile — driven by touch */
+        }
+      `}</style>
+    </section>
+  );
+}
