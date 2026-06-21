@@ -27,6 +27,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useReducer, useRef } from 'react';
+import { logger } from '@/logger';
 
 // ─── Enum options — copied from lib/validations/audit.ts (source of truth) ────
 // If the schema changes these arrays, update this file to match.
@@ -180,8 +181,8 @@ export default function AuditForm() {
      * UTM params: omit the key entirely if the value is empty — the schema
      * expects null | string, not empty string. websiteUrl: omit if empty.
      *
-     * DEV NOTE: log the body in the console so you can verify in the Network
-     * tab that every key exactly matches the Zod schema.
+     * DEV NOTE: log the body through the shared logger so you can verify in
+     * the Network tab that every key exactly matches the Zod schema.
      */
     const body: Record<string, string | null> = {
       businessName: fields.businessName,
@@ -201,10 +202,7 @@ export default function AuditForm() {
     if (!body.utm_medium)   delete body.utm_medium;
     if (!body.utm_campaign) delete body.utm_campaign;
 
-    // DEV: log exact request body to verify key/value alignment with schema
-    if (process.env.NODE_ENV === 'development') {
-      console.log('[AuditForm] POST /api/audit body:', JSON.stringify(body, null, 2));
-    }
+    logger.debug('[AuditForm] POST /api/audit body:', JSON.stringify(body, null, 2));
 
     try {
       const res = await fetch('/api/audit', {

@@ -3,6 +3,7 @@ import { contactSchema } from '@/lib/validations/contact';
 import { rateLimiter } from '@/lib/rate-limit';
 import { supabaseAdmin } from '@/lib/supabase-admin';
 import { sendTeamNotification, sendClientConfirmation } from '@/lib/email';
+import { logger } from '@/logger';
 
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -132,7 +133,7 @@ export async function POST(
       });
 
     if (dbError) {
-      console.error('[/api/contact] Supabase insert failed:', dbError);
+      logger.error('[/api/contact] Supabase insert failed:', dbError);
       return NextResponse.json(
         {
           success: false,
@@ -176,13 +177,13 @@ export async function POST(
     ]);
 
     if (teamResult.status === 'rejected') {
-      console.error(
+      logger.error(
         '[/api/contact] Team notification email failed:',
         teamResult.reason,
       );
     }
     if (clientResult.status === 'rejected') {
-      console.error(
+      logger.error(
         '[/api/contact] Client confirmation email failed:',
         clientResult.reason,
       );
@@ -195,7 +196,7 @@ export async function POST(
     );
   } catch (error: unknown) {
     // Catch-all for unexpected errors — never expose internals to the client.
-    console.error('[/api/contact] Unexpected error:', error);
+    logger.error('[/api/contact] Unexpected error:', error);
     return NextResponse.json(
       { success: false, message: 'Something went wrong. Please try again.' },
       { status: 500 },

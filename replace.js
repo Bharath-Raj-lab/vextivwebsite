@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { logger } = require('./logger');
 
 let code = fs.readFileSync('components/sections/ServicesPreview.tsx', 'utf8');
 
@@ -669,10 +670,10 @@ if (oldCssMatch) {
   if (oldCssMatchFallback) {
     code = code.replace(oldCssMatchFallback[0], newCss + '\n\n        /* Phone home bar */');
   } else {
-    console.log("Could not find CSS block to replace!");
+    logger.error("Could not find CSS block to replace!");
   }
 }
 
 // Write the modified file back
 fs.writeFileSync('components/sections/ServicesPreview.tsx', code);
-console.log("File patched successfully!");
+logger.info("File patched successfully!");

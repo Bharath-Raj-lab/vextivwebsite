@@ -57,3 +57,10 @@ export function trackCaseStudyOpen(slug: string): void {
 export function trackBlogArticleOpen(slug: string): void {
   sendEvent('blog_article_open', { slug: slug });
 }
+
+export function trackEvent(
+  eventName: string,
+  params?: Record<string, string | number | boolean | null | undefined>,
+): void {
+  sendEvent(eventName, params);
+}

@@ -3,6 +3,7 @@ import { auditSchema } from '@/lib/validations/audit';
 import { rateLimiter } from '@/lib/rate-limit';
 import { supabaseAdmin } from '@/lib/supabase-admin';
 import { sendTeamNotification, sendClientConfirmation } from '@/lib/email';
+import { logger } from '@/logger';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -131,7 +132,7 @@ export async function POST(
       });
 
     if (dbError) {
-      console.error('[/api/audit] Supabase insert failed:', dbError);
+      logger.error('[/api/audit] Supabase insert failed:', dbError);
       return NextResponse.json(
         {
           success: false,
@@ -177,13 +178,13 @@ export async function POST(
     ]);
 
     if (teamResult.status === 'rejected') {
-      console.error(
+      logger.error(
         '[/api/audit] Team notification email failed:',
         teamResult.reason,
       );
     }
     if (clientResult.status === 'rejected') {
-      console.error(
+      logger.error(
         '[/api/audit] Client confirmation email failed:',
         clientResult.reason,
       );
@@ -195,7 +196,7 @@ export async function POST(
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (error: unknown) {
     // Catch-all for unexpected errors — never expose internals to the client.
-    console.error('[/api/audit] Unexpected error:', error);
+    logger.error('[/api/audit] Unexpected error:', error);
     return NextResponse.json(
       { success: false, message: 'Something went wrong. Please try again.' },
       { status: 500 },

@@ -20,6 +20,7 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   title: "Vextiv Studio",
+  metadataBase: new URL("https://vextiv.tech"),
   description: "Digital solutions crafted with precision — Vextiv Studio",
   icons: {
     icon: [
