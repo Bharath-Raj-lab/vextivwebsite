@@ -28,6 +28,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useReducer, useRef } from 'react';
 import { logger } from '@/logger';
+import { trackFormStart, trackFormSubmitSuccess, trackFormSubmitError } from '@/lib/analytics';
 
 // ─── Enum options — copied from lib/validations/audit.ts (source of truth) ────
 // If the schema changes these arrays, update this file to match.
@@ -144,6 +145,15 @@ export default function AuditForm() {
   });
 
   const firstErrorRef = useRef<HTMLElement | null>(null);
+  const hasTrackedStart = useRef(false);
+
+  // ── GA4: fire form_start once on first field interaction ──────────────────
+  function handleFormFocus() {
+    if (!hasTrackedStart.current) {
+      hasTrackedStart.current = true;
+      trackFormStart('audit-form');
+    }
+  }
 
   // ── On mount: read UTM params from URL ──────────────────────────────────────
   useEffect(() => {
@@ -216,12 +226,14 @@ export default function AuditForm() {
         | { success: false; message: string; errors?: Record<string, string> };
 
       if (json.success) {
+        trackFormSubmitSuccess('audit-form');
         dispatch({ type: 'SET_STATUS', status: 'success' });
         return;
       }
 
       // Field-level validation errors from the API
       if ('errors' in json && json.errors) {
+        trackFormSubmitError('audit-form', json.message ?? 'Validation error');
         const fieldErrors: FieldErrors = {};
         for (const [key, msg] of Object.entries(json.errors)) {
           if (key in INITIAL_FIELDS) {
@@ -233,14 +245,17 @@ export default function AuditForm() {
       }
 
       // Generic server error
+      trackFormSubmitError('audit-form', json.message ?? 'Server error');
       dispatch({
         type: 'SET_GLOBAL_ERROR',
         message: json.message ?? 'Something went wrong. Please try again.',
       });
     } catch {
+      const networkMsg = 'Network error. Please check your connection and try again.';
+      trackFormSubmitError('audit-form', networkMsg);
       dispatch({
         type: 'SET_GLOBAL_ERROR',
-        message: 'Network error. Please check your connection and try again.',
+        message: networkMsg,
       });
     }
   }
@@ -314,6 +329,7 @@ export default function AuditForm() {
               id="audit-form"
               className="audit-form"
               onSubmit={handleSubmit}
+              onFocus={handleFormFocus}
               noValidate
               aria-label="Free digital audit request form"
             >

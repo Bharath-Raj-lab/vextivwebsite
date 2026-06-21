@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { CaseStudy, PortfolioCategory } from '@/types/portfolio';
-import { trackPortfolioFilterClick } from '@/lib/analytics';
+import { trackPortfolioFilterClick, trackCaseStudyOpen } from '@/lib/analytics';
 
 const CATEGORIES: PortfolioCategory[] = ['All', 'Websites', 'QR Systems', 'Branding', 'Social Media'];
 
@@ -46,6 +46,7 @@ export default function WorkClient({ initialCaseStudies }: { initialCaseStudies:
             key={study.id}
             href={`/work/${study.slug}`}
             className="group block relative rounded-2xl overflow-hidden bg-[var(--bg-surface-1)] border border-[var(--border-subtle)] hover:border-[var(--accent-border-hover)] transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-[var(--accent-fill-08)]"
+            onClick={() => trackCaseStudyOpen(study.slug)}
           >
             <div className="relative h-64 w-full overflow-hidden bg-zinc-900">
               {study.thumbnail ? (

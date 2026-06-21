@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 // ─── CTA Section ──────────────────────────────────────────────────────────────
 // Layout: two-column, content left / image right (with subtle tilt like reference).
@@ -102,6 +103,7 @@ export default function PremiumCTA() {
               onMouseLeave={(e) => {
                 (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "#C8F04D";
               }}
+              onClick={() => trackEvent('cta_click', { label: 'Book a Free Consultation', location: 'premium-cta' })}
             >
               BOOK A FREE CONSULTATION
               <ArrowRight style={{ width: "14px", height: "14px" }} />

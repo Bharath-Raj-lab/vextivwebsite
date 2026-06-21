@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BlogPost, BlogCategory } from '@/types/blog';
+import { trackBlogArticleOpen } from '@/lib/analytics';
 
 const CATEGORIES: ('All' | BlogCategory)[] = ['All', 'Digital Strategy', 'Tech & Tools', 'Local SEO', 'Design & Branding'];
 const POSTS_PER_PAGE = 6;
@@ -63,6 +64,7 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
             key={post.id}
             href={`/blog/${post.slug}`}
             className="group block relative rounded-2xl overflow-hidden bg-[var(--bg-surface-1)] border border-[var(--border-subtle)] hover:border-[var(--accent-border-hover)] transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-[var(--accent-fill-08)] flex flex-col"
+            onClick={() => trackBlogArticleOpen(post.slug)}
           >
             <div className="relative h-56 w-full overflow-hidden bg-zinc-900">
               {post.thumbnail ? (

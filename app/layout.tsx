@@ -3,6 +3,9 @@ import { Syne, DM_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import GtagLoader from "@/components/layout/GtagLoader";
+import MetaPixel from "@/components/layout/MetaPixel";
+import CookieConsent from "@/components/ui/CookieConsent";
 
 const syne = Syne({
   weight: ["700", "800"],
@@ -46,11 +49,16 @@ export default function RootLayout({
       className={`${syne.variable} ${dmSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        {/* Consent-gated tag loaders — render <Script> tags only after cookie acceptance */}
+        <GtagLoader />   {/* GA4 + Google Ads: single gtag.js loader, one init block */}
+        <MetaPixel />    {/* Facebook Pixel: independent fbevents.js — kept separate */}
         <Navbar />
         <main id="main-content" className="flex-1">
           {children}
         </main>
         <Footer />
+        {/* DPDP Act 2023 consent banner — fixed bottom, above mobile CTA bar */}
+        <CookieConsent />
       </body>
     </html>
   );
