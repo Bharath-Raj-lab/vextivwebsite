@@ -8,7 +8,7 @@ export const dynamic = "force-static";
 
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vextiv.com"),
+  metadataBase: new URL("https://vextiv.tech"),
   title: "Privacy Policy | Vextiv Studio",
   description:
     "How Vextiv Studio collects, uses, and protects your personal data. Compliant with India's Digital Personal Data Protection Act 2023.",
@@ -16,22 +16,25 @@ export const metadata: Metadata = {
     title: "Privacy Policy | Vextiv Studio",
     description:
       "How Vextiv Studio collects, uses, and protects your personal data. Compliant with India's Digital Personal Data Protection Act 2023.",
-    url: "https://vextiv.com/privacy",
+    url: "https://vextiv.tech/privacy",
     siteName: "Vextiv Studio",
     type: "website",
   },
   alternates: {
-    canonical: "https://vextiv.com/privacy",
+    canonical: "https://vextiv.tech/privacy",
+  },
+  twitter: {
+    card: "summary_large_image",
   },
 };
 
 // ─── Content ──────────────────────────────────────────────────────────────────
 
 const EFFECTIVE_DATE = "20 June 2025" as const;
-const CONTACT_EMAIL  = "hello@vextiv.com" as const;
+const CONTACT_EMAIL = "hello@vextiv.tech" as const;
 
 const INTRO =
-  "This Privacy Policy explains how Vextiv Studio ('we', 'us', 'our') collects, uses, stores, and protects personal data when you visit our website (vextiv.com) or engage us for digital services. We are committed to handling your information responsibly and in compliance with the Digital Personal Data Protection Act, 2023 (DPDP Act) of India.";
+  "This Privacy Policy explains how Vextiv Studio ('we', 'us', 'our') collects, uses, stores, and protects personal data when you visit our website (vextiv.tech) or engage us for digital services. We are committed to handling your information responsibly and in compliance with the Digital Personal Data Protection Act, 2023 (DPDP Act) of India.";
 
 const SECTIONS: readonly ProseSection[] = [
   {
@@ -48,7 +51,7 @@ const SECTIONS: readonly ProseSection[] = [
           "Name and email address submitted via the contact form.",
           "Business name, phone number, and project details provided during consultation.",
           "Any files, assets, or documents shared with us during an engagement.",
-          "Correspondence content from emails sent to hello@vextiv.com.",
+          "Correspondence content from emails sent to hello@vextiv.tech.",
         ],
       },
       {
@@ -149,7 +152,7 @@ const SECTIONS: readonly ProseSection[] = [
       {
         heading: "How to exercise your rights",
         content: [
-          "To exercise any of the above rights, please contact us by email at hello@vextiv.com with the subject line 'DPDP Data Request'. We will acknowledge your request within 72 hours and respond substantively within 30 days. We may need to verify your identity before processing any request.",
+          "To exercise any of the above rights, please contact us by email at hello@vextiv.tech with the subject line 'DPDP Data Request'. We will acknowledge your request within 72 hours and respond substantively within 30 days. We may need to verify your identity before processing any request.",
         ],
       },
     ],
@@ -195,7 +198,7 @@ const SECTIONS: readonly ProseSection[] = [
       "For all privacy-related queries, data access requests, correction requests, erasure requests, or complaints, please contact us at:",
     ],
     list: [
-      "Email: hello@vextiv.com (Subject: DPDP Data Request)",
+      "Email: hello@vextiv.tech (Subject: DPDP Data Request)",
       "Studio: Vextiv Studio, Hyderabad, Telangana, India",
     ],
   },

@@ -7,7 +7,7 @@ export const dynamic = "force-static";
 
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vextiv.com"),
+  metadataBase: new URL("https://vextiv.tech"),
   title: "About Vextiv Studio | Hyderabad Digital Agency",
   description:
     "We're a digital studio founded in Hyderabad with one purpose: to give local businesses the online presence they deserve. Meet the team behind Vextiv Studio.",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     title: "About Vextiv Studio | Hyderabad Digital Agency",
     description:
       "We're a digital studio founded in Hyderabad with one purpose: to give local businesses the online presence they deserve. Meet the team behind Vextiv Studio.",
-    url: "https://vextiv.com/about",
+    url: "https://vextiv.tech/about",
     siteName: "Vextiv Studio",
     type: "website",
   },
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   alternates: {
-    canonical: "https://vextiv.com/about",
+    canonical: "https://vextiv.tech/about",
   },
 };
 

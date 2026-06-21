@@ -10,9 +10,24 @@ import { Suspense } from 'react';
 import ContactForm from './ContactForm';
 
 export const metadata: Metadata = {
-  title: 'Contact Us — Vextiv Studio',
+  metadataBase: new URL("https://vextiv.tech"),
+  title: "Contact Us | Vextiv Studio",
   description:
-    'Get in touch with Vextiv Studio. Tell us about your project and we\'ll respond within 1–2 business days with a tailored proposal.',
+    "Get in touch with Vextiv Studio. Tell us about your project in Hyderabad or beyond, and we'll respond within 1–2 business days with a tailored proposal.",
+  openGraph: {
+    title: "Contact Us | Vextiv Studio",
+    description:
+      "Get in touch with Vextiv Studio. Tell us about your project in Hyderabad or beyond, and we'll respond within 1–2 business days with a tailored proposal.",
+    url: "https://vextiv.tech/contact",
+    siteName: "Vextiv Studio",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
+  alternates: {
+    canonical: "https://vextiv.tech/contact",
+  },
 };
 
 export default function ContactPage() {

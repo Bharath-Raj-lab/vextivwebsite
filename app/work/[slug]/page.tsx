@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { caseStudies, getCaseStudyBySlug } from '@/lib/case-studies';
 import CaseStudyClient from './CaseStudyClient';
+import JsonLd from '@/components/seo/JsonLd';
 
 export const revalidate = 3600;
 
@@ -18,11 +19,29 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const study = getCaseStudyBySlug(slug);
   if (!study) return { title: 'Not Found | Vextiv Studio' };
 
+  const fullSuffix = " - Check out this project by Vextiv Studio, a digital agency based in Hyderabad.";
+  const shortSuffix = " — Vextiv Studio, Hyderabad.";
+  const desc = study.outcomeHeadline.length + fullSuffix.length <= 160 
+    ? study.outcomeHeadline + fullSuffix 
+    : study.outcomeHeadline + shortSuffix;
+
   return {
-    title: `${study.title} | Vextiv Studio`,
-    description: study.outcomeHeadline,
+    metadataBase: new URL("https://vextiv.tech"),
+    title: study.title + " | Vextiv Studio",
+    description: desc,
     openGraph: {
+      title: study.title + " | Vextiv Studio",
+      description: desc,
+      url: "https://vextiv.tech/work/" + slug,
+      siteName: "Vextiv Studio",
       images: [study.thumbnail],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+    },
+    alternates: {
+      canonical: "https://vextiv.tech/work/" + slug,
     },
   };
 }
@@ -30,13 +49,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const study = getCaseStudyBySlug(slug);
-  
+
   if (!study) {
     notFound();
   }
 
-  // JSON-LD BreadcrumbList
-  const jsonLd = {
+  // BreadcrumbList schema (PRD §8.2) — dynamic, built from route segment
+  const breadcrumbSchema: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
@@ -44,29 +63,26 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://vextiv.com/',
+        item: 'https://vextiv.tech/',
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Work',
-        item: 'https://vextiv.com/work',
+        item: 'https://vextiv.tech/work',
       },
       {
         '@type': 'ListItem',
         position: 3,
         name: study.title,
-        item: `https://vextiv.com/work/${study.slug}`,
+        item: `https://vextiv.tech/work/${study.slug}`,
       },
     ],
   };
 
   return (
     <main className="min-h-screen bg-[var(--bg-base)] pt-32 pb-24">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd schema={breadcrumbSchema} />
       <CaseStudyClient slug={study.slug} />
 
       <article className="container mx-auto px-6 max-w-5xl">
@@ -154,7 +170,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                   </div>
                 ))}
               </div>
-              
+
               <div className="mt-10 pt-8 border-t border-[var(--border-subtle)]">
                 <h3 className="text-sm uppercase tracking-widest text-[var(--text-muted)] font-bold mb-4">Services</h3>
                 <div className="flex flex-wrap gap-2">
@@ -196,14 +212,14 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             Ready to achieve similar results?
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center relative z-10">
-            <Link 
-              href="/contact" 
+            <Link
+              href="/contact"
               className="px-8 py-4 bg-[var(--accent)] text-black font-bold rounded-full hover:bg-white transition-colors duration-300"
             >
               Start a Project
             </Link>
             {study.liveUrl && (
-              <a 
+              <a
                 href={study.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"

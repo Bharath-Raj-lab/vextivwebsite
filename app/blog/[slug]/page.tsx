@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { blogPosts, getPostBySlug, getRelatedPosts } from '@/lib/blog';
 import BlogArticleClient from './BlogArticleClient';
+import JsonLd from '@/components/seo/JsonLd';
 
 export const revalidate = 3600;
 
@@ -18,14 +19,51 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const post = getPostBySlug(slug);
   if (!post) return { title: 'Not Found | Vextiv Studio' };
 
+  const fullSuffix = " - Insights from Vextiv Studio, Hyderabad.";
+  const shortSuffix = " — Vextiv Studio, Hyderabad.";
+  
+  function trimAtWord(str: string, maxLen: number) {
+    if (str.length <= maxLen) return str;
+    const trimmed = str.substring(0, maxLen);
+    const lastSpace = trimmed.lastIndexOf(" ");
+    return lastSpace > 0 ? trimmed.substring(0, lastSpace) : trimmed;
+  }
+
+  let desc = post.excerpt;
+  if (desc.includes("Hyderabad")) {
+    if (desc.length > 160) {
+      desc = trimAtWord(desc, 157) + "...";
+    }
+  } else {
+    if (desc.length + fullSuffix.length <= 160) {
+      desc += fullSuffix;
+    } else if (desc.length + shortSuffix.length <= 160) {
+      desc += shortSuffix;
+    } else {
+      const maxLen = 160 - shortSuffix.length - 3;
+      desc = trimAtWord(desc, maxLen) + "..." + shortSuffix;
+    }
+  }
+
   return {
-    title: `${post.title} | Vextiv Studio`,
-    description: post.excerpt,
+    metadataBase: new URL("https://vextiv.tech"),
+    title: post.title + " | Vextiv Studio",
+    description: desc,
     openGraph: {
+      title: post.title + " | Vextiv Studio",
+      description: desc,
+      url: "https://vextiv.tech/blog/" + slug,
+      siteName: "Vextiv Studio",
       images: [post.thumbnail],
       type: 'article',
       publishedTime: post.date,
       authors: [post.author.name],
+    },
+    twitter: {
+      card: "summary_large_image",
+    },
+    alternates: {
+      canonical: "https://vextiv.tech/blog/" + slug,
     },
   };
 }
@@ -33,32 +71,74 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
-  
+
   if (!post) {
     notFound();
   }
 
   const relatedPosts = getRelatedPosts(post.slug, post.category);
 
-  // JSON-LD Article
-  const jsonLd = {
+  // BreadcrumbList schema (PRD §8.2) — dynamic, built from route segments
+  const breadcrumbSchema: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://vextiv.tech/',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Blog',
+        item: 'https://vextiv.tech/blog',
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: post.title,
+        item: `https://vextiv.tech/blog/${post.slug}`,
+      },
+    ],
+  };
+
+  // Article schema (PRD §8.2) — dynamic, built from post data
+  const articleSchema: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: post.title,
+    description: post.excerpt,
     image: [post.thumbnail],
     datePublished: post.date,
-    author: [{
-      '@type': 'Person',
-      name: post.author.name,
-    }],
+    // dateModified falls back to datePublished when not separately tracked
+    dateModified: post.date,
+    author: [
+      {
+        '@type': 'Person',
+        name: post.author.name,
+      },
+    ],
+    publisher: {
+      '@type': 'Organization',
+      name: 'Vextiv Studio',
+      url: 'https://vextiv.tech',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://vextiv.tech/favicons/favicon-32x32.png',
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://vextiv.tech/blog/${post.slug}`,
+    },
   };
 
   return (
     <div className="min-h-screen bg-[var(--bg-base)] pt-[calc(var(--navbar-height)+4rem)] pb-24">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd schema={breadcrumbSchema} />
+      <JsonLd schema={articleSchema} />
       <BlogArticleClient slug={post.slug} />
 
       <article className="container mx-auto px-6 max-w-4xl">
@@ -103,7 +183,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </div>
 
         {/* Content */}
-        <div 
+        <div
           className="max-w-3xl mx-auto mb-20 text-[var(--text-secondary)] text-lg leading-relaxed space-y-6 [&>h3]:text-2xl [&>h3]:font-bold [&>h3]:text-[var(--text-primary)] [&>h3]:mt-10 [&>h3]:mb-4 [&>p]:mb-6 [&>a]:text-[var(--accent)] hover:[&>a]:text-[var(--text-primary)] [&>a]:underline [&>img]:rounded-2xl [&>ul]:list-disc [&>ul]:ml-6 [&>ol]:list-decimal [&>ol]:ml-6"
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
@@ -117,8 +197,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <p className="text-[var(--text-secondary)] mb-8 relative z-10">
             Our team of experts at Vextiv Studio can help you build and scale your digital presence.
           </p>
-          <Link 
-            href="/contact" 
+          <Link
+            href="/contact"
             className="px-8 py-4 bg-[var(--accent)] text-black font-bold rounded-full hover:bg-white transition-colors duration-300 relative z-10 inline-block"
           >
             Get in Touch

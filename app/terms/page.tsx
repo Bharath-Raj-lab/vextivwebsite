@@ -8,7 +8,7 @@ export const dynamic = "force-static";
 
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vextiv.com"),
+  metadataBase: new URL("https://vextiv.tech"),
   title: "Terms of Service | Vextiv Studio",
   description:
     "Terms and conditions governing all engagements with Vextiv Studio. Read before hiring us — clear, plain English, no legal jargon where possible.",
@@ -16,22 +16,25 @@ export const metadata: Metadata = {
     title: "Terms of Service | Vextiv Studio",
     description:
       "Terms and conditions governing all engagements with Vextiv Studio. Read before hiring us — clear, plain English, no legal jargon where possible.",
-    url: "https://vextiv.com/terms",
+    url: "https://vextiv.tech/terms",
     siteName: "Vextiv Studio",
     type: "website",
   },
   alternates: {
-    canonical: "https://vextiv.com/terms",
+    canonical: "https://vextiv.tech/terms",
+  },
+  twitter: {
+    card: "summary_large_image",
   },
 };
 
 // ─── Content ──────────────────────────────────────────────────────────────────
 
 const EFFECTIVE_DATE = "20 June 2025" as const;
-const CONTACT_EMAIL  = "hello@vextiv.com" as const;
+const CONTACT_EMAIL = "hello@vextiv.tech" as const;
 
 const INTRO =
-  "These Terms of Service ('Terms') govern the relationship between Vextiv Studio ('we', 'us', 'our') — a digital agency operating in Hyderabad, Telangana, India — and any individual or business ('Client', 'you') who engages us for services. By engaging Vextiv Studio for a project or service, you agree to be bound by these Terms. If you have questions before committing, please reach out at hello@vextiv.com.";
+  "These Terms of Service ('Terms') govern the relationship between Vextiv Studio ('we', 'us', 'our') — a digital agency operating in Hyderabad, Telangana, India — and any individual or business ('Client', 'you') who engages us for services. By engaging Vextiv Studio for a project or service, you agree to be bound by these Terms. If you have questions before committing, please reach out at hello@vextiv.tech.";
 
 const SECTIONS: readonly ProseSection[] = [
   {
@@ -180,7 +183,7 @@ const SECTIONS: readonly ProseSection[] = [
     heading: "Governing Law",
     content: [
       "These Terms of Service shall be governed by and construed in accordance with the laws of India. Any disputes arising out of or in connection with these Terms, or any project engagement with Vextiv Studio, shall be subject to the exclusive jurisdiction of the courts located in Hyderabad, Telangana, India.",
-      "We will always try to resolve any dispute directly and amicably before initiating formal proceedings. If you have a concern, contact us at hello@vextiv.com and we will respond promptly.",
+      "We will always try to resolve any dispute directly and amicably before initiating formal proceedings. If you have a concern, contact us at hello@vextiv.tech and we will respond promptly.",
     ],
     subSections: [
       {

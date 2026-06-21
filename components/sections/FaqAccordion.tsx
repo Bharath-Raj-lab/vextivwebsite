@@ -135,7 +135,7 @@ const FAQ_CATEGORIES: readonly FaqCategory[] = [
         id: "how-to-contact-support",
         question: "How do I contact you if something's wrong?",
         answer:
-          "Email us at hello@vextiv.com with a description of the issue and we'll respond within one business day. For active retainer clients, response times are typically faster. We don't have a support ticket system — we prefer a direct email thread where the context stays in one place.",
+          "Email us at hello@vextiv.tech with a description of the issue and we'll respond within one business day. For active retainer clients, response times are typically faster. We don't have a support ticket system — we prefer a direct email thread where the context stays in one place.",
       },
     ],
   },

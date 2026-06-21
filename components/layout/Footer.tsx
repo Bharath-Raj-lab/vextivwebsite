@@ -203,8 +203,8 @@ export default function Footer() {
               </li>
               <li className="footer__contact-item">
                 <Mail size={15} strokeWidth={1.75} aria-hidden="true" className="footer__contact-icon" />
-                <a href="mailto:hello@vextiv.com" className="footer__contact-link">
-                  hello@vextiv.com
+                <a href="mailto:hello@vextiv.tech" className="footer__contact-link">
+                  hello@vextiv.tech
                 </a>
               </li>
               <li className="footer__contact-item">

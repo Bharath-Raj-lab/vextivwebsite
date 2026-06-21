@@ -3,9 +3,24 @@ import Link from "next/link";
 
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
+  metadataBase: new URL("https://vextiv.tech"),
   title: "404 — Page Not Found | Vextiv Studio",
   description:
-    "The page you're looking for doesn't exist. Head back home or explore our work.",
+    "The page you're looking for doesn't exist or has been moved. Head back home to explore our work and learn more about our Hyderabad digital agency.",
+  openGraph: {
+    title: "404 — Page Not Found | Vextiv Studio",
+    description:
+      "The page you're looking for doesn't exist or has been moved. Head back home to explore our work and learn more about our Hyderabad digital agency.",
+    url: "https://vextiv.tech/not-found",
+    siteName: "Vextiv Studio",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
+  alternates: {
+    canonical: "https://vextiv.tech/not-found",
+  },
 };
 
 // ─── Arrow icon ───────────────────────────────────────────────────────────────

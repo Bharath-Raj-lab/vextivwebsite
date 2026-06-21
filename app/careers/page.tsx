@@ -6,7 +6,7 @@ export const dynamic = "force-static";
 
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vextiv.com"),
+  metadataBase: new URL("https://vextiv.tech"),
   title: "Careers at Vextiv Studio | Join Our Hyderabad Team",
   description:
     "We're a small, focused digital studio based in Hyderabad. No open roles right now, but we always want to hear from people who care about craft. Send us a message.",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: "Careers at Vextiv Studio | Join Our Hyderabad Team",
     description:
       "We're a small, focused digital studio based in Hyderabad. No open roles right now, but we always want to hear from people who care about craft. Send us a message.",
-    url: "https://vextiv.com/careers",
+    url: "https://vextiv.tech/careers",
     siteName: "Vextiv Studio",
     type: "website",
   },
@@ -22,13 +22,13 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   alternates: {
-    canonical: "https://vextiv.com/careers",
+    canonical: "https://vextiv.tech/careers",
   },
 };
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
-const CONTACT_EMAIL = "hello@vextiv.com" as const;
+const CONTACT_EMAIL = "hello@vextiv.tech" as const;
 
 const CULTURE_POINTS: readonly { readonly id: string; readonly text: string }[] = [
   { id: "small-team", text: "Small on purpose. Every person on the team has real ownership over real work — no hand-holding, no bureaucracy." },

@@ -12,7 +12,7 @@ import ScrollDepthTracker from "@/components/sections/ScrollDepthTracker";
 
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vextiv.com"),
+  metadataBase: new URL("https://vextiv.tech"),
   title: "Vextiv Studio | Digital Growth Agency in Hyderabad",
   description:
     "Vextiv Studio builds websites, QR systems, branding, and social media for restaurants, startups, and local businesses in Hyderabad. Get a free consultation.",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: "Vextiv Studio | Digital Growth Agency in Hyderabad",
     description:
       "Vextiv Studio builds websites, QR systems, branding, and social media for restaurants, startups, and local businesses in Hyderabad. Get a free consultation.",
-    url: "https://vextiv.com",
+    url: "https://vextiv.tech",
     siteName: "Vextiv Studio",
     type: "website",
   },
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   alternates: {
-    canonical: "https://vextiv.com",
+    canonical: "https://vextiv.tech",
   },
 };
 

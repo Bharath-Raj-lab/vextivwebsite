@@ -1,11 +1,27 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import JsonLd from "@/components/seo/JsonLd";
 
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
+  metadataBase: new URL("https://vextiv.tech"),
   title: "Services | Vextiv Studio",
   description:
     "From websites to branding, QR ordering systems to local SEO — Vextiv Studio delivers end-to-end digital services for businesses across Hyderabad and beyond.",
+  openGraph: {
+    title: "Services | Vextiv Studio",
+    description:
+      "From websites to branding, QR ordering systems to local SEO — Vextiv Studio delivers end-to-end digital services for businesses across Hyderabad and beyond.",
+    url: "https://vextiv.tech/services",
+    siteName: "Vextiv Studio",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
+  alternates: {
+    canonical: "https://vextiv.tech/services",
+  },
 };
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -655,8 +671,39 @@ function ServicesHero() {
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function ServicesPage() {
+  // Service schemas (PRD §8.2, §2.1) — one block per service
+  const serviceSchemas: Record<string, unknown>[] = SERVICES.map((service) => ({
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: service.name,
+    description: service.description,
+    provider: {
+      '@type': 'LocalBusiness',
+      name: 'Vextiv Studio',
+      url: 'https://vextiv.tech',
+    },
+    // PRD §8.4 — areaServed list
+    areaServed: [
+      'Hyderabad',
+      'Secunderabad',
+      'Gachibowli',
+      'Hitech City',
+      'Banjara Hills',
+      'Jubilee Hills',
+      'Kondapur',
+      'Madhapur',
+      'Telangana',
+      'Andhra Pradesh',
+    ],
+    url: `https://vextiv.tech/services#${service.id}`,
+  }));
+
   return (
     <>
+      {/* Service structured data — one <script> block per service */}
+      {serviceSchemas.map((schema, i) => (
+        <JsonLd key={i} schema={schema} />
+      ))}
       <ServicesHero />
 
       <main className="svc-main">

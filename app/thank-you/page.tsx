@@ -5,8 +5,22 @@ import Link from "next/link";
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://vextiv.tech"),
   title: "Message Received | Vextiv Studio",
-  description: "Thank you for reaching out to Vextiv Studio.",
+  description: "Thank you for reaching out to Vextiv Studio. We will review your details and be in touch shortly to discuss how we can help your Hyderabad business grow.",
+  openGraph: {
+    title: "Message Received | Vextiv Studio",
+    description: "Thank you for reaching out to Vextiv Studio. We will review your details and be in touch shortly to discuss how we can help your Hyderabad business grow.",
+    url: "https://vextiv.tech/thank-you",
+    siteName: "Vextiv Studio",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
+  alternates: {
+    canonical: "https://vextiv.tech/thank-you",
+  },
   robots: {
     index: false,
     follow: false,
