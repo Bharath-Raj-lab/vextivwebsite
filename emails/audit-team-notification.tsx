@@ -1,6 +1,6 @@
-// React Email template — Contact team notification
-// Sent to the internal team when a new contact inquiry is received.
-// Rendered server-side by Resend; import via @/emails/team-notification.
+// React Email template — Audit team notification
+// Sent to the internal team when a new free-audit request is submitted.
+// Rendered server-side by Resend; import via @/emails/audit-team-notification.
 
 import {
   Body,
@@ -18,14 +18,13 @@ import * as React from 'react';
 
 // ─── Props ────────────────────────────────────────────────────────────────────
 
-export interface TeamNotificationProps {
-  name: string;
+export interface AuditTeamNotificationProps {
+  businessName: string;
   email: string;
   phone: string;
-  company: string | null;
-  service: string | null;
-  budget: string | null;
-  brief: string | null;
+  primaryGoal: string;
+  websiteUrl: string | null;
+  hearAboutUs: string | null;
   utm_source: string | null;
   utm_medium: string | null;
   utm_campaign: string | null;
@@ -34,28 +33,27 @@ export interface TeamNotificationProps {
 
 // ─── Template ─────────────────────────────────────────────────────────────────
 
-export default function TeamNotification({
-  name,
+export default function AuditTeamNotification({
+  businessName,
   email,
   phone,
-  company,
-  service,
-  budget,
-  brief,
+  primaryGoal,
+  websiteUrl,
+  hearAboutUs,
   utm_source,
   utm_medium,
   utm_campaign,
   submittedAt,
-}: TeamNotificationProps) {
+}: AuditTeamNotificationProps) {
   const hasUtm = utm_source || utm_medium || utm_campaign;
 
   return (
     <Html>
       <Head />
-      <Preview>New Contact Inquiry — {name}</Preview>
+      <Preview>New Free Audit Request — {businessName}</Preview>
       <Body style={styles.body}>
         <Container style={styles.container}>
-          <Heading style={styles.heading}>📬 New Contact Inquiry</Heading>
+          <Heading style={styles.heading}>🔍 New Free Audit Request</Heading>
           <Text style={styles.meta}>Received: {submittedAt}</Text>
 
           <Hr style={styles.hr} />
@@ -66,8 +64,8 @@ export default function TeamNotification({
               Contact Details
             </Heading>
             <Row>
-              <Text style={styles.label}>Name</Text>
-              <Text style={styles.value}>{name}</Text>
+              <Text style={styles.label}>Business Name</Text>
+              <Text style={styles.value}>{businessName}</Text>
             </Row>
             <Row>
               <Text style={styles.label}>Email</Text>
@@ -77,37 +75,29 @@ export default function TeamNotification({
               <Text style={styles.label}>Phone</Text>
               <Text style={styles.value}>{phone}</Text>
             </Row>
-            {company && (
+            {websiteUrl && (
               <Row>
-                <Text style={styles.label}>Company</Text>
-                <Text style={styles.value}>{company}</Text>
+                <Text style={styles.label}>Website URL</Text>
+                <Text style={styles.value}>{websiteUrl}</Text>
               </Row>
             )}
           </Section>
 
           <Hr style={styles.hr} />
 
-          {/* ── Inquiry details ── */}
+          {/* ── Audit details ── */}
           <Section>
             <Heading as="h2" style={styles.subheading}>
-              Inquiry Details
+              Audit Details
             </Heading>
-            {service && (
+            <Row>
+              <Text style={styles.label}>Primary Goal</Text>
+              <Text style={styles.value}>{primaryGoal}</Text>
+            </Row>
+            {hearAboutUs && (
               <Row>
-                <Text style={styles.label}>Service</Text>
-                <Text style={styles.value}>{service}</Text>
-              </Row>
-            )}
-            {budget && (
-              <Row>
-                <Text style={styles.label}>Budget</Text>
-                <Text style={styles.value}>{budget}</Text>
-              </Row>
-            )}
-            {brief && (
-              <Row>
-                <Text style={styles.label}>Brief</Text>
-                <Text style={styles.value}>{brief}</Text>
+                <Text style={styles.label}>How They Heard About Us</Text>
+                <Text style={styles.value}>{hearAboutUs}</Text>
               </Row>
             )}
           </Section>

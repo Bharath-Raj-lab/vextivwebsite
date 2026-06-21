@@ -1,6 +1,6 @@
-// React Email template — Contact client confirmation
-// Sent to the person who submitted a contact inquiry.
-// Rendered server-side by Resend; import via @/emails/client-confirmation.
+// React Email template — Audit client confirmation
+// Sent to the person who submitted a free-audit request.
+// Rendered server-side by Resend; import via @/emails/audit-client-confirmation.
 
 import {
   Body,
@@ -16,32 +16,42 @@ import * as React from 'react';
 
 // ─── Props ────────────────────────────────────────────────────────────────────
 
-export interface ClientConfirmationProps {
-  name: string;
+export interface AuditClientConfirmationProps {
+  businessName: string;
 }
 
 // ─── Template ─────────────────────────────────────────────────────────────────
 
-export default function ClientConfirmation({ name }: ClientConfirmationProps) {
+export default function AuditClientConfirmation({
+  businessName,
+}: AuditClientConfirmationProps) {
   return (
     <Html>
       <Head />
-      <Preview>We&apos;ve received your message — Vextiv Studio</Preview>
+      <Preview>
+        Your free audit request is confirmed — Vextiv Studio
+      </Preview>
       <Body style={styles.body}>
         <Container style={styles.container}>
-          <Heading style={styles.heading}>Thanks for reaching out! 👋</Heading>
+          <Heading style={styles.heading}>You&apos;re on the list! 🎉</Heading>
 
           <Text style={styles.paragraph}>
-            Hi {name}, we&apos;ve received your message and will get back to you
-            within <strong>1–2 business days</strong>.
+            Hi {businessName}, thanks for requesting your free digital audit
+            from <strong>Vextiv Studio</strong>.
           </Text>
 
           <Text style={styles.paragraph}>
-            In the meantime, feel free to reply to this email if you have
-            anything to add — we&apos;re happy to help.
+            Our team will review your details and reach out within{' '}
+            <strong>1–2 business days</strong> with a personalised audit report
+            and actionable recommendations.
           </Text>
 
           <Hr style={styles.hr} />
+
+          <Text style={styles.paragraph}>
+            In the meantime, feel free to reply to this email if you have any
+            questions — we&apos;re happy to help.
+          </Text>
 
           <Text style={styles.signature}>
             Warm regards,
@@ -52,7 +62,7 @@ export default function ClientConfirmation({ name }: ClientConfirmationProps) {
           <Hr style={styles.hr} />
           <Text style={styles.footer}>
             © {new Date().getFullYear()} Vextiv Studio · You received this
-            because you contacted us via our website.
+            because you requested a free digital audit.
           </Text>
         </Container>
       </Body>
