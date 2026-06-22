@@ -14,6 +14,7 @@ import {
   Mail,
   Phone,
 } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 // ─── Animation Variants ───────────────────────────────────────────────────────
 const fadeUp = {
@@ -50,10 +51,12 @@ function SocialIcon({
   href,
   label,
   children,
+  isWhatsApp = false,
 }: {
   href: string;
   label: string;
   children: React.ReactNode;
+  isWhatsApp?: boolean;
 }) {
   return (
     <a
@@ -62,6 +65,13 @@ function SocialIcon({
       aria-label={label}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => {
+        if (isWhatsApp) {
+          trackEvent('whatsapp_click', { location: 'footer' });
+        } else {
+          trackEvent('outbound_link_click', { href });
+        }
+      }}
     >
       {children}
     </a>
@@ -141,7 +151,7 @@ export default function Footer() {
               <SocialIcon href="https://facebook.com/vextivstudio" label="Vextiv on Facebook">
                 <Facebook size={18} strokeWidth={1.75} aria-hidden="true" />
               </SocialIcon>
-              <SocialIcon href={whatsappHref} label="Vextiv on WhatsApp">
+              <SocialIcon href={whatsappHref} label="Vextiv on WhatsApp" isWhatsApp>
                 <MessageCircle size={18} strokeWidth={1.75} aria-hidden="true" />
               </SocialIcon>
             </div>
@@ -215,7 +225,12 @@ export default function Footer() {
               </li>
             </ul>
 
-            <Link href="/contact" className="footer__schedule-btn" id="footer-schedule-btn">
+            <Link
+              href="/contact"
+              className="footer__schedule-btn"
+              id="footer-schedule-btn"
+              onClick={() => trackEvent('cta_click', { label: 'Book a Free Consultation', location: 'footer' })}
+            >
               Book a Free Consultation
               <ArrowRight size={14} strokeWidth={2} aria-hidden="true" />
             </Link>

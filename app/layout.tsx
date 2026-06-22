@@ -5,6 +5,9 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import JsonLd from "@/components/seo/JsonLd";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import GtagLoader from "@/components/layout/GtagLoader";
+import MetaPixel from "@/components/layout/MetaPixel";
+import CookieConsent from "@/components/ui/CookieConsent";
 
 const syne = Syne({
   weight: ["700", "800"],
@@ -111,12 +114,17 @@ export default function RootLayout({
         {/* Site-wide structured data */}
         <JsonLd schema={localBusinessSchema} />
         <JsonLd schema={webSiteSchema} />
+
+        {/* Consent-gated tag loaders */}
+        <GtagLoader />
+        <MetaPixel />
         <Navbar />
         <main id="main-content" className="flex-1">
           {children}
         </main>
         <Footer />
         <WhatsAppButton />
+        <CookieConsent />
       </body>
     </html>
   );

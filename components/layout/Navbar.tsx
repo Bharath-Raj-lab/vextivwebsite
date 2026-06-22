@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useReducer, useRef } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 // ─── Nav links ───────────────────────────────────────────────────────────────
 const NAV_LINKS = [
@@ -109,7 +110,12 @@ export default function Navbar() {
 
           {/* Right Side: CTA Capsule & Mobile Hamburger */}
           <div className="navbar__actions">
-            <Link href="/contact" className="navbar__cta-capsule" aria-label="Book a call with Vextiv">
+            <Link
+              href="/contact"
+              className="navbar__cta-capsule"
+              aria-label="Book a call with Vextiv"
+              onClick={() => trackEvent('cta_click', { label: 'Book a Call', location: 'navbar' })}
+            >
               Book a Call
             </Link>
 

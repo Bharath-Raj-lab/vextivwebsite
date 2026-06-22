@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { caseStudies, getCaseStudyBySlug } from '@/lib/case-studies';
-import CaseStudyClient from './CaseStudyClient';
+import CaseStudyClient, { CaseStudyCtaLink, CaseStudyLiveLink } from './CaseStudyClient';
 import JsonLd from '@/components/seo/JsonLd';
 
 export const revalidate = 3600;
@@ -212,21 +212,19 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             Ready to achieve similar results?
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center relative z-10">
-            <Link
+            <CaseStudyCtaLink
               href="/contact"
               className="px-8 py-4 bg-[var(--accent)] text-black font-bold rounded-full hover:bg-white transition-colors duration-300"
             >
               Start a Project
-            </Link>
+            </CaseStudyCtaLink>
             {study.liveUrl && (
-              <a
+              <CaseStudyLiveLink
                 href={study.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="px-8 py-4 bg-[var(--bg-surface-2)] border border-[var(--border-subtle)] text-[var(--text-primary)] font-bold rounded-full hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all duration-300"
               >
                 View Live Site &rarr;
-              </a>
+              </CaseStudyLiveLink>
             )}
           </div>
         </div>
