@@ -8,6 +8,7 @@ import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import GtagLoader from "@/components/layout/GtagLoader";
 import MetaPixel from "@/components/layout/MetaPixel";
 import CookieConsent from "@/components/ui/CookieConsent";
+import ClientProviders from "@/components/layout/ClientProviders";
 
 const syne = Syne({
   weight: ["700", "800"],
@@ -111,20 +112,22 @@ export default function RootLayout({
       className={`${syne.variable} ${dmSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        {/* Site-wide structured data */}
-        <JsonLd schema={localBusinessSchema} />
-        <JsonLd schema={webSiteSchema} />
+        <ClientProviders>
+          {/* Site-wide structured data */}
+          <JsonLd schema={localBusinessSchema} />
+          <JsonLd schema={webSiteSchema} />
 
-        {/* Consent-gated tag loaders */}
-        <GtagLoader />
-        <MetaPixel />
-        <Navbar />
-        <main id="main-content" className="flex-1">
-          {children}
-        </main>
-        <Footer />
-        <WhatsAppButton />
-        <CookieConsent />
+          {/* Consent-gated tag loaders */}
+          <GtagLoader />
+          <MetaPixel />
+          <Navbar />
+          <main id="main-content" className="flex-1">
+            {children}
+          </main>
+          <Footer />
+          <WhatsAppButton />
+          <CookieConsent />
+        </ClientProviders>
       </body>
     </html>
   );

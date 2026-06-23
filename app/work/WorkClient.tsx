@@ -23,11 +23,12 @@ export default function WorkClient({ initialCaseStudies }: { initialCaseStudies:
   return (
     <div>
       {/* Filter Tabs */}
-      <div className="flex flex-wrap gap-2 mb-12">
+      <div role="group" aria-label="Filter by category" className="flex flex-wrap gap-2 mb-12">
         {CATEGORIES.map((category) => (
           <button
             key={category}
             onClick={() => handleFilterClick(category)}
+            aria-pressed={activeFilter === category}
             className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 border ${
               activeFilter === category
                 ? 'bg-[var(--accent-fill-10)] text-white border-[var(--accent-border-active)] shadow-[0_0_15px_rgba(200,240,77,0.1)]'

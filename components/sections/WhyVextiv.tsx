@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { motion, useInView, useMotionValue, useSpring, MotionValue } from "framer-motion";
+import { motion, useInView, useMotionValue, useSpring, MotionValue, useReducedMotion } from "framer-motion";
 
 // ─── Ease ────────────────────────────────────────────────────────────────
 const EXPO = [0.16, 1, 0.3, 1] as const;
@@ -15,25 +15,27 @@ function CardFooter({
   description,
   cta,
   light,
+  prefersReducedMotion,
 }: {
   visible: boolean;
   delay?: number;
   description: string;
   cta: string;
   light?: boolean;
+  prefersReducedMotion: boolean | null;
 }) {
   return (
     <motion.div
       className="wv-footer"
-      initial={{ opacity: 0, y: 20 }}
-      animate={visible ? { opacity: 1, y: 0 } : {}}
+      initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
+      animate={prefersReducedMotion ? {} : (visible ? { opacity: 1, y: 0 } : {})}
       transition={{ duration: 0.75, delay, ease: EXPO }}
     >
       <p className={light ? "wv-desc wv-desc--light" : "wv-desc"}>{description}</p>
       <motion.button
         className={light ? "wv-cta wv-cta--light" : "wv-cta"}
-        whileHover={{ scale: 1.04 }}
-        whileTap={{ scale: 0.96 }}
+        whileHover={prefersReducedMotion ? undefined : { scale: 1.04 }}
+        whileTap={prefersReducedMotion ? undefined : { scale: 0.96 }}
       >
         {cta}
         <span className="wv-arrow">→</span>
@@ -53,6 +55,7 @@ interface ReactiveLetterProps {
   mouseY: MotionValue<number>;
   isHovered: boolean;
   isTapped: boolean;
+  prefersReducedMotion: boolean | null;
   className?: string;
   initial?: React.ComponentPropsWithoutRef<typeof motion.span>["initial"];
   animate?: React.ComponentPropsWithoutRef<typeof motion.span>["animate"];
@@ -68,6 +71,7 @@ function ReactiveLetter({
   mouseY,
   isHovered,
   isTapped,
+  prefersReducedMotion,
   className,
   initial,
   animate,
@@ -84,6 +88,13 @@ function ReactiveLetter({
 
   useEffect(() => {
     if (!after || !ref.current) return;
+
+    // If reduced motion is preferred, never move letters
+    if (prefersReducedMotion) {
+      x.set(0);
+      y.set(0);
+      return;
+    }
 
     if (isTapped) {
       const varianceX = 15 + (i % 3) * 6;
@@ -143,10 +154,10 @@ function ReactiveLetter({
     <motion.span
       ref={ref}
       className={className}
-      initial={initial}
-      animate={animate}
+      initial={prefersReducedMotion ? false : initial}
+      animate={prefersReducedMotion ? {} : animate}
       transition={transition}
-      style={{ ...style, x: springX, y: springY, display: "inline-flex", whiteSpace: "pre" }}
+      style={{ ...style, x: prefersReducedMotion ? 0 : springX, y: prefersReducedMotion ? 0 : springY, display: "inline-flex", whiteSpace: "pre" }}
     >
       {ch}
     </motion.span>
@@ -158,6 +169,7 @@ function ReactiveLetter({
 // Surface: #0a0a0a black  ·  Type: white + lime
 // ══════════════════════════════════════════════════════════════════════════
 function Card1({ visible }: { visible: boolean }) {
+  const prefersReducedMotion = useReducedMotion();
   const word = "STRATEGY".split("");
   const [after, setAfter] = useState(false);
   const [isTapped, setIsTapped] = useState(false);
@@ -170,6 +182,7 @@ function Card1({ visible }: { visible: boolean }) {
   }, [visible]);
 
   const handleTap = () => {
+    if (prefersReducedMotion) return;
     setIsTapped(true);
     if (tapTimeout.current) clearTimeout(tapTimeout.current);
     tapTimeout.current = setTimeout(() => setIsTapped(false), 800);
@@ -178,8 +191,8 @@ function Card1({ visible }: { visible: boolean }) {
   return (
     <motion.div 
       className="wv-card wv-card-black" 
-      whileHover="hover"
-      onTap={handleTap}
+      whileHover={prefersReducedMotion ? undefined : "hover"}
+      onTap={prefersReducedMotion ? undefined : handleTap}
     >
       <div className="wv-noise" />
 
@@ -192,15 +205,17 @@ function Card1({ visible }: { visible: boolean }) {
             <motion.span
               key={i}
               className="wv-fall-letter"
-              initial={{ y: -40, opacity: 0, x: 0, rotate: 0 }}
+              initial={prefersReducedMotion ? false : { y: -40, opacity: 0, x: 0, rotate: 0 }}
               animate={
-                isTapped 
-                  ? { y: i % 2 === 0 ? -16 : 16, x: i % 3 === 0 ? 14 : -14, rotate: i % 2 === 0 ? 4 : -4, opacity: 1 }
-                  : (visible ? { y: 0, x: 0, rotate: 0, opacity: 1 } : { y: -40, x: 0, rotate: 0, opacity: 0 })
+                prefersReducedMotion
+                  ? { opacity: 1 }
+                  : isTapped 
+                    ? { y: i % 2 === 0 ? -16 : 16, x: i % 3 === 0 ? 14 : -14, rotate: i % 2 === 0 ? 4 : -4, opacity: 1 }
+                    : (visible ? { y: 0, x: 0, rotate: 0, opacity: 1 } : { y: -40, x: 0, rotate: 0, opacity: 0 })
               }
-              variants={{ hover: { y: i % 2 === 0 ? -16 : 16, x: i % 3 === 0 ? 14 : -14, rotate: i % 2 === 0 ? 4 : -4 } }}
+              variants={prefersReducedMotion ? undefined : { hover: { y: i % 2 === 0 ? -16 : 16, x: i % 3 === 0 ? 14 : -14, rotate: i % 2 === 0 ? 4 : -4 } }}
               transition={{
-                type: "spring", damping: 14, stiffness: 100, delay: visible && !isTapped ? 0.06 * i : 0
+                type: "spring", damping: 14, stiffness: 100, delay: visible && !isTapped && !prefersReducedMotion ? 0.06 * i : 0
               }}
             >
               {ch}
@@ -213,8 +228,8 @@ function Card1({ visible }: { visible: boolean }) {
       <div className="wv-body">
         <motion.h3
           className="wv-title"
-          initial={{ opacity: 0, x: -18 }}
-          animate={after ? { opacity: 1, x: 0 } : {}}
+          initial={prefersReducedMotion ? false : { opacity: 0, x: -18 }}
+          animate={prefersReducedMotion ? {} : (after ? { opacity: 1, x: 0 } : {})}
           transition={{ duration: 0.6, ease: EXPO }}
         >
           Ideas that hit<br />
@@ -225,6 +240,7 @@ function Card1({ visible }: { visible: boolean }) {
           delay={0.12}
           description="We don't do timid. Every creative decision is made to stop the scroll and demand attention."
           cta="See the work"
+          prefersReducedMotion={prefersReducedMotion}
         />
       </div>
     </motion.div>
@@ -236,6 +252,7 @@ function Card1({ visible }: { visible: boolean }) {
 // Surface: #f05a00 orange  ·  Type: black
 // ══════════════════════════════════════════════════════════════════════════
 function Card2({ visible }: { visible: boolean }) {
+  const prefersReducedMotion = useReducedMotion();
   const word = "DESIGN".split("");
   const [after, setAfter] = useState(false);
   const [isTapped, setIsTapped] = useState(false);
@@ -248,6 +265,7 @@ function Card2({ visible }: { visible: boolean }) {
   }, [visible]);
 
   const handleTap = () => {
+    if (prefersReducedMotion) return;
     setIsTapped(true);
     if (tapTimeout.current) clearTimeout(tapTimeout.current);
     tapTimeout.current = setTimeout(() => setIsTapped(false), 800);
@@ -256,8 +274,8 @@ function Card2({ visible }: { visible: boolean }) {
   return (
     <motion.div 
       className="wv-card wv-card-orange" 
-      whileHover="hover"
-      onTap={handleTap}
+      whileHover={prefersReducedMotion ? undefined : "hover"}
+      onTap={prefersReducedMotion ? undefined : handleTap}
     >
       <div className="wv-noise" />
 
@@ -269,15 +287,17 @@ function Card2({ visible }: { visible: boolean }) {
             <motion.span
               key={i}
               className="wv-slide-letter"
-              initial={{ x: i < 3 ? -40 : 40, opacity: 0, y: 0, rotate: 0 }}
+              initial={prefersReducedMotion ? false : { x: i < 3 ? -40 : 40, opacity: 0, y: 0, rotate: 0 }}
               animate={
-                isTapped 
-                  ? { x: i % 2 === 0 ? 14 : -14, y: i % 3 === 0 ? 12 : -12, rotate: i % 2 === 0 ? 4 : -4, opacity: 1 }
-                  : (visible ? { x: 0, y: 0, rotate: 0, opacity: 1 } : { x: i < 3 ? -40 : 40, opacity: 0, y: 0, rotate: 0 })
+                prefersReducedMotion
+                  ? { opacity: 1 }
+                  : isTapped 
+                    ? { x: i % 2 === 0 ? 14 : -14, y: i % 3 === 0 ? 12 : -12, rotate: i % 2 === 0 ? 4 : -4, opacity: 1 }
+                    : (visible ? { x: 0, y: 0, rotate: 0, opacity: 1 } : { x: i < 3 ? -40 : 40, opacity: 0, y: 0, rotate: 0 })
               }
-              variants={{ hover: { x: i % 2 === 0 ? 14 : -14, y: i % 3 === 0 ? 12 : -12, rotate: i % 2 === 0 ? 4 : -4 } }}
+              variants={prefersReducedMotion ? undefined : { hover: { x: i % 2 === 0 ? 14 : -14, y: i % 3 === 0 ? 12 : -12, rotate: i % 2 === 0 ? 4 : -4 } }}
               transition={{
-                type: "spring", damping: 15, stiffness: 100, delay: visible && !isTapped ? 0.1 + i * 0.03 : 0
+                type: "spring", damping: 15, stiffness: 100, delay: visible && !isTapped && !prefersReducedMotion ? 0.1 + i * 0.03 : 0
               }}
               style={{ marginRight: i === 2 ? 6 : 1 }}
             >
@@ -290,8 +310,8 @@ function Card2({ visible }: { visible: boolean }) {
       <div className="wv-body">
         <motion.h3
           className="wv-title wv-title--dark"
-          initial={{ opacity: 0, y: 14 }}
-          animate={after ? { opacity: 1, y: 0 } : {}}
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
+          animate={prefersReducedMotion ? {} : (after ? { opacity: 1, y: 0 } : {})}
           transition={{ duration: 0.6, ease: EXPO }}
         >
           Results that<br />
@@ -303,6 +323,7 @@ function Card2({ visible }: { visible: boolean }) {
           description="Growth isn't an accident. We engineer momentum that builds on itself every single month."
           cta="See the numbers"
           light
+          prefersReducedMotion={prefersReducedMotion}
         />
       </div>
     </motion.div>
@@ -314,6 +335,7 @@ function Card2({ visible }: { visible: boolean }) {
 // Surface: #f5f0e8 cream  ·  Type: deep charcoal + burnt orange cursor
 // ══════════════════════════════════════════════════════════════════════════
 function Card3({ visible }: { visible: boolean }) {
+  const prefersReducedMotion = useReducedMotion();
   const word = "GROWTH".split("");
   const [after, setAfter] = useState(false);
   const [isTapped, setIsTapped] = useState(false);
@@ -330,11 +352,13 @@ function Card3({ visible }: { visible: boolean }) {
   }, [visible]);
 
   const handlePointerMove = (e: React.PointerEvent) => {
+    if (prefersReducedMotion) return;
     mouseX.set(e.clientX);
     mouseY.set(e.clientY);
   };
 
   const handleTap = () => {
+    if (prefersReducedMotion) return;
     setIsTapped(true);
     if (tapTimeout.current) clearTimeout(tapTimeout.current);
     tapTimeout.current = setTimeout(() => setIsTapped(false), 800);
@@ -343,20 +367,20 @@ function Card3({ visible }: { visible: boolean }) {
   return (
     <motion.div 
       className="wv-card wv-card-cream" 
-      whileHover="hover"
+      whileHover={prefersReducedMotion ? undefined : "hover"}
       onPointerMove={handlePointerMove}
-      onPointerEnter={() => setIsHovered(true)}
+      onPointerEnter={() => !prefersReducedMotion && setIsHovered(true)}
       onPointerLeave={() => setIsHovered(false)}
-      onPointerDown={() => setIsHovered(true)}
+      onPointerDown={() => !prefersReducedMotion && setIsHovered(true)}
       onPointerUp={() => setIsHovered(false)}
       onPointerCancel={() => setIsHovered(false)}
-      onTap={handleTap}
+      onTap={prefersReducedMotion ? undefined : handleTap}
     >
       <div className="wv-stage wv-stage-type">
         <motion.span
           className="wv-num wv-num--burnt"
-          initial={{ opacity: 0 }}
-          animate={visible ? { opacity: 1 } : {}}
+          initial={prefersReducedMotion ? false : { opacity: 0 }}
+          animate={prefersReducedMotion ? {} : (visible ? { opacity: 1 } : {})}
           transition={{ duration: 0.4, delay: 0.1 }}
         >
           03 / Brand
@@ -373,6 +397,7 @@ function Card3({ visible }: { visible: boolean }) {
                mouseY={mouseY}
                isHovered={isHovered}
                isTapped={isTapped}
+               prefersReducedMotion={prefersReducedMotion}
                className="wv-type-text"
                initial={{ opacity: 0, scale: 0.8 }}
                animate={visible ? { opacity: 1, scale: 1 } : {}}
@@ -388,8 +413,8 @@ function Card3({ visible }: { visible: boolean }) {
       <div className="wv-body">
         <motion.h3
           className="wv-title wv-title--dark"
-          initial={{ opacity: 0, y: 14 }}
-          animate={after ? { opacity: 1, y: 0 } : {}}
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
+          animate={prefersReducedMotion ? {} : (after ? { opacity: 1, y: 0 } : {})}
           transition={{ duration: 0.6, ease: EXPO }}
         >
           Identity that<br />
@@ -401,6 +426,7 @@ function Card3({ visible }: { visible: boolean }) {
           description="Logos, tone, visual systems — crafted so that every touchpoint is unmistakably you."
           cta="Explore branding"
           light
+          prefersReducedMotion={prefersReducedMotion}
         />
       </div>
     </motion.div>
@@ -412,6 +438,7 @@ function Card3({ visible }: { visible: boolean }) {
 // Surface: #100505 deep crimson  ·  Type: white + red accent stripe
 // ══════════════════════════════════════════════════════════════════════════
 function Card4({ visible }: { visible: boolean }) {
+  const prefersReducedMotion = useReducedMotion();
   const word = "SPEED".split("");
   const [after, setAfter] = useState(false);
   const [isTapped, setIsTapped] = useState(false);
@@ -428,11 +455,13 @@ function Card4({ visible }: { visible: boolean }) {
   }, [visible]);
 
   const handlePointerMove = (e: React.PointerEvent) => {
+    if (prefersReducedMotion) return;
     mouseX.set(e.clientX);
     mouseY.set(e.clientY);
   };
 
   const handleTap = () => {
+    if (prefersReducedMotion) return;
     setIsTapped(true);
     if (tapTimeout.current) clearTimeout(tapTimeout.current);
     tapTimeout.current = setTimeout(() => setIsTapped(false), 800);
@@ -441,22 +470,22 @@ function Card4({ visible }: { visible: boolean }) {
   return (
     <motion.div 
       className="wv-card wv-card-red" 
-      whileHover="hover"
+      whileHover={prefersReducedMotion ? undefined : "hover"}
       onPointerMove={handlePointerMove}
-      onPointerEnter={() => setIsHovered(true)}
+      onPointerEnter={() => !prefersReducedMotion && setIsHovered(true)}
       onPointerLeave={() => setIsHovered(false)}
-      onPointerDown={() => setIsHovered(true)}
+      onPointerDown={() => !prefersReducedMotion && setIsHovered(true)}
       onPointerUp={() => setIsHovered(false)}
       onPointerCancel={() => setIsHovered(false)}
-      onTap={handleTap}
+      onTap={prefersReducedMotion ? undefined : handleTap}
     >
       <div className="wv-noise" />
 
       <div className="wv-stage wv-stage-mask">
         <motion.span
           className="wv-num wv-num--red"
-          initial={{ opacity: 0 }}
-          animate={visible ? { opacity: 1 } : {}}
+          initial={prefersReducedMotion ? false : { opacity: 0 }}
+          animate={prefersReducedMotion ? {} : (visible ? { opacity: 1 } : {})}
           transition={{ duration: 0.4, delay: 0.1 }}
         >
           04
@@ -466,8 +495,8 @@ function Card4({ visible }: { visible: boolean }) {
           <div className="wv-mask-wrap" style={{ overflow: after ? 'visible' : 'hidden' }}>
             <motion.span
               className="wv-mask-line"
-              initial={{ y: "100%" }}
-              animate={visible ? { y: "0%" } : {}}
+              initial={prefersReducedMotion ? false : { y: "100%" }}
+              animate={prefersReducedMotion ? {} : (visible ? { y: "0%" } : {})}
               transition={{
                 y: { type: "spring", damping: 16, stiffness: 90, delay: 0.2 }
               }}
@@ -482,6 +511,7 @@ function Card4({ visible }: { visible: boolean }) {
                   mouseY={mouseY}
                   isHovered={isHovered}
                   isTapped={isTapped}
+                  prefersReducedMotion={prefersReducedMotion}
                 />
               ))}
             </motion.span>
@@ -492,8 +522,8 @@ function Card4({ visible }: { visible: boolean }) {
       <div className="wv-body">
         <motion.h3
           className="wv-title"
-          initial={{ opacity: 0, x: -16 }}
-          animate={after ? { opacity: 1, x: 0 } : {}}
+          initial={prefersReducedMotion ? false : { opacity: 0, x: -16 }}
+          animate={prefersReducedMotion ? {} : (after ? { opacity: 1, x: 0 } : {})}
           transition={{ duration: 0.6, ease: EXPO }}
         >
           Execution at<br />
@@ -504,6 +534,7 @@ function Card4({ visible }: { visible: boolean }) {
           delay={0.12}
           description="We ship fast, iterate faster. No months of planning — real work starts on day one."
           cta="Start today"
+          prefersReducedMotion={prefersReducedMotion}
         />
       </div>
     </motion.div>
@@ -516,6 +547,7 @@ function Card4({ visible }: { visible: boolean }) {
 // Spans full width as a cinematic wide banner
 // ══════════════════════════════════════════════════════════════════════════
 function Card5({ visible }: { visible: boolean }) {
+  const prefersReducedMotion = useReducedMotion();
   const word = "RESULTS".split("");
   const [after, setAfter] = useState(false);
   const [isTapped, setIsTapped] = useState(false);
@@ -528,6 +560,7 @@ function Card5({ visible }: { visible: boolean }) {
   }, [visible]);
 
   const handleTap = () => {
+    if (prefersReducedMotion) return;
     setIsTapped(true);
     if (tapTimeout.current) clearTimeout(tapTimeout.current);
     tapTimeout.current = setTimeout(() => setIsTapped(false), 800);
@@ -536,8 +569,8 @@ function Card5({ visible }: { visible: boolean }) {
   return (
     <motion.div 
       className="wv-card wv-card-white wv-card-wide" 
-      whileHover="hover"
-      onTap={handleTap}
+      whileHover={prefersReducedMotion ? undefined : "hover"}
+      onTap={prefersReducedMotion ? undefined : handleTap}
     >
       {/* Left: rotating letters */}
       <div className="wv-stage wv-stage-spin">
@@ -548,15 +581,17 @@ function Card5({ visible }: { visible: boolean }) {
             <motion.span
               key={i}
               className="wv-spin-letter"
-              initial={{ opacity: 0, y: 30, x: 0, rotate: 0 }}
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 30, x: 0, rotate: 0 }}
               animate={
-                isTapped 
-                  ? { y: i % 2 === 0 ? -16 : 16, x: i % 3 === 0 ? 14 : -14, rotate: i % 2 === 0 ? 5 : -5, opacity: 1 }
-                  : (visible ? { opacity: 1, y: 0, x: 0, rotate: 0 } : { opacity: 0, y: 30, x: 0, rotate: 0 })
+                prefersReducedMotion
+                  ? { opacity: 1 }
+                  : isTapped 
+                    ? { y: i % 2 === 0 ? -16 : 16, x: i % 3 === 0 ? 14 : -14, rotate: i % 2 === 0 ? 5 : -5, opacity: 1 }
+                    : (visible ? { opacity: 1, y: 0, x: 0, rotate: 0 } : { opacity: 0, y: 30, x: 0, rotate: 0 })
               }
-              variants={{ hover: { y: i % 2 === 0 ? -16 : 16, x: i % 3 === 0 ? 14 : -14, rotate: i % 2 === 0 ? 5 : -5 } }}
+              variants={prefersReducedMotion ? undefined : { hover: { y: i % 2 === 0 ? -16 : 16, x: i % 3 === 0 ? 14 : -14, rotate: i % 2 === 0 ? 5 : -5 } }}
               transition={{
-                type: "spring", damping: 14, stiffness: 110, delay: visible && !isTapped ? 0.08 * i : 0
+                type: "spring", damping: 14, stiffness: 110, delay: visible && !isTapped && !prefersReducedMotion ? 0.08 * i : 0
               }}
             >
               {ch}
@@ -568,8 +603,8 @@ function Card5({ visible }: { visible: boolean }) {
       {/* Divider */}
       <motion.div
         className="wv-wide-divider"
-        initial={{ scaleY: 0 }}
-        animate={visible ? { scaleY: 1 } : {}}
+        initial={prefersReducedMotion ? false : { scaleY: 0 }}
+        animate={prefersReducedMotion ? {} : (visible ? { scaleY: 1 } : {})}
         transition={{ duration: 0.8, delay: 0.5, ease: EXPO }}
         style={{ originY: 0.5 }}
       />
@@ -578,8 +613,8 @@ function Card5({ visible }: { visible: boolean }) {
       <div className="wv-body wv-body-wide">
         <motion.h3
           className="wv-title wv-title--dark"
-          initial={{ opacity: 0, y: 14 }}
-          animate={after ? { opacity: 1, y: 0 } : {}}
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
+          animate={prefersReducedMotion ? {} : (after ? { opacity: 1, y: 0 } : {})}
           transition={{ duration: 0.6, ease: EXPO }}
         >
           Proof over<br />
@@ -591,6 +626,7 @@ function Card5({ visible }: { visible: boolean }) {
           description="Every client gets a dedicated dashboard. Every metric is tracked. No smoke, no mirrors."
           cta="View case studies"
           light
+          prefersReducedMotion={prefersReducedMotion}
         />
       </div>
     </motion.div>
@@ -601,6 +637,7 @@ function Card5({ visible }: { visible: boolean }) {
 // SECTION ROOT
 // ══════════════════════════════════════════════════════════════════════════
 export default function WhyVextiv() {
+  const prefersReducedMotion = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
   const isInView    = useInView(sectionRef, { margin: "-80px" });
 
@@ -628,14 +665,14 @@ export default function WhyVextiv() {
         {/* ── Section header ── */}
         <motion.div
           className="wv-hdr"
-          initial={{ opacity: 0, y: 32 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 32 }}
+          animate={prefersReducedMotion ? {} : (isInView ? { opacity: 1, y: 0 } : {})}
           transition={{ duration: 0.9, ease: EXPO }}
         >
           <motion.p
             className="wv-eyebrow"
-            initial={{ opacity: 0, x: -16 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            initial={prefersReducedMotion ? false : { opacity: 0, x: -16 }}
+            animate={prefersReducedMotion ? {} : (isInView ? { opacity: 1, x: 0 } : {})}
             transition={{ duration: 0.6, delay: 0.15, ease: EXPO }}
           >
             Why Vextiv
@@ -643,16 +680,16 @@ export default function WhyVextiv() {
           <h2 id="wv-heading" className="wv-h2">
             <motion.span
               className="wv-h2-a"
-              initial={{ opacity: 0, y: 28 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 28 }}
+              animate={prefersReducedMotion ? {} : (isInView ? { opacity: 1, y: 0 } : {})}
               transition={{ duration: 0.8, delay: 0.22, ease: EXPO }}
             >
               Five reasons
             </motion.span>
             <motion.span
               className="wv-h2-b"
-              initial={{ opacity: 0, y: 28 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 28 }}
+              animate={prefersReducedMotion ? {} : (isInView ? { opacity: 1, y: 0 } : {})}
               transition={{ duration: 0.8, delay: 0.34, ease: EXPO }}
             >
               clients stay.
@@ -667,8 +704,8 @@ export default function WhyVextiv() {
           <motion.div
             ref={c1Ref}
             className="wv-cell wv-cell-1"
-            initial={{ opacity: 0, y: 36 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 36 }}
+            animate={prefersReducedMotion ? {} : (isInView ? { opacity: 1, y: 0 } : {})}
             transition={{ duration: 0.7, delay: 0.08, ease: EXPO }}
           >
             <Card1 visible={c1} />
@@ -677,8 +714,8 @@ export default function WhyVextiv() {
           <motion.div
             ref={c2Ref}
             className="wv-cell wv-cell-2"
-            initial={{ opacity: 0, y: 36 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 36 }}
+            animate={prefersReducedMotion ? {} : (isInView ? { opacity: 1, y: 0 } : {})}
             transition={{ duration: 0.7, delay: 0.18, ease: EXPO }}
           >
             <Card2 visible={c2} />
@@ -688,8 +725,8 @@ export default function WhyVextiv() {
           <motion.div
             ref={c3Ref}
             className="wv-cell wv-cell-3"
-            initial={{ opacity: 0, y: 36 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 36 }}
+            animate={prefersReducedMotion ? {} : (isInView ? { opacity: 1, y: 0 } : {})}
             transition={{ duration: 0.7, delay: 0.28, ease: EXPO }}
           >
             <Card3 visible={c3} />
@@ -698,8 +735,8 @@ export default function WhyVextiv() {
           <motion.div
             ref={c4Ref}
             className="wv-cell wv-cell-4"
-            initial={{ opacity: 0, y: 36 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 36 }}
+            animate={prefersReducedMotion ? {} : (isInView ? { opacity: 1, y: 0 } : {})}
             transition={{ duration: 0.7, delay: 0.38, ease: EXPO }}
           >
             <Card4 visible={c4} />
@@ -709,8 +746,8 @@ export default function WhyVextiv() {
           <motion.div
             ref={c5Ref}
             className="wv-cell wv-cell-5"
-            initial={{ opacity: 0, y: 36 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 36 }}
+            animate={prefersReducedMotion ? {} : (isInView ? { opacity: 1, y: 0 } : {})}
             transition={{ duration: 0.7, delay: 0.48, ease: EXPO }}
           >
             <Card5 visible={c5} />
@@ -752,7 +789,7 @@ export default function WhyVextiv() {
 
         .wv-eyebrow {
           font-family: var(--font-body, sans-serif);
-          font-size: 11px;
+          font-size: var(--text-2xs);
           font-weight: 700;
           letter-spacing: 0.22em;
           text-transform: uppercase;

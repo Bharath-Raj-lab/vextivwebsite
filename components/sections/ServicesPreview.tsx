@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { motion, useSpring, useTransform, useMotionValue, AnimatePresence } from "framer-motion";
+import { motion, useSpring, useTransform, useMotionValue, AnimatePresence, useReducedMotion } from "framer-motion";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 // ─── Constants ─────────────────────────────────────────────────────────────
@@ -197,9 +197,12 @@ function ServiceCard({
   const CARD_WIDTH_EXPANDED = isOverlay ? "100%" : (isMobile ? CARD_WIDTH_EXPANDED_M : CARD_WIDTH_EXPANDED_D);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const _CARD_HEIGHT = isOverlay ? "100%" : (isMobile ? CARD_HEIGHT_M : CARD_HEIGHT_D);
-  const cardRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLButtonElement>(null);
 
-  // 3D tilt (only when active)
+  // Respect OS-level reduced-motion preference
+  const prefersReducedMotion = useReducedMotion();
+
+  // 3D tilt (only when active and motion is allowed)
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const rotateX = useSpring(useTransform(mouseY, [-1, 1], [6, -6]), SPRING_OPTS);
@@ -209,7 +212,7 @@ function ServiceCard({
   const [spotlight, setSpotlight] = useState({ x: 50, y: 30 });
   const [sweepActive, setSweepActive] = useState(false);
 
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     if (!isActive || !cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
     const nx = (e.clientX - rect.left) / rect.width;
@@ -233,8 +236,7 @@ function ServiceCard({
     }
   }, [isActive]);
 
-  // Width spring — useSpring only accepts numbers; when isOverlay the CSS width
-  // is "100%" so we bypass the spring and set it directly on the motion.div.
+  // Width spring — bypass spring when isOverlay (width is 100% string)
   const numericExpandedWidth = typeof CARD_WIDTH_EXPANDED === "number"
     ? CARD_WIDTH_EXPANDED
     : CARD_WIDTH_COLLAPSED;
@@ -250,20 +252,24 @@ function ServiceCard({
   useEffect(() => { scaleSpring.set(waveScale); }, [waveScale, scaleSpring]);
 
   return (
-    <motion.div
+    <motion.button
       ref={cardRef}
       className="sv-card-outer"
+      type="button"
+      aria-label={`${service.name}: ${service.shortDesc}`}
+      aria-expanded={isActive}
       style={{
         width: isOverlay ? "100%" : widthSpring,
         height: cardHeight,
-        y: ySpring,
-        scale: scaleSpring,
-        rotateX: !isMobile && isActive ? rotateX : 0,
-        rotateY: !isMobile && isActive ? rotateY : 0,
+        y: prefersReducedMotion ? 0 : ySpring,
+        scale: prefersReducedMotion ? 1 : scaleSpring,
+        rotateX: (!isMobile && isActive && !prefersReducedMotion) ? rotateX : 0,
+        rotateY: (!isMobile && isActive && !prefersReducedMotion) ? rotateY : 0,
         transformStyle: "preserve-3d",
         zIndex: isActive ? 20 : "auto",
       }}
       onMouseEnter={isMobile ? undefined : onEnter}
+      onClick={() => { if (isActive) onLeave(); else onEnter(); }}
       onMouseLeave={isMobile ? undefined : handleMouseLeave}
       onMouseMove={isMobile ? undefined : handleMouseMove}
       onTouchEnd={(e) => {
@@ -351,14 +357,18 @@ function ServiceCard({
               <span className="sv-stat-dot" />
               {service.stat}
             </div>
-            <button className="sv-cta">
+            <a
+              href={`/services#${service.id}`}
+              className="sv-cta"
+              onClick={(e) => e.stopPropagation()}
+            >
               Learn More
               <ArrowRight size={14} />
-            </button>
+            </a>
           </div>
         </motion.div>
       </div>
-    </motion.div>
+    </motion.button>
   );
 }
 
@@ -368,6 +378,15 @@ export default function ServicesPreview() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [visible, setVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+
+  // Dismiss mobile overlay on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setActiveIndex(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 900);
@@ -527,7 +546,7 @@ export default function ServicesPreview() {
         }
 
         .sv-eyebrow {
-          font-size: 11px;
+          font-size: var(--text-2xs);
           font-weight: 700;
           letter-spacing: 0.2em;
           text-transform: uppercase;
@@ -573,6 +592,19 @@ export default function ServicesPreview() {
           overflow: visible;
           position: relative;
           will-change: transform, width;
+          /* Reset native button styles — interaction is purely visual */
+          background: none;
+          border: none;
+          padding: 0;
+          margin: 0;
+          cursor: default;
+          text-align: left;
+          -webkit-appearance: none;
+        }
+        .sv-card-outer:focus-visible {
+          outline: 2px solid var(--accent-focus);
+          outline-offset: 3px;
+          border-radius: 28px;
         }
 
         /* ────────────────────────────────────────────────────

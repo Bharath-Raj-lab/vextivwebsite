@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
 import {
   Instagram,
@@ -80,11 +80,15 @@ function SocialIcon({
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function Footer() {
+  const prefersReducedMotion = useReducedMotion();
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "";
   const whatsappHref = `https://wa.me/${whatsappNumber}`;
 
   const gridRef = useRef<HTMLDivElement>(null);
   const gridInView = useInView(gridRef, { once: true, margin: "-80px" });
+
+  // When reduced motion is preferred, columns are visible immediately
+  const shouldAnimate = gridInView && !prefersReducedMotion;
 
   const SERVICES = [
     { label: "Website Development", href: "/services" },
@@ -120,8 +124,8 @@ export default function Footer() {
           {/* Column 1 — Brand */}
           <motion.div
             className="footer__col footer__col--brand"
-            initial="hidden"
-            animate={gridInView ? "visible" : "hidden"}
+            initial={prefersReducedMotion ? false : "hidden"}
+            animate={shouldAnimate ? "visible" : (prefersReducedMotion ? "visible" : "hidden")}
             variants={fadeUp}
             custom={0}
           >
@@ -160,8 +164,8 @@ export default function Footer() {
           {/* Column 2 — Services */}
           <motion.div
             className="footer__col"
-            initial="hidden"
-            animate={gridInView ? "visible" : "hidden"}
+            initial={prefersReducedMotion ? false : "hidden"}
+            animate={shouldAnimate ? "visible" : (prefersReducedMotion ? "visible" : "hidden")}
             variants={fadeUp}
             custom={1}
           >
@@ -180,8 +184,8 @@ export default function Footer() {
           {/* Column 3 — Company */}
           <motion.div
             className="footer__col"
-            initial="hidden"
-            animate={gridInView ? "visible" : "hidden"}
+            initial={prefersReducedMotion ? false : "hidden"}
+            animate={shouldAnimate ? "visible" : (prefersReducedMotion ? "visible" : "hidden")}
             variants={fadeUp}
             custom={2}
           >
@@ -200,8 +204,8 @@ export default function Footer() {
           {/* Column 4 — Contact */}
           <motion.div
             className="footer__col"
-            initial="hidden"
-            animate={gridInView ? "visible" : "hidden"}
+            initial={prefersReducedMotion ? false : "hidden"}
+            animate={shouldAnimate ? "visible" : (prefersReducedMotion ? "visible" : "hidden")}
             variants={fadeUp}
             custom={3}
           >

@@ -123,21 +123,25 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex justify-center gap-2 mb-20">
-          {Array.from({ length: totalPages }).map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrentPage(i + 1)}
-              className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium transition-colors ${
-                currentPage === i + 1
-                  ? 'bg-[var(--accent)] text-black'
-                  : 'bg-[var(--bg-surface-2)] text-[var(--text-primary)] hover:bg-[var(--bg-surface-3)]'
-              }`}
-            >
-              {i + 1}
-            </button>
-          ))}
-        </div>
+        <nav aria-label="Blog pagination">
+          <div className="flex justify-center gap-2 mb-20">
+            {Array.from({ length: totalPages }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentPage(i + 1)}
+                aria-current={currentPage === i + 1 ? "page" : undefined}
+                aria-label={`Go to page ${i + 1}`}
+                className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium transition-colors ${
+                  currentPage === i + 1
+                    ? 'bg-[var(--accent)] text-black'
+                    : 'bg-[var(--bg-surface-2)] text-[var(--text-primary)] hover:bg-[var(--bg-surface-3)]'
+                }`}
+              >
+                {i + 1}
+              </button>
+            ))}
+          </div>
+        </nav>
       )}
 
       {/* Newsletter Signup */}

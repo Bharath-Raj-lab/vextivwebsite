@@ -42,7 +42,8 @@ export default function Navbar() {
   const pathname        = usePathname();
   const prefersReduced  = useReducedMotion();
   const [isOpen,   setIsOpen]   = useReducer((_: boolean, v: boolean) => v, false);
-  const closeRef = useRef<HTMLButtonElement>(null);
+  const closeRef     = useRef<HTMLButtonElement>(null);
+  const hamburgerRef  = useRef<HTMLButtonElement>(null);
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -53,11 +54,44 @@ export default function Navbar() {
   useEffect(() => {
     if (!isOpen) return;
     closeRef.current?.focus();
+
+    const overlay = document.getElementById("mobile-menu");
+
+    const focusableSelectors =
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    const focusable = overlay
+      ? Array.from(overlay.querySelectorAll<HTMLElement>(focusableSelectors))
+      : [];
+    const first = focusable[0];
+    const last  = focusable[focusable.length - 1];
+
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setIsOpen(false);
     };
+
+    const trapTab = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+      if (!first || !last) return;
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+      }
+    };
+
     document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
+    document.addEventListener("keydown", trapTab);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("keydown", trapTab);
+    };
+  }, [isOpen]);
+
+  // Return focus to hamburger when overlay closes
+  useEffect(() => {
+    if (!isOpen) {
+      hamburgerRef.current?.focus();
+    }
   }, [isOpen]);
 
   // Entrance animation (respects prefers-reduced-motion)
@@ -121,6 +155,7 @@ export default function Navbar() {
 
             {/* Hamburger */}
             <button
+              ref={hamburgerRef}
               className="navbar__hamburger"
               aria-label={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
@@ -138,6 +173,7 @@ export default function Navbar() {
             <motion.div
               id="mobile-menu"
               role="dialog"
+              aria-modal="true"
               aria-label="Navigation menu"
               className="navbar__mobile-overlay"
               initial={{ opacity: 0, y: prefersReduced ? 0 : -12 }}

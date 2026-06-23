@@ -51,6 +51,7 @@ export default function CookieConsent() {
         role="dialog"
         aria-modal="false"
         aria-label="Cookie consent"
+        aria-describedby="cookie-consent-desc"
         aria-live="polite"
         className="cookie-consent"
         id="cookie-consent-banner"
@@ -63,7 +64,7 @@ export default function CookieConsent() {
             <p className="cookie-consent__title">
               We use cookies
             </p>
-            <p className="cookie-consent__description">
+            <p id="cookie-consent-desc" className="cookie-consent__description">
               We use analytics cookies to understand how you use our site and
               improve your experience. Under the{" "}
               <strong>Digital Personal Data Protection Act 2023</strong>, you can
