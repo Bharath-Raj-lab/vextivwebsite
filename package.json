@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "audit": "npm audit --audit-level=high"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
@@ -14,6 +15,7 @@
     "@upstash/ratelimit": "^2.0.8",
     "@upstash/redis": "^1.38.0",
     "framer-motion": "^11.18.2",
+    "isomorphic-dompurify": "^3.18.0",
     "lucide-react": "^0.469.0",
     "next": "^15.5.19",
     "react": "19.2.4",

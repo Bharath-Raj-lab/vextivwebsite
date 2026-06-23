@@ -1,9 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
+import DOMPurify from 'isomorphic-dompurify';
 import { contactSchema } from '@/lib/validations/contact';
 import { rateLimiter } from '@/lib/rate-limit';
 import { supabaseAdmin } from '@/lib/supabase-admin';
 import { sendTeamNotification, sendClientConfirmation } from '@/lib/email';
 import { logger } from '@/logger';
+
+// ─── Sanitization helper ─────────────────────────────────────────────────────
+
+/**
+ * Strips all HTML/SVG from a string using DOMPurify (server-safe via jsdom).
+ * Returns null when the input is null/undefined so callers can remain
+ * type-compatible with nullable Supabase columns.
+ *
+ * Zod has already trimmed and length-checked the value before this runs;
+ * sanitization is an extra defence-in-depth layer against stored XSS.
+ */
+function sanitize(value: string | null | undefined): string | null {
+  if (value == null) return null;
+  return DOMPurify.sanitize(value, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
+}
 
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -116,20 +132,25 @@ export async function POST(
     }
 
     // ── 5. Supabase insert → leads table ───────────────────────────────────
+    // Sanitize all free-text fields with DOMPurify before persisting.
+    // This strips any HTML/script payloads that slipped past Zod's length/
+    // trim checks, providing defence-in-depth against stored-XSS attacks.
+    // Enum fields (service, budget) are Zod-whitelisted — no sanitization needed.
+    // Email is structurally validated by Zod and lowercased — safe as-is.
     const { error: dbError } = await supabaseAdmin
       .from('leads')
       .insert({
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        company: data.company,
-        service: data.service,
-        budget: data.budget,
-        brief: data.brief,
+        name:     sanitize(data.name)!,
+        email:    data.email,
+        phone:    sanitize(data.phone)!,
+        company:  sanitize(data.company),
+        service:  data.service,
+        budget:   data.budget,
+        brief:    sanitize(data.brief),
         source: 'contact',
-        utm_source: data.utm_source,
-        utm_medium: data.utm_medium,
-        utm_campaign: data.utm_campaign,
+        utm_source:   sanitize(data.utm_source),
+        utm_medium:   sanitize(data.utm_medium),
+        utm_campaign: sanitize(data.utm_campaign),
       });
 
     if (dbError) {

@@ -1,9 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
+import DOMPurify from 'isomorphic-dompurify';
 import { auditSchema } from '@/lib/validations/audit';
 import { rateLimiter } from '@/lib/rate-limit';
 import { supabaseAdmin } from '@/lib/supabase-admin';
 import { sendTeamNotification, sendClientConfirmation } from '@/lib/email';
 import { logger } from '@/logger';
+
+// ─── Sanitization helper ─────────────────────────────────────────────────────
+
+/**
+ * Strips all HTML/SVG from a string using DOMPurify (server-safe via jsdom).
+ * Returns null when the input is null/undefined so callers can remain
+ * type-compatible with nullable Supabase columns.
+ *
+ * Zod has already trimmed and length-checked the value before this runs;
+ * sanitization is an extra defence-in-depth layer against stored XSS.
+ */
+function sanitize(value: string | null | undefined): string | null {
+  if (value == null) return null;
+  return DOMPurify.sanitize(value, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
+}
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -116,19 +132,23 @@ export async function POST(
     //   primaryGoal  → primary_goal (dedicated column, added in migration)
     //   websiteUrl   → website_url  (dedicated column, added in migration)
     //   hearAboutUs  → hear_about_us (dedicated column, added in migration)
+    //
+    // Sanitize all free-text fields with DOMPurify before persisting.
+    // primaryGoal and hearAboutUs are Zod enum-whitelisted — no sanitization needed.
+    // Email is structurally validated by Zod and lowercased — safe as-is.
     const { error: dbError } = await supabaseAdmin
       .from('leads')
       .insert({
-        name: data.businessName,
-        email: data.email,
-        phone: data.phone,
-        source: 'audit',
-        primary_goal: data.primaryGoal,
-        website_url: data.websiteUrl,
+        name:          sanitize(data.businessName)!,
+        email:         data.email,
+        phone:         sanitize(data.phone)!,
+        source:        'audit',
+        primary_goal:  data.primaryGoal,
+        website_url:   sanitize(data.websiteUrl),
         hear_about_us: data.hearAboutUs,
-        utm_source: data.utm_source,
-        utm_medium: data.utm_medium,
-        utm_campaign: data.utm_campaign,
+        utm_source:    sanitize(data.utm_source),
+        utm_medium:    sanitize(data.utm_medium),
+        utm_campaign:  sanitize(data.utm_campaign),
       });
 
     if (dbError) {

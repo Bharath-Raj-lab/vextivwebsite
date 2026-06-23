@@ -244,7 +244,7 @@ export default function Navbar() {
           width: 100%;
           max-width: 1500px;
           padding: 0 clamp(24px, 4vw, 64px);
-          z-index: 100;
+          z-index: 40;
           pointer-events: none;
         }
 
@@ -513,8 +513,8 @@ export default function Navbar() {
             font-size: 13px;
           }
           .navbar__hamburger {
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
           }
         }
 

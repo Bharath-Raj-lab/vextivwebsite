@@ -251,6 +251,7 @@ export default function Hero() {
         .hero {
           position: relative;
           height: 100vh;
+          height: 100dvh;
           min-height: 600px;
           max-height: 1200px;
           width: 100%;

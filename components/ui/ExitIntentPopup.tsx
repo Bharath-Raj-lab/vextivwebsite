@@ -22,6 +22,9 @@ export default function ExitIntentPopup() {
 
     const handleMouseLeave = (e: MouseEvent) => {
       if (e.clientY < 0) {
+        const cookieConsent = localStorage.getItem("vextiv_cookie_consent");
+        if (!cookieConsent) return; // Suppress if consent is unresolved
+
         const hasShown = sessionStorage.getItem("vextiv_exit_shown");
         if (!hasShown) {
           sessionStorage.setItem("vextiv_exit_shown", "true");
@@ -132,7 +135,7 @@ export default function ExitIntentPopup() {
         position: "fixed",
         inset: 0,
         backgroundColor: "rgba(8,8,8,0.85)",
-        zIndex: 50,
+        zIndex: 50, /* sits above navbar (40) and whatsapp (30) */
         ...(shouldReduceMotion ? { opacity: 1 } : {}),
       }}
       onClick={() => setIsVisible(false)}

@@ -113,11 +113,12 @@ export default function CookieConsent() {
 
           /*
            * Z-index layering (Vextiv Studio):
-           *   Navbar           = 100
-           *   Mobile overlay   =  40
-           *   Cookie banner    =  60   ← above mobile CTA bars, below navbar
+           *   ExitIntent       =  50
+           *   Cookie banner    =  45   ← below modal popups
+           *   Navbar           =  40
+           *   WhatsApp btn     =  30
            */
-          z-index: 60;
+          z-index: 45;
 
           display: flex;
           align-items: center;

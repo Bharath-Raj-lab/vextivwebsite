@@ -1021,6 +1021,12 @@ function AuditStyles() {
           align-items: center;
         }
       }
+      @media (max-width: 768px) {
+        .audit-input,
+        .audit-select {
+          font-size: 16px;
+        }
+      }
       @media (max-width: 540px) {
         .audit-main {
           padding: 32px 16px 60px;
