@@ -7,15 +7,15 @@ export const dynamic = "force-static";
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL("https://vextiv.tech"),
-  title: "Careers at Vextiv Studio | Join Our Hyderabad Team",
+  title: "Careers at VeXtiv Studio | Join Our Hyderabad Team",
   description:
     "We're a small, focused digital studio based in Hyderabad. No open roles right now, but we always want to hear from people who care about craft. Send us a message.",
   openGraph: {
-    title: "Careers at Vextiv Studio | Join Our Hyderabad Team",
+    title: "Careers at VeXtiv Studio | Join Our Hyderabad Team",
     description:
       "We're a small, focused digital studio based in Hyderabad. No open roles right now, but we always want to hear from people who care about craft. Send us a message.",
     url: "https://vextiv.tech/careers",
-    siteName: "Vextiv Studio",
+    siteName: "VeXtiv Studio",
     type: "website",
   },
   twitter: {
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
-const CONTACT_EMAIL = "hello@vextiv.tech" as const;
+const CONTACT_EMAIL = "vextiv.tech@gmail.com" as const;
 
 const CULTURE_POINTS: readonly { readonly id: string; readonly text: string }[] = [
   { id: "small-team", text: "Small on purpose. Every person on the team has real ownership over real work — no hand-holding, no bureaucracy." },

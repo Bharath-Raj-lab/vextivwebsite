@@ -1,6 +1,6 @@
-// React Email template — Audit client confirmation
-// Sent to the person who submitted a free-audit request.
-// Rendered server-side by Resend; import via @/emails/audit-client-confirmation.
+// React Email template — Newsletter confirmation
+// Sent to the person who subscribes to the blog.
+// Rendered server-side by Resend; import via @/emails/newsletter-confirmation.
 
 import {
   Body,
@@ -14,44 +14,26 @@ import {
 } from 'react-email';
 import * as React from 'react';
 
-// ─── Props ────────────────────────────────────────────────────────────────────
-
-export interface AuditClientConfirmationProps {
-  businessName: string;
-}
-
 // ─── Template ─────────────────────────────────────────────────────────────────
 
-export default function AuditClientConfirmation({
-  businessName,
-}: AuditClientConfirmationProps) {
+export default function NewsletterConfirmation() {
   return (
     <Html>
       <Head />
-      <Preview>
-        Your free audit request is confirmed — VeXtiv Studio
-      </Preview>
+      <Preview>You're subscribed to the VeXtiv Studio blog!</Preview>
       <Body style={styles.body}>
         <Container style={styles.container}>
-          <Heading style={styles.heading}>You&apos;re on the list! 🎉</Heading>
+          <Heading style={styles.heading}>Welcome to the club 🚀</Heading>
 
           <Text style={styles.paragraph}>
-            Hi {businessName}, thanks for requesting your free digital audit
-            from <strong>VeXtiv Studio</strong>.
+            Thanks for subscribing to the VeXtiv Studio blog. We'll keep you posted on new articles, strategies, and deep dives for Hyderabad businesses.
           </Text>
 
           <Text style={styles.paragraph}>
-            Our team will review your details and reach out within{' '}
-            <strong>1–2 business days</strong> with a personalised audit report
-            and actionable recommendations.
+            If you ever want to chat about a project or have questions, just hit reply to this email. We read every message.
           </Text>
 
           <Hr style={styles.hr} />
-
-          <Text style={styles.paragraph}>
-            In the meantime, feel free to reply to this email if you have any
-            questions — we&apos;re happy to help.
-          </Text>
 
           <Text style={styles.signature}>
             Warm regards,
@@ -62,7 +44,7 @@ export default function AuditClientConfirmation({
           <Hr style={styles.hr} />
           <Text style={styles.footer}>
             © {new Date().getFullYear()} VeXtiv Studio · You received this
-            because you requested a free digital audit.
+            because you subscribed to our newsletter via our website.
           </Text>
         </Container>
       </Body>

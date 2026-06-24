@@ -13,15 +13,15 @@ import AuditForm from './AuditForm';
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vextiv.tech"),
-  title: "Free Digital Audit | Vextiv Studio",
+  title: "Free Digital Audit | VeXtiv Studio",
   description:
     "Get a free personalised digital audit for your business in Hyderabad. Fill in the form and our team will be in touch within 1–2 business days.",
   openGraph: {
-    title: "Free Digital Audit | Vextiv Studio",
+    title: "Free Digital Audit | VeXtiv Studio",
     description:
       "Get a free personalised digital audit for your business in Hyderabad. Fill in the form and our team will be in touch within 1–2 business days.",
     url: "https://vextiv.tech/audit",
-    siteName: "Vextiv Studio",
+    siteName: "VeXtiv Studio",
     type: "website",
   },
   twitter: {

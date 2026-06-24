@@ -15,6 +15,7 @@ import {
   Phone,
 } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
+import Logo from "@/components/ui/Logo";
 
 // ─── Animation Variants ───────────────────────────────────────────────────────
 const fadeUp = {
@@ -52,16 +53,18 @@ function SocialIcon({
   label,
   children,
   isWhatsApp = false,
+  className = "",
 }: {
   href: string;
   label: string;
   children: React.ReactNode;
   isWhatsApp?: boolean;
+  className?: string;
 }) {
   return (
     <a
       href={href}
-      className="footer__social-btn"
+      className={`footer__social-btn ${className}`.trim()}
       aria-label={label}
       target="_blank"
       rel="noopener noreferrer"
@@ -91,13 +94,12 @@ export default function Footer() {
   const shouldAnimate = gridInView && !prefersReducedMotion;
 
   const SERVICES = [
-    { label: "Website Development", href: "/services" },
-    { label: "Web Application Development", href: "/services" },
-    { label: "UI/UX Design", href: "/services" },
-    { label: "E-Commerce Solutions", href: "/services" },
-    { label: "SEO Optimization", href: "/services" },
-    { label: "Website Maintenance", href: "/services" },
-    { label: "Business Automation", href: "/services" },
+    { label: "Website Design & Development", href: "/services#website-development" },
+    { label: "QR Ordering Systems", href: "/services#qr-ordering" },
+    { label: "Branding & Identity", href: "/services#branding" },
+    { label: "Social Media Management", href: "/services#social-media" },
+    { label: "Content Creation", href: "/services#content-creation" },
+    { label: "Local SEO & Google Business Optimization", href: "/services#local-seo" },
   ];
 
   const COMPANY = [
@@ -115,6 +117,11 @@ export default function Footer() {
       {/* ── Radial glow background effect ──────────────────────────────── */}
       <div className="footer__bg-glow" aria-hidden="true" />
 
+      {/* ── Watermark background effect ────────────────────────────────── */}
+      <div className="footer__watermark" aria-hidden="true">
+        Ve<span className="footer__watermark-accent">X</span>tiv
+      </div>
+
       {/* ══════════════════════════════════════════════════════════════════
           SECTION 1 — Main Footer Grid
       ══════════════════════════════════════════════════════════════════ */}
@@ -129,16 +136,11 @@ export default function Footer() {
             variants={fadeUp}
             custom={0}
           >
-            <Link href="/" className="footer__logo-row" aria-label="Vextiv Studio — home">
-              <Image
-                src="/logo.svg"
-                alt="Vextiv Studio"
-                width={40}
-                height={40}
-                style={{ width: "auto", height: "36px" }}
-              />
-              <span className="footer__logo-text">VE<span className="footer__logo-accent">X</span>TIV</span>
-            </Link>
+            <Logo 
+              className="footer__logo-row"
+              textClassName="footer__logo-text"
+              imageSize={36}
+            />
             <p className="footer__tagline">
               Building modern websites, web applications, and digital solutions
               for businesses ready to grow.
@@ -146,13 +148,13 @@ export default function Footer() {
 
             {/* Social Icons */}
             <div className="footer__social-row" role="list" aria-label="Social media links">
-              <SocialIcon href="https://instagram.com/vextivstudio" label="Vextiv on Instagram">
+              <SocialIcon href="https://instagram.com/vextiv.tech" label="Vextiv on Instagram">
                 <Instagram size={18} strokeWidth={1.75} aria-hidden="true" />
               </SocialIcon>
               <SocialIcon href="https://linkedin.com/company/vextiv" label="Vextiv on LinkedIn">
                 <Linkedin size={18} strokeWidth={1.75} aria-hidden="true" />
               </SocialIcon>
-              <SocialIcon href="https://facebook.com/vextivstudio" label="Vextiv on Facebook">
+              <SocialIcon href="https://www.facebook.com/people/Vextiv/61589618447564/" label="Vextiv on Facebook" className="footer__social-btn--facebook">
                 <Facebook size={18} strokeWidth={1.75} aria-hidden="true" />
               </SocialIcon>
               <SocialIcon href={whatsappHref} label="Vextiv on WhatsApp" isWhatsApp>
@@ -217,14 +219,8 @@ export default function Footer() {
               </li>
               <li className="footer__contact-item">
                 <Mail size={15} strokeWidth={1.75} aria-hidden="true" className="footer__contact-icon" />
-                <a href="mailto:hello@vextiv.tech" className="footer__contact-link">
-                  hello@vextiv.tech
-                </a>
-              </li>
-              <li className="footer__contact-item">
-                <Phone size={15} strokeWidth={1.75} aria-hidden="true" className="footer__contact-icon" />
-                <a href="tel:+91XXXXXXXXXX" className="footer__contact-link">
-                  +91 XXXXX XXXXX
+                <a href="mailto:vextiv.tech@gmail.com" className="footer__contact-link">
+                  vextiv.tech@gmail.com
                 </a>
               </li>
             </ul>
@@ -247,7 +243,7 @@ export default function Footer() {
         ══════════════════════════════════════════════════════════════ */}
         <div className="footer__bottom" role="contentinfo">
           <p className="footer__copy">
-            © 2026 Vextiv. All Rights Reserved.
+            © 2026 VeXtiv. All Rights Reserved.
           </p>
           <div className="footer__legal-links">
             <Link href="/privacy" className="footer__legal-link">Privacy Policy</Link>
@@ -283,6 +279,26 @@ export default function Footer() {
             radial-gradient(ellipse 50% 40% at 15% 100%, rgba(200, 240, 77, 0.025) 0%, transparent 60%);
           pointer-events: none;
           z-index: 0;
+        }
+
+        /* ── Watermark ───────────────────────────────────────────────── */
+        .footer__watermark {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-family: var(--font-display);
+          font-weight: 800;
+          font-size: clamp(60px, 15vw, 160px);
+          color: var(--text-watermark);
+          z-index: 0;
+          user-select: none;
+          pointer-events: none;
+          line-height: 1;
+        }
+
+        .footer__watermark-accent {
+          color: var(--accent-fill-08);
         }
 
         /* ── Inner container ─────────────────────────────────────────── */
@@ -337,10 +353,9 @@ export default function Footer() {
         .footer__logo-text {
           color: #FFFFFF;
           font-family: var(--font-display);
-          font-weight: 700;
+          font-weight: 400;
           font-size: 24px;
           letter-spacing: 0.12em;
-          text-transform: uppercase;
         }
 
         .footer__logo-accent {
@@ -385,6 +400,12 @@ export default function Footer() {
           border-color: #C8F04D;
           color: #000000;
           transform: translateY(-2px);
+        }
+
+        .footer__social-btn--facebook:hover {
+          background: var(--facebook);
+          border-color: var(--facebook);
+          color: #ffffff;
         }
 
         .footer__social-btn:focus-visible {

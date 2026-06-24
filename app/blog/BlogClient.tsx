@@ -13,7 +13,11 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
   const [activeFilter, setActiveFilter] = useState<'All' | BlogCategory>('All');
   const [currentPage, setCurrentPage] = useState(1);
   const [email, setEmail] = useState('');
+  const [honeypot, setHoneypot] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [message, setMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const handleFilterClick = (category: 'All' | BlogCategory) => {
     setActiveFilter(category);
@@ -30,11 +34,35 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
     currentPage * POSTS_PER_PAGE
   );
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      setSubscribed(true);
-      setEmail('');
+    if (!email || isLoading) return;
+
+    setIsLoading(true);
+    setIsError(false);
+    setMessage('');
+
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, website: honeypot }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        setSubscribed(true);
+        setMessage(data.message);
+      } else {
+        setIsError(true);
+        setMessage(data.message || 'Something went wrong. Please try again.');
+      }
+    } catch (err) {
+      setIsError(true);
+      setMessage('Something went wrong. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -155,23 +183,39 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
         </p>
         {subscribed ? (
           <div className="bg-[var(--accent-fill-10)] border border-[var(--accent-border-active)] text-[var(--accent)] px-6 py-4 rounded-xl inline-block font-medium relative z-10">
-            Thanks for subscribing! Keep an eye on your inbox.
+            {message || "Thanks for subscribing! Keep an eye on your inbox."}
           </div>
         ) : (
           <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto relative z-10">
             <input
-              type="email"
-              placeholder="Enter your email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="flex-1 bg-[var(--bg-surface-2)] border border-[var(--border-subtle)] text-[var(--text-primary)] px-5 py-3 rounded-xl focus:outline-none focus:border-[var(--accent-focus)]"
+              type="text"
+              name="website"
+              value={honeypot}
+              onChange={(e) => setHoneypot(e.target.value)}
+              style={{ opacity: 0, position: 'absolute', top: 0, left: 0, zIndex: -1 }}
+              tabIndex={-1}
+              autoComplete="off"
             />
+            <div className="flex-1 flex flex-col gap-2">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                required
+                disabled={isLoading}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full bg-[var(--bg-surface-2)] border border-[var(--border-subtle)] text-[var(--text-primary)] px-5 py-3 rounded-xl focus:outline-none focus:border-[var(--accent-focus)] disabled:opacity-50"
+              />
+              {isError && (
+                <span className="text-red-400 text-sm text-left">{message}</span>
+              )}
+            </div>
             <button
               type="submit"
-              className="bg-[var(--text-primary)] text-black px-6 py-3 rounded-xl font-bold hover:bg-[var(--accent)] transition-colors duration-300"
+              disabled={isLoading}
+              className="bg-[var(--text-primary)] text-black px-6 py-3 rounded-xl font-bold hover:bg-[var(--accent)] transition-colors duration-300 disabled:opacity-50 self-start sm:self-auto h-[50px] whitespace-nowrap"
             >
-              Subscribe
+              {isLoading ? '...' : 'Subscribe'}
             </button>
           </form>
         )}

@@ -5,12 +5,13 @@ import ContactTeamNotification from '@/emails/team-notification';
 import ContactClientConfirmation from '@/emails/client-confirmation';
 import AuditTeamNotification from '@/emails/audit-team-notification';
 import AuditClientConfirmation from '@/emails/audit-client-confirmation';
+import NewsletterConfirmation from '@/emails/newsletter-confirmation';
 
 // ─── Singleton ────────────────────────────────────────────────────────────────
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const FROM = process.env.RESEND_FROM_EMAIL ?? 'hello@vextivestudio.com';
+const FROM = process.env.RESEND_FROM_EMAIL ?? 'vextiv.tech@gmail.com';
 const TEAM_TO = process.env.TEAM_EMAIL ?? 'team@vextivestudio.com';
 
 // ─── Param types ─────────────────────────────────────────────────────────────
@@ -97,6 +98,7 @@ export async function sendTeamNotification(
   const { error } = await resend.emails.send({
     from: FROM,
     to: TEAM_TO,
+    replyTo: 'vextiv.tech@gmail.com',
     subject,
     react: reactEl,
   });
@@ -127,16 +129,17 @@ export async function sendClientConfirmation(
   let reactEl: React.ReactElement;
 
   if (params.source === 'contact') {
-    subject = "We've received your message — Vextiv Studio";
+    subject = "We've received your message — VeXtiv Studio";
     reactEl = ContactClientConfirmation({ name: params.name });
   } else {
-    subject = 'Your free digital audit is confirmed — Vextiv Studio';
+    subject = 'Your free digital audit is confirmed — VeXtiv Studio';
     reactEl = AuditClientConfirmation({ businessName: params.businessName });
   }
 
   const { error } = await resend.emails.send({
     from: FROM,
     to: toEmail,
+    replyTo: 'vextiv.tech@gmail.com',
     subject,
     react: reactEl,
   });
@@ -145,5 +148,26 @@ export async function sendClientConfirmation(
     throw new Error(
       `Resend client confirmation failed: ${JSON.stringify(error)}`,
     );
+  }
+}
+
+// ─── sendNewsletterConfirmation ───────────────────────────────────────────────
+
+/**
+ * Sends a confirmation email to a new blog newsletter subscriber.
+ *
+ * Throws on Resend API failure — callers should use Promise.allSettled.
+ */
+export async function sendNewsletterConfirmation(toEmail: string): Promise<void> {
+  const { error } = await resend.emails.send({
+    from: FROM,
+    to: toEmail,
+    replyTo: 'vextiv.tech@gmail.com',
+    subject: 'Welcome to the VeXtiv Studio Blog 🚀',
+    react: NewsletterConfirmation(),
+  });
+
+  if (error) {
+    throw new Error(`Resend newsletter confirmation failed: ${JSON.stringify(error)}`);
   }
 }

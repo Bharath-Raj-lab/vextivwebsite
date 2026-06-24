@@ -105,6 +105,7 @@ export default function ExitIntentPopup() {
 
   const handleCtaClick = () => {
     trackEvent("audit_cta_click");
+    setIsVisible(false);
     router.push("/audit");
   };
 

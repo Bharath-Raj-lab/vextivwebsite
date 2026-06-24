@@ -13,15 +13,15 @@ import ScrollDepthTracker from "@/components/sections/ScrollDepthTracker";
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL("https://vextiv.tech"),
-  title: "Vextiv Studio | Digital Growth Agency in Hyderabad",
+  title: "VeXtiv Studio | Digital Growth Agency in Hyderabad",
   description:
-    "Vextiv Studio builds websites, QR systems, branding, and social media for restaurants, startups, and local businesses in Hyderabad. Get a free consultation.",
+    "VeXtiv Studio builds websites, QR systems, branding, and social media for restaurants, startups, and local businesses in Hyderabad. Get a free consultation.",
   openGraph: {
-    title: "Vextiv Studio | Digital Growth Agency in Hyderabad",
+    title: "VeXtiv Studio | Digital Growth Agency in Hyderabad",
     description:
-      "Vextiv Studio builds websites, QR systems, branding, and social media for restaurants, startups, and local businesses in Hyderabad. Get a free consultation.",
+      "VeXtiv Studio builds websites, QR systems, branding, and social media for restaurants, startups, and local businesses in Hyderabad. Get a free consultation.",
     url: "https://vextiv.tech",
-    siteName: "Vextiv Studio",
+    siteName: "VeXtiv Studio",
     type: "website",
   },
   twitter: {

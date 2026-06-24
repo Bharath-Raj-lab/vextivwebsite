@@ -5,15 +5,15 @@ import JsonLd from "@/components/seo/JsonLd";
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL("https://vextiv.tech"),
-  title: "Services | Vextiv Studio",
+  title: "Services | VeXtiv Studio",
   description:
-    "From websites to branding, QR ordering systems to local SEO — Vextiv Studio delivers end-to-end digital services for businesses across Hyderabad and beyond.",
+    "From websites to branding, QR ordering systems to local SEO — VeXtiv Studio delivers end-to-end digital services for businesses across Hyderabad and beyond.",
   openGraph: {
-    title: "Services | Vextiv Studio",
+    title: "Services | VeXtiv Studio",
     description:
-      "From websites to branding, QR ordering systems to local SEO — Vextiv Studio delivers end-to-end digital services for businesses across Hyderabad and beyond.",
+      "From websites to branding, QR ordering systems to local SEO — VeXtiv Studio delivers end-to-end digital services for businesses across Hyderabad and beyond.",
     url: "https://vextiv.tech/services",
-    siteName: "Vextiv Studio",
+    siteName: "VeXtiv Studio",
     type: "website",
   },
   twitter: {
@@ -679,7 +679,7 @@ export default function ServicesPage() {
     description: service.description,
     provider: {
       '@type': 'LocalBusiness',
-      name: 'Vextiv Studio',
+      name: "VeXtiv Studio",
       url: 'https://vextiv.tech',
     },
     // PRD §8.4 — areaServed list

@@ -7,6 +7,7 @@ import { useEffect, useReducer, useRef } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
+import Logo from "@/components/ui/Logo";
 
 // ─── Nav links ───────────────────────────────────────────────────────────────
 const NAV_LINKS = [
@@ -16,26 +17,6 @@ const NAV_LINKS = [
   { label: "About",    href: "/about"    },
   { label: "Blog",     href: "/blog"     },
 ] as const;
-
-// ─── Logo ─────────────────────────────────────────────────────────────────────
-function Logo() {
-  return (
-    <Link href="/" className="navbar__brand" aria-label="Vextiv Studio — home">
-      <Image 
-        src="/logo.svg" 
-        alt="Vextiv Studio" 
-        width={120} 
-        height={32} 
-        style={{ width: "auto", height: "32px" }} 
-        priority 
-        className="navbar__brand-logo"
-      />
-      <span className="navbar__brand-text">
-        Ve<span className="navbar__brand-accent">x</span>tiv
-      </span>
-    </Link>
-  );
-}
 
 // ─── Component ────────────────────────────────────────────────────────────────
 export default function Navbar() {
@@ -116,7 +97,7 @@ export default function Navbar() {
       >
         <nav className="navbar__inner" aria-label="Main navigation">
           {/* Logo + Text */}
-          <Logo />
+          <Logo className="navbar__brand" imageClassName="navbar__brand-logo" textClassName="navbar__brand-text" priority />
 
           {/* Center Navigation Capsule */}
           <ul className="navbar__links-capsule" role="list">
@@ -277,13 +258,10 @@ export default function Navbar() {
         }
         .navbar__brand-text {
           font-family: var(--font-display, sans-serif);
-          font-weight: 600;
+          font-weight: 400;
           font-size: 20px;
           color: #ffffff;
           letter-spacing: 0.5px;
-        }
-        .navbar__brand-accent {
-          color: var(--accent);
         }
 
         /* Center Navigation Capsule */

@@ -244,10 +244,10 @@ export default function ContactForm() {
               <p className="cp-info__value">Within 24 hours</p>
               <p className="cp-info__label" style={{ marginTop: '16px' }}>Email us at</p>
               <a
-                href="mailto:hello@vextivestudio.com"
+                href="mailto:vextiv.tech@gmail.com"
                 className="cp-info__link"
               >
-                hello@vextivestudio.com
+                vextiv.tech@gmail.com
               </a>
             </div>
           </aside>
