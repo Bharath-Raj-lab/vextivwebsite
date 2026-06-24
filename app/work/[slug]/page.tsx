@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { caseStudies, getCaseStudyBySlug } from '@/lib/case-studies';
 import CaseStudyClient, { CaseStudyCtaLink, CaseStudyLiveLink } from './CaseStudyClient';
 import JsonLd from '@/components/seo/JsonLd';
+import InteractiveProjectGallery from '@/components/work/InteractiveProjectGallery';
 
 export const revalidate = 3600;
 
@@ -186,24 +187,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         </div>
 
         {/* Gallery */}
-        {study.gallery.length > 0 && (
-          <section className="mb-24">
-            <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-10 text-center">Gallery</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {study.gallery.map((img, i) => (
-                <div key={i} className={`relative rounded-2xl overflow-hidden border border-[var(--border-subtle)] ${i === 2 ? 'md:col-span-2' : ''} h-80 md:h-[500px]`}>
-                  <Image
-                    src={img}
-                    alt={`Gallery image ${i + 1}`}
-                    fill
-                    className="object-cover hover:scale-105 transition-transform duration-700"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
+        <InteractiveProjectGallery images={study.gallery} />
 
         {/* CTA & Live URL */}
         <div className="text-center bg-[var(--bg-surface-1)] border border-[var(--border-subtle)] rounded-3xl p-12 relative overflow-hidden">

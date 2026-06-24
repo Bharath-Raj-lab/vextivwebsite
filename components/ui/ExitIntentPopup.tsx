@@ -47,8 +47,6 @@ export default function ExitIntentPopup() {
     if (isVisible) {
       previousFocusRef.current = document.activeElement as HTMLElement;
 
-      let rafId: number;
-
       const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === "Escape") {
           setIsVisible(false);
@@ -83,7 +81,7 @@ export default function ExitIntentPopup() {
 
       document.addEventListener("keydown", handleKeyDown);
 
-      rafId = requestAnimationFrame(() => {
+      const rafId = requestAnimationFrame(() => {
         if (ctaRef.current) {
           ctaRef.current.focus();
         }
@@ -111,22 +109,22 @@ export default function ExitIntentPopup() {
   const backdropProps = shouldReduceMotion
     ? { style: { opacity: 1 } }
     : {
-        initial: { opacity: 0 },
-        animate: { opacity: 1 },
-        transition: { duration: 0.2 },
-      };
+      initial: { opacity: 0 },
+      animate: { opacity: 1 },
+      transition: { duration: 0.2 },
+    };
 
   const cardProps = shouldReduceMotion
     ? {
-        initial: { opacity: 1, scale: 1, x: "-50%", y: "-50%" },
-        animate: { opacity: 1, scale: 1, x: "-50%", y: "-50%" },
-        transition: { duration: 0 },
-      }
+      initial: { opacity: 1, scale: 1, x: "-50%", y: "-50%" },
+      animate: { opacity: 1, scale: 1, x: "-50%", y: "-50%" },
+      transition: { duration: 0 },
+    }
     : {
-        initial: { scale: 0.95, opacity: 0, x: "-50%", y: "-50%" },
-        animate: { scale: 1, opacity: 1, x: "-50%", y: "-50%" },
-        transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] },
-      };
+      initial: { scale: 0.95, opacity: 0, x: "-50%", y: "-50%" },
+      animate: { scale: 1, opacity: 1, x: "-50%", y: "-50%" },
+      transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] },
+    };
 
   return (
     <motion.div
