@@ -51,10 +51,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Supabase Insert
-    // Supabase Insert
-    const { error: dbError } = await (supabaseAdmin as any)
-      .from('subscribers')
-      .insert({ email: data.email, source: 'blog' });
+    const { error: dbError } = await supabaseAdmin
+  .from('leads')
+  .insert({ email: data.email, name: '' });
 
     if (dbError) {
       if (dbError.code === '23505') { // Unique constraint violation code

@@ -47,7 +47,6 @@ export default function ExitIntentPopup() {
     if (isVisible) {
       previousFocusRef.current = document.activeElement as HTMLElement;
 
-      let rafId: number;
 
       const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === "Escape") {
@@ -83,7 +82,7 @@ export default function ExitIntentPopup() {
 
       document.addEventListener("keydown", handleKeyDown);
 
-      rafId = requestAnimationFrame(() => {
+      const rafId = requestAnimationFrame(() => {
         if (ctaRef.current) {
           ctaRef.current.focus();
         }
