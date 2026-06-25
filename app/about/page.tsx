@@ -8,15 +8,15 @@ export const dynamic = "force-static";
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL("https://vextiv.tech"),
-  title: "About Vextiv Studio | Hyderabad Digital Agency",
+  title: "About VeXtiv Studio | Hyderabad Digital Agency",
   description:
-    "We're a digital studio founded in Hyderabad with one purpose: to give local businesses the online presence they deserve. Meet the team behind Vextiv Studio.",
+    "We're a digital studio founded in Hyderabad with one purpose: to give local businesses the online presence they deserve. Meet the team behind VeXtiv Studio.",
   openGraph: {
-    title: "About Vextiv Studio | Hyderabad Digital Agency",
+    title: "About VeXtiv Studio | Hyderabad Digital Agency",
     description:
-      "We're a digital studio founded in Hyderabad with one purpose: to give local businesses the online presence they deserve. Meet the team behind Vextiv Studio.",
+      "We're a digital studio founded in Hyderabad with one purpose: to give local businesses the online presence they deserve. Meet the team behind VeXtiv Studio.",
     url: "https://vextiv.tech/about",
-    siteName: "Vextiv Studio",
+    siteName: "VeXtiv Studio",
     type: "website",
   },
   twitter: {
@@ -46,7 +46,7 @@ interface Value {
 }
 
 const STORY_PARAGRAPHS: readonly string[] = [
-  "Vextiv Studio was born in Hyderabad out of a simple frustration: too many brilliant local businesses were invisible online. Restaurants with incredible food, boutiques with unique products, service providers with real talent — all underselling themselves with outdated websites, inconsistent branding, or no digital presence at all. We started Vextiv to fix that.",
+  "VeXtiv Studio was born in Hyderabad out of a simple frustration: too many brilliant local businesses were invisible online. Restaurants with incredible food, boutiques with unique products, service providers with real talent — all underselling themselves with outdated websites, inconsistent branding, or no digital presence at all. We started Vextiv to fix that.",
   "From day one, we chose to stay close to home. Hyderabad's business community is fast-moving, deeply entrepreneurial, and fiercely loyal to quality. That energy shaped how we work — we move quickly, we stay direct, and we care about outcomes more than aesthetics for their own sake. Every project we take on is built to perform.",
   "Today we serve restaurants, startups, service businesses, and growing brands across the city and beyond. We're a small studio by design — it keeps us focused, keeps our work personal, and keeps our clients from becoming ticket numbers. We know the people we work with. That matters to us.",
 ];
@@ -58,7 +58,7 @@ const TEAM_MEMBERS: readonly TeamMember[] = [
     role: "Founder & Strategy",
     bio: "Ganesh started Vextiv with a conviction that local businesses deserve world-class digital work. He leads client relationships, strategy, and overall creative direction — making sure every project delivers real business results, not just a pretty deliverable.",
     photo: "/team/ganesh.png",
-    photoAlt: "Ganesh Raj, Founder of Vextiv Studio",
+    photoAlt: "Ganesh Raj, Founder of VeXtiv Studio",
   },
   {
     id: "priya",
@@ -66,7 +66,7 @@ const TEAM_MEMBERS: readonly TeamMember[] = [
     role: "Lead Designer",
     bio: "Priya is the visual mind behind Vextiv's work. She brings a meticulous eye to brand identity, UI, and content design — turning briefs into experiences that feel both intentional and effortless. She believes great design should be invisible until the moment it isn't.",
     photo: "/team/priya.png",
-    photoAlt: "Priya Sharma, Lead Designer at Vextiv Studio",
+    photoAlt: "Priya Sharma, Lead Designer at VeXtiv Studio",
   },
   {
     id: "arjun",
@@ -74,7 +74,7 @@ const TEAM_MEMBERS: readonly TeamMember[] = [
     role: "Developer & Tech Lead",
     bio: "Arjun builds everything that lives under the surface — fast, accessible, and built to last. From Next.js sites to QR ordering systems, he writes code that holds up under real-world conditions and doesn't need to be rewritten in six months.",
     photo: "/team/arjun.png",
-    photoAlt: "Arjun Mehta, Developer at Vextiv Studio",
+    photoAlt: "Arjun Mehta, Developer at VeXtiv Studio",
   },
 ];
 
@@ -235,7 +235,7 @@ function ValuesSection() {
 // ─── Section: CTA ─────────────────────────────────────────────────────────────
 function AboutCTA() {
   return (
-    <section className="ab-cta-section" aria-label="Get in touch with Vextiv Studio">
+    <section className="ab-cta-section" aria-label="Get in touch with VeXtiv Studio">
       <div className="ab-cta-inner">
         {/* Ambient glow blob */}
         <div className="ab-cta-glow" aria-hidden="true" />
@@ -250,7 +250,7 @@ function AboutCTA() {
           questions, and come back with a clear plan — no jargon, no templates,
           no wasted time.
         </p>
-        <Link href="/contact" className="ab-cta-btn" aria-label="Start a project with Vextiv Studio">
+        <Link href="/contact" className="ab-cta-btn" aria-label="Start a project with VeXtiv Studio">
           <span>Start a Conversation</span>
           {/* Arrow */}
           <svg

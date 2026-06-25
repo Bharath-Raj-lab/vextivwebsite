@@ -46,7 +46,6 @@ export default function ExitIntentPopup() {
   useEffect(() => {
     if (isVisible) {
       previousFocusRef.current = document.activeElement as HTMLElement;
-
       const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === "Escape") {
           setIsVisible(false);
@@ -103,6 +102,7 @@ export default function ExitIntentPopup() {
 
   const handleCtaClick = () => {
     trackEvent("audit_cta_click");
+    setIsVisible(false);
     router.push("/audit");
   };
 

@@ -7,15 +7,15 @@ export const revalidate = 3600; // SSG + ISR
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vextiv.tech"),
-  title: "Our Work | Vextiv Studio",
+  title: "Our Work | VeXtiv Studio",
   description:
     "Explore our portfolio of digital experiences, branding, and QR systems designed for modern businesses across Hyderabad and globally.",
   openGraph: {
-    title: "Our Work | Vextiv Studio",
+    title: "Our Work | VeXtiv Studio",
     description:
       "Explore our portfolio of digital experiences, branding, and QR systems designed for modern businesses across Hyderabad and globally.",
     url: "https://vextiv.tech/work",
-    siteName: "Vextiv Studio",
+    siteName: "VeXtiv Studio",
     type: "website",
   },
   twitter: {

@@ -33,8 +33,10 @@
 
   /* === TEXT === */
   --text-primary: #F0EEE8;
-  --text-secondary: rgba(240, 238, 232, 0.55);
+  --text-secondary: rgba(240, 238, 232, 0.65);
   --text-muted: rgba(240, 238, 232, 0.45);
+  --text-watermark: rgba(240, 238, 232, 0.035);
+  --text-inverse: #09090B;
   --text-very-muted: rgba(240, 238, 232, 0.30);
   --text-ultra-muted: rgba(240, 238, 232, 0.25);
   --text-accent: #C8F04D;

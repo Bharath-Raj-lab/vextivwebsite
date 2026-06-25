@@ -8,15 +8,15 @@ export const dynamic = "force-static";
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL("https://vextiv.tech"),
-  title: "FAQ | Vextiv Studio — Hyderabad Digital Agency",
+  title: "FAQ | VeXtiv Studio — Hyderabad Digital Agency",
   description:
     "Common questions about working with Vextiv Studio — pricing, process, timelines, support, and more. Honest answers, no marketing fluff.",
   openGraph: {
-    title: "FAQ | Vextiv Studio — Hyderabad Digital Agency",
+    title: "FAQ | VeXtiv Studio — Hyderabad Digital Agency",
     description:
       "Common questions about working with Vextiv Studio — pricing, process, timelines, support, and more. Honest answers, no marketing fluff.",
     url: "https://vextiv.tech/faq",
-    siteName: "Vextiv Studio",
+    siteName: "VeXtiv Studio",
     type: "website",
   },
   twitter: {

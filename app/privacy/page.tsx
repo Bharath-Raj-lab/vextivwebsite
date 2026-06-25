@@ -9,15 +9,15 @@ export const dynamic = "force-static";
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL("https://vextiv.tech"),
-  title: "Privacy Policy | Vextiv Studio",
+  title: "Privacy Policy | VeXtiv Studio",
   description:
-    "How Vextiv Studio collects, uses, and protects your personal data. Compliant with India's Digital Personal Data Protection Act 2023.",
+    "How VeXtiv Studio collects, uses, and protects your personal data. Compliant with India's Digital Personal Data Protection Act 2023.",
   openGraph: {
-    title: "Privacy Policy | Vextiv Studio",
+    title: "Privacy Policy | VeXtiv Studio",
     description:
-      "How Vextiv Studio collects, uses, and protects your personal data. Compliant with India's Digital Personal Data Protection Act 2023.",
+      "How VeXtiv Studio collects, uses, and protects your personal data. Compliant with India's Digital Personal Data Protection Act 2023.",
     url: "https://vextiv.tech/privacy",
-    siteName: "Vextiv Studio",
+    siteName: "VeXtiv Studio",
     type: "website",
   },
   alternates: {
@@ -31,10 +31,10 @@ export const metadata: Metadata = {
 // ─── Content ──────────────────────────────────────────────────────────────────
 
 const EFFECTIVE_DATE = "20 June 2025" as const;
-const CONTACT_EMAIL = "hello@vextiv.tech" as const;
+const CONTACT_EMAIL = "vextiv.tech@gmail.com" as const;
 
 const INTRO =
-  "This Privacy Policy explains how Vextiv Studio ('we', 'us', 'our') collects, uses, stores, and protects personal data when you visit our website (vextiv.tech) or engage us for digital services. We are committed to handling your information responsibly and in compliance with the Digital Personal Data Protection Act, 2023 (DPDP Act) of India.";
+  "This Privacy Policy explains how VeXtiv Studio ('we', 'us', 'our') collects, uses, stores, and protects personal data when you visit our website (vextiv.tech) or engage us for digital services. We are committed to handling your information responsibly and in compliance with the Digital Personal Data Protection Act, 2023 (DPDP Act) of India.";
 
 const SECTIONS: readonly ProseSection[] = [
   {
@@ -51,7 +51,7 @@ const SECTIONS: readonly ProseSection[] = [
           "Name and email address submitted via the contact form.",
           "Business name, phone number, and project details provided during consultation.",
           "Any files, assets, or documents shared with us during an engagement.",
-          "Correspondence content from emails sent to hello@vextiv.tech.",
+          "Correspondence content from emails sent to vextiv.tech@gmail.com.",
         ],
       },
       {
@@ -139,7 +139,7 @@ const SECTIONS: readonly ProseSection[] = [
     id: "your-rights",
     heading: "Your Rights under the DPDP Act 2023",
     content: [
-      "As a Data Principal under India's Digital Personal Data Protection Act, 2023, you have the following rights with respect to your personal data processed by Vextiv Studio:",
+      "As a Data Principal under India's Digital Personal Data Protection Act, 2023, you have the following rights with respect to your personal data processed by VeXtiv Studio:",
     ],
     list: [
       "Right to Access: You may request a summary of the personal data we hold about you and the purposes for which it is being processed.",
@@ -152,7 +152,7 @@ const SECTIONS: readonly ProseSection[] = [
       {
         heading: "How to exercise your rights",
         content: [
-          "To exercise any of the above rights, please contact us by email at hello@vextiv.tech with the subject line 'DPDP Data Request'. We will acknowledge your request within 72 hours and respond substantively within 30 days. We may need to verify your identity before processing any request.",
+          "To exercise any of the above rights, please contact us by email at vextiv.tech@gmail.com with the subject line 'DPDP Data Request'. We will acknowledge your request within 72 hours and respond substantively within 30 days. We may need to verify your identity before processing any request.",
         ],
       },
     ],
@@ -194,12 +194,12 @@ const SECTIONS: readonly ProseSection[] = [
     id: "contact",
     heading: "Contact for Data Requests",
     content: [
-      "Vextiv Studio acts as the Data Fiduciary for personal data processed through this website and our service engagements.",
+      "VeXtiv Studio acts as the Data Fiduciary for personal data processed through this website and our service engagements.",
       "For all privacy-related queries, data access requests, correction requests, erasure requests, or complaints, please contact us at:",
     ],
     list: [
-      "Email: hello@vextiv.tech (Subject: DPDP Data Request)",
-      "Studio: Vextiv Studio, Hyderabad, Telangana, India",
+      "Email: vextiv.tech@gmail.com (Subject: DPDP Data Request)",
+      "Studio: VeXtiv Studio, Hyderabad, Telangana, India",
     ],
   },
 ];

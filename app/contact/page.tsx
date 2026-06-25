@@ -11,15 +11,15 @@ import ContactForm from './ContactForm';
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vextiv.tech"),
-  title: "Contact Us | Vextiv Studio",
+  title: "Contact Us | VeXtiv Studio",
   description:
-    "Get in touch with Vextiv Studio. Tell us about your project in Hyderabad or beyond, and we'll respond within 1–2 business days with a tailored proposal.",
+    "Get in touch with VeXtiv Studio. Tell us about your project in Hyderabad or beyond, and we'll respond within 1–2 business days with a tailored proposal.",
   openGraph: {
-    title: "Contact Us | Vextiv Studio",
+    title: "Contact Us | VeXtiv Studio",
     description:
-      "Get in touch with Vextiv Studio. Tell us about your project in Hyderabad or beyond, and we'll respond within 1–2 business days with a tailored proposal.",
+      "Get in touch with VeXtiv Studio. Tell us about your project in Hyderabad or beyond, and we'll respond within 1–2 business days with a tailored proposal.",
     url: "https://vextiv.tech/contact",
-    siteName: "Vextiv Studio",
+    siteName: "VeXtiv Studio",
     type: "website",
   },
   twitter: {

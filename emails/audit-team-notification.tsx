@@ -134,7 +134,7 @@ export default function AuditTeamNotification({
 
           <Hr style={styles.hr} />
           <Text style={styles.footer}>
-            This notification was generated automatically by Vextiv Studio.
+            This notification was generated automatically by VeXtiv Studio.
           </Text>
         </Container>
       </Body>
