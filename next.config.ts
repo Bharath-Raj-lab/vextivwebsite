@@ -45,6 +45,8 @@ const ContentSecurityPolicy = `
     data:
     blob:
     https://images.unsplash.com
+    https://picsum.photos
+    https://loremflickr.com
     https://www.google-analytics.com
     https://www.facebook.com
     https://www.googletagmanager.com;
@@ -115,6 +117,14 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+      },
+      {
+        protocol: 'https',
+        hostname: 'loremflickr.com',
       },
     ],
   },

@@ -178,7 +178,7 @@ export default function Hero() {
               animate="visible"
               custom={0}
             >
-              We Build Digital
+              More Visibility.
             </motion.span>
             <motion.span
               className="hero__headline-bold"
@@ -187,7 +187,7 @@ export default function Hero() {
               animate="visible"
               custom={1}
             >
-              Experiences That Grow
+              More Customers. More <span style={{ color: "#C8F04D" }}>Growth</span>.
             </motion.span>
           </h1>
         </div>
@@ -203,9 +203,7 @@ export default function Hero() {
             custom={2}
           >
             <p className="hero__description">
-              Websites, Branding, Content &amp; QR Systems designed to attract
-              customers and drive growth for restaurants, startups, and local
-              businesses.
+              We help businesses stand out with websites, branding, content, and smart digital systems.
             </p>
           </motion.div>
 
@@ -217,9 +215,6 @@ export default function Hero() {
             animate="visible"
             custom={3}
           >
-            <p className="hero__cta-desc">
-              Crafted digital solutions that convert visitors into loyal customers.
-            </p>
             <div className="hero__ctas">
               <Link
                 href="/contact"

@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, useMotionValue, useSpring, MotionValue, useReducedMotion } from "framer-motion";
+import Link from "next/link";
 
 // ─── Ease ────────────────────────────────────────────────────────────────
 const EXPO = [0.16, 1, 0.3, 1] as const;
@@ -16,6 +17,7 @@ function CardFooter({
   cta,
   light,
   prefersReducedMotion,
+  href,
 }: {
   visible: boolean;
   delay?: number;
@@ -23,7 +25,20 @@ function CardFooter({
   cta: string;
   light?: boolean;
   prefersReducedMotion: boolean | null;
+  href?: string;
 }) {
+  const content = (
+    <motion.span
+      className={light ? "wv-cta wv-cta--light" : "wv-cta"}
+      whileHover={prefersReducedMotion ? undefined : { scale: 1.04 }}
+      whileTap={prefersReducedMotion ? undefined : { scale: 0.96 }}
+      style={{ display: "inline-flex" }}
+    >
+      {cta}
+      <span className="wv-arrow">→</span>
+    </motion.span>
+  );
+
   return (
     <motion.div
       className="wv-footer"
@@ -32,14 +47,7 @@ function CardFooter({
       transition={{ duration: 0.75, delay, ease: EXPO }}
     >
       <p className={light ? "wv-desc wv-desc--light" : "wv-desc"}>{description}</p>
-      <motion.button
-        className={light ? "wv-cta wv-cta--light" : "wv-cta"}
-        whileHover={prefersReducedMotion ? undefined : { scale: 1.04 }}
-        whileTap={prefersReducedMotion ? undefined : { scale: 0.96 }}
-      >
-        {cta}
-        <span className="wv-arrow">→</span>
-      </motion.button>
+      {href ? <Link href={href} style={{ textDecoration: 'none' }}>{content}</Link> : content}
     </motion.div>
   );
 }
@@ -241,6 +249,7 @@ function Card1({ visible }: { visible: boolean }) {
           description="We don't do timid. Every creative decision is made to stop the scroll and demand attention."
           cta="See the work"
           prefersReducedMotion={prefersReducedMotion}
+          href="/work"
         />
       </div>
     </motion.div>
@@ -324,6 +333,7 @@ function Card2({ visible }: { visible: boolean }) {
           cta="See the numbers"
           light
           prefersReducedMotion={prefersReducedMotion}
+          href="/work"
         />
       </div>
     </motion.div>
@@ -427,6 +437,7 @@ function Card3({ visible }: { visible: boolean }) {
           cta="Explore branding"
           light
           prefersReducedMotion={prefersReducedMotion}
+          href="/services"
         />
       </div>
     </motion.div>
@@ -535,6 +546,7 @@ function Card4({ visible }: { visible: boolean }) {
           description="We ship fast, iterate faster. No months of planning — real work starts on day one."
           cta="Start today"
           prefersReducedMotion={prefersReducedMotion}
+          href="/contact"
         />
       </div>
     </motion.div>
@@ -627,6 +639,7 @@ function Card5({ visible }: { visible: boolean }) {
           cta="View case studies"
           light
           prefersReducedMotion={prefersReducedMotion}
+          href="/work"
         />
       </div>
     </motion.div>

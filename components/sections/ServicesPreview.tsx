@@ -18,81 +18,81 @@ const SPRING_OPTS = { stiffness: 220, damping: 26, mass: 0.9 };
 // ─── Premium Custom SVG Icons ──────────────────────────────────────────────
 const IconWebsite = () => (
   <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="2" y="5" width="32" height="26" rx="4" stroke="#0A0A0A" strokeWidth="2.2" fill="none" />
-    <line x1="2" y1="12" x2="34" y2="12" stroke="#0A0A0A" strokeWidth="2.2" />
-    <circle cx="7.5" cy="8.5" r="1.5" fill="#0A0A0A" />
-    <circle cx="12.5" cy="8.5" r="1.5" fill="#0A0A0A" />
-    <circle cx="17.5" cy="8.5" r="1.5" fill="#0A0A0A" />
-    <rect x="7" y="17" width="10" height="8" rx="2" fill="#0A0A0A" opacity="0.15" stroke="#0A0A0A" strokeWidth="1.8" />
-    <line x1="20" y1="17" x2="29" y2="17" stroke="#0A0A0A" strokeWidth="2" strokeLinecap="round" />
-    <line x1="20" y1="21" x2="29" y2="21" stroke="#0A0A0A" strokeWidth="2" strokeLinecap="round" />
-    <line x1="20" y1="25" x2="25" y2="25" stroke="#0A0A0A" strokeWidth="2" strokeLinecap="round" />
+    <rect x="2" y="5" width="32" height="26" rx="4" stroke="currentColor" strokeWidth="2.2" fill="none" />
+    <line x1="2" y1="12" x2="34" y2="12" stroke="currentColor" strokeWidth="2.2" />
+    <circle cx="7.5" cy="8.5" r="1.5" fill="currentColor" />
+    <circle cx="12.5" cy="8.5" r="1.5" fill="currentColor" />
+    <circle cx="17.5" cy="8.5" r="1.5" fill="currentColor" />
+    <rect x="7" y="17" width="10" height="8" rx="2" fill="currentColor" opacity="0.15" stroke="currentColor" strokeWidth="1.8" />
+    <line x1="20" y1="17" x2="29" y2="17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <line x1="20" y1="21" x2="29" y2="21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <line x1="20" y1="25" x2="25" y2="25" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
   </svg>
 );
 
 const IconBrand = () => (
   <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="18" cy="18" r="10" stroke="#0A0A0A" strokeWidth="2.2" fill="none" />
-    <circle cx="18" cy="18" r="4" fill="#0A0A0A" opacity="0.18" />
-    <line x1="18" y1="4" x2="18" y2="8" stroke="#0A0A0A" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="18" y1="28" x2="18" y2="32" stroke="#0A0A0A" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="4" y1="18" x2="8" y2="18" stroke="#0A0A0A" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="28" y1="18" x2="32" y2="18" stroke="#0A0A0A" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="8.5" y1="8.5" x2="11.5" y2="11.5" stroke="#0A0A0A" strokeWidth="2" strokeLinecap="round" />
-    <line x1="24.5" y1="24.5" x2="27.5" y2="27.5" stroke="#0A0A0A" strokeWidth="2" strokeLinecap="round" />
-    <line x1="27.5" y1="8.5" x2="24.5" y2="11.5" stroke="#0A0A0A" strokeWidth="2" strokeLinecap="round" />
-    <line x1="11.5" y1="24.5" x2="8.5" y2="27.5" stroke="#0A0A0A" strokeWidth="2" strokeLinecap="round" />
+    <circle cx="18" cy="18" r="10" stroke="currentColor" strokeWidth="2.2" fill="none" />
+    <circle cx="18" cy="18" r="4" fill="currentColor" opacity="0.18" />
+    <line x1="18" y1="4" x2="18" y2="8" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="18" y1="28" x2="18" y2="32" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="4" y1="18" x2="8" y2="18" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="28" y1="18" x2="32" y2="18" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="8.5" y1="8.5" x2="11.5" y2="11.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <line x1="24.5" y1="24.5" x2="27.5" y2="27.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <line x1="27.5" y1="8.5" x2="24.5" y2="11.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <line x1="11.5" y1="24.5" x2="8.5" y2="27.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
   </svg>
 );
 
 const IconContent = () => (
   <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="3" y="6" width="30" height="21" rx="3.5" stroke="#0A0A0A" strokeWidth="2.2" fill="none" />
-    <polygon points="14,11 14,22 24,16.5" fill="#0A0A0A" opacity="0.85" />
-    <line x1="8" y1="30" x2="28" y2="30" stroke="#0A0A0A" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="14" y1="27" x2="14" y2="30" stroke="#0A0A0A" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="22" y1="27" x2="22" y2="30" stroke="#0A0A0A" strokeWidth="2.2" strokeLinecap="round" />
+    <rect x="3" y="6" width="30" height="21" rx="3.5" stroke="currentColor" strokeWidth="2.2" fill="none" />
+    <polygon points="14,11 14,22 24,16.5" fill="currentColor" opacity="0.85" />
+    <line x1="8" y1="30" x2="28" y2="30" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="14" y1="27" x2="14" y2="30" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="22" y1="27" x2="22" y2="30" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
   </svg>
 );
 
 const IconSocial = () => (
   <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="28" cy="8" r="4" stroke="#0A0A0A" strokeWidth="2.2" fill="none" />
-    <circle cx="8" cy="18" r="4" stroke="#0A0A0A" strokeWidth="2.2" fill="none" />
-    <circle cx="28" cy="28" r="4" stroke="#0A0A0A" strokeWidth="2.2" fill="none" />
-    <line x1="12" y1="16" x2="24" y2="10" stroke="#0A0A0A" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="12" y1="20" x2="24" y2="26" stroke="#0A0A0A" strokeWidth="2.2" strokeLinecap="round" />
-    <circle cx="28" cy="8" r="1.5" fill="#0A0A0A" />
-    <circle cx="8" cy="18" r="1.5" fill="#0A0A0A" />
-    <circle cx="28" cy="28" r="1.5" fill="#0A0A0A" />
+    <circle cx="28" cy="8" r="4" stroke="currentColor" strokeWidth="2.2" fill="none" />
+    <circle cx="8" cy="18" r="4" stroke="currentColor" strokeWidth="2.2" fill="none" />
+    <circle cx="28" cy="28" r="4" stroke="currentColor" strokeWidth="2.2" fill="none" />
+    <line x1="12" y1="16" x2="24" y2="10" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="12" y1="20" x2="24" y2="26" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+    <circle cx="28" cy="8" r="1.5" fill="currentColor" />
+    <circle cx="8" cy="18" r="1.5" fill="currentColor" />
+    <circle cx="28" cy="28" r="1.5" fill="currentColor" />
   </svg>
 );
 
 const IconSEO = () => (
   <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="16" cy="15" r="9" stroke="#0A0A0A" strokeWidth="2.2" fill="none" />
-    <line x1="22.5" y1="22.5" x2="32" y2="32" stroke="#0A0A0A" strokeWidth="2.5" strokeLinecap="round" />
-    <line x1="12" y1="15" x2="20" y2="15" stroke="#0A0A0A" strokeWidth="2" strokeLinecap="round" />
-    <line x1="16" y1="11" x2="16" y2="19" stroke="#0A0A0A" strokeWidth="2" strokeLinecap="round" />
-    <circle cx="16" cy="15" r="2.5" fill="#0A0A0A" opacity="0.2" />
+    <circle cx="16" cy="15" r="9" stroke="currentColor" strokeWidth="2.2" fill="none" />
+    <line x1="22.5" y1="22.5" x2="32" y2="32" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+    <line x1="12" y1="15" x2="20" y2="15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <line x1="16" y1="11" x2="16" y2="19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <circle cx="16" cy="15" r="2.5" fill="currentColor" opacity="0.2" />
   </svg>
 );
 
 const IconQR = () => (
   <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="4" y="4" width="12" height="12" rx="2" stroke="#0A0A0A" strokeWidth="2.2" fill="none" />
-    <rect x="20" y="4" width="12" height="12" rx="2" stroke="#0A0A0A" strokeWidth="2.2" fill="none" />
-    <rect x="4" y="20" width="12" height="12" rx="2" stroke="#0A0A0A" strokeWidth="2.2" fill="none" />
-    <rect x="7" y="7" width="6" height="6" rx="1" fill="#0A0A0A" />
-    <rect x="23" y="7" width="6" height="6" rx="1" fill="#0A0A0A" />
-    <rect x="7" y="23" width="6" height="6" rx="1" fill="#0A0A0A" />
-    <line x1="20" y1="20" x2="23" y2="20" stroke="#0A0A0A" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="20" y1="24" x2="20" y2="32" stroke="#0A0A0A" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="24" y1="24" x2="32" y2="24" stroke="#0A0A0A" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="28" y1="20" x2="32" y2="20" stroke="#0A0A0A" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="32" y1="24" x2="32" y2="32" stroke="#0A0A0A" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="24" y1="32" x2="28" y2="32" stroke="#0A0A0A" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="24" y1="28" x2="28" y2="28" stroke="#0A0A0A" strokeWidth="2.2" strokeLinecap="round" />
+    <rect x="4" y="4" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="2.2" fill="none" />
+    <rect x="20" y="4" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="2.2" fill="none" />
+    <rect x="4" y="20" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="2.2" fill="none" />
+    <rect x="7" y="7" width="6" height="6" rx="1" fill="currentColor" />
+    <rect x="23" y="7" width="6" height="6" rx="1" fill="currentColor" />
+    <rect x="7" y="23" width="6" height="6" rx="1" fill="currentColor" />
+    <line x1="20" y1="20" x2="23" y2="20" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="20" y1="24" x2="20" y2="32" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="24" y1="24" x2="32" y2="24" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="28" y1="20" x2="32" y2="20" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="32" y1="24" x2="32" y2="32" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="24" y1="32" x2="28" y2="32" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+    <line x1="24" y1="28" x2="28" y2="28" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
   </svg>
 );
 
@@ -106,10 +106,8 @@ const SERVICES = [
     longDesc: "We build high-performance web experiences designed to convert traffic into revenue. Every pixel is optimized for speed, accessibility, and measurable growth.",
     features: ["Next.js & React Architecture", "CMS Integration", "Technical SEO Foundation"],
     // gradient colors for the card background
-    gradFrom: "#4D9FFF",
-    gradTo: "#2F6BFF",
-    glowColor: "rgba(77, 159, 255, 0.55)",
     stat: "98 Speed Score",
+    bgImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
   },
   {
     id: "brand",
@@ -118,10 +116,8 @@ const SERVICES = [
     shortDesc: "Memorable logo systems and comprehensive visual guidelines.",
     longDesc: "Your brand is your most valuable asset. We craft cohesive identity systems that resonate with your target audience and stand out in crowded markets.",
     features: ["Logo & Mark Design", "Typography & Color Systems", "Brand Guidelines"],
-    gradFrom: "#FF5BA7",
-    gradTo: "#FF2D75",
-    glowColor: "rgba(255, 91, 167, 0.55)",
     stat: "Full Guidelines",
+    bgImage: "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=800&auto=format&fit=crop",
   },
   {
     id: "content",
@@ -134,6 +130,7 @@ const SERVICES = [
     gradTo: "#FF7A00",
     glowColor: "rgba(255, 179, 71, 0.55)",
     stat: "1.2M Total Views",
+    bgImage: "https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=800&auto=format&fit=crop",
   },
   {
     id: "social",
@@ -146,6 +143,7 @@ const SERVICES = [
     gradTo: "#8A2BE2",
     glowColor: "rgba(198, 108, 255, 0.55)",
     stat: "8.7% Engage Rate",
+    bgImage: "https://images.unsplash.com/photo-1611926653458-09294b3142bf?q=80&w=800&auto=format&fit=crop",
   },
   {
     id: "seo",
@@ -158,6 +156,7 @@ const SERVICES = [
     gradTo: "#00C896",
     glowColor: "rgba(62, 231, 183, 0.55)",
     stat: "#1 Local Rank",
+    bgImage: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?q=80&w=800&auto=format&fit=crop",
   },
   {
     id: "qr",
@@ -170,6 +169,7 @@ const SERVICES = [
     gradTo: "#16C7FF",
     glowColor: "rgba(92, 225, 255, 0.55)",
     stat: "Zero Print Costs",
+    bgImage: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=800&auto=format&fit=crop",
   },
 ];
 
@@ -295,8 +295,12 @@ function ServiceCard({
           "--grad-from": service.gradFrom,
           "--grad-to": service.gradTo,
           "--glow": service.glowColor,
+          "--bg-image": `url('${service.bgImage}')`,
         } as React.CSSProperties}
       >
+        {/* Base Image Background */}
+        <div className="sv-bg-image" />
+
         {/* Base gradient background */}
         <div className="sv-bg-gradient" />
 
@@ -616,6 +620,7 @@ export default function ServicesPreview() {
           border-radius: 32px;
           opacity: 0;
           filter: blur(28px);
+          background: var(--glow);
           transition: opacity 0.5s ease, box-shadow 0.5s ease;
           pointer-events: none;
           z-index: 0;
@@ -632,24 +637,42 @@ export default function ServicesPreview() {
           position: relative;
           width: 100%;
           height: 100%;
+          background: #0D0D12;
           border-radius: 28px;
-          border: 1px solid rgba(255,255,255,0.18);
+          border: 1px solid rgba(255,255,255,0.08);
           overflow: hidden;
           transition: border-color 0.4s ease, box-shadow 0.4s ease;
           box-shadow:
-            0 2px 0 rgba(255,255,255,0.25) inset,
-            0 -1px 0 rgba(0,0,0,0.3) inset,
-            0 24px 48px -12px rgba(0,0,0,0.5);
+            0 2px 0 rgba(255,255,255,0.05) inset,
+            0 -1px 0 rgba(0,0,0,0.5) inset,
+            0 24px 48px -12px rgba(0,0,0,0.7);
           z-index: 1;
         }
 
         .sv-card--active {
-          border-color: rgba(255,255,255,0.28);
+          border-color: rgba(255,255,255,0.2);
           box-shadow:
-            0 2px 0 rgba(255,255,255,0.3) inset,
-            0 -1px 0 rgba(0,0,0,0.3) inset,
-            0 32px 64px -16px rgba(0,0,0,0.7),
-            0 0 0 1px rgba(255,255,255,0.12);
+            0 2px 0 rgba(255,255,255,0.1) inset,
+            0 -1px 0 rgba(0,0,0,0.5) inset,
+            0 32px 64px -16px rgba(0,0,0,0.9),
+            0 0 0 1px rgba(255,255,255,0.05);
+        }
+
+        /* ── Base Image Background ── */
+        .sv-bg-image {
+          position: absolute;
+          inset: 0;
+          background-image: var(--bg-image);
+          background-size: cover;
+          background-position: center;
+          z-index: 0;
+          transition: transform 0.6s ease, opacity 0.6s ease;
+          opacity: 0.25;
+        }
+
+        .sv-card--active .sv-bg-image {
+          transform: scale(1.05);
+          opacity: 0.45;
         }
 
         /* ── Gradient base ── */
@@ -657,7 +680,14 @@ export default function ServicesPreview() {
           position: absolute;
           inset: 0;
           background: linear-gradient(145deg, var(--grad-from) 0%, var(--grad-to) 100%);
-          z-index: 0;
+          z-index: 1;
+          opacity: 0.25;
+          mix-blend-mode: screen;
+          transition: opacity 0.6s ease;
+        }
+
+        .sv-card--active .sv-bg-gradient {
+          opacity: 0.4;
         }
 
         /* ── Inner radial highlight (top-center white gleam) ── */
@@ -760,7 +790,7 @@ export default function ServicesPreview() {
           display: flex;
           align-items: center;
           justify-content: center;
-          /* Icon SVGs use #0A0A0A strokes directly */
+          color: #ffffff;
         }
 
         .sv-label-text {
@@ -770,7 +800,7 @@ export default function ServicesPreview() {
           font-size: 12px;
           font-weight: 700;
           letter-spacing: 0.08em;
-          color: rgba(10, 10, 10, 0.75);
+          color: rgba(255, 255, 255, 0.7);
           white-space: nowrap;
         }
 
@@ -785,10 +815,14 @@ export default function ServicesPreview() {
           flex-direction: column;
           z-index: 10;
           pointer-events: none;
+          transition: background 0.4s ease, backdrop-filter 0.4s ease;
         }
 
         .sv-card--active .sv-content {
           pointer-events: auto;
+          background: rgba(13, 13, 18, 0.75);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
         }
 
         /* Icon container */
@@ -796,17 +830,18 @@ export default function ServicesPreview() {
           width: 68px;
           height: 68px;
           border-radius: 18px;
-          background: rgba(255,255,255,0.22);
-          border: 1px solid rgba(255,255,255,0.35);
+          background: rgba(200, 240, 77, 0.06);
+          border: 1px solid rgba(200, 240, 77, 0.2);
           display: flex;
           align-items: center;
           justify-content: center;
           margin-bottom: 26px;
           box-shadow:
-            0 2px 0 rgba(255,255,255,0.4) inset,
-            0 4px 16px rgba(0,0,0,0.12);
+            0 2px 0 rgba(255,255,255,0.05) inset,
+            0 4px 16px rgba(0,0,0,0.3);
           backdrop-filter: blur(4px);
           flex-shrink: 0;
+          color: #C8F04D;
         }
 
         .sv-content-name {
@@ -815,13 +850,13 @@ export default function ServicesPreview() {
           font-weight: 700;
           letter-spacing: -0.025em;
           margin-bottom: 14px;
-          color: #0A0A0A;
+          color: #ffffff;
           line-height: 1.2;
         }
 
         .sv-content-desc {
           font-size: 13.5px;
-          color: rgba(10, 10, 10, 0.68);
+          color: rgba(255, 255, 255, 0.7);
           line-height: 1.65;
           margin-bottom: 28px;
           flex-shrink: 0;
@@ -841,12 +876,12 @@ export default function ServicesPreview() {
           align-items: center;
           gap: 10px;
           font-size: 13px;
-          color: rgba(10, 10, 10, 0.8);
+          color: rgba(255, 255, 255, 0.85);
           font-weight: 500;
         }
 
         .sv-feature-icon {
-          color: rgba(10, 10, 10, 0.65);
+          color: #C8F04D;
           flex-shrink: 0;
         }
 
@@ -854,7 +889,7 @@ export default function ServicesPreview() {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          border-top: 1px solid rgba(0,0,0,0.12);
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
           padding-top: 22px;
           margin-top: auto;
           gap: 12px;
@@ -866,7 +901,7 @@ export default function ServicesPreview() {
           gap: 8px;
           font-size: 13px;
           font-weight: 700;
-          color: rgba(10, 10, 10, 0.75);
+          color: rgba(255, 255, 255, 0.8);
           letter-spacing: 0.01em;
         }
 
@@ -874,7 +909,7 @@ export default function ServicesPreview() {
           width: 7px;
           height: 7px;
           border-radius: 50%;
-          background: rgba(10,10,10,0.6);
+          background: #C8F04D;
           flex-shrink: 0;
         }
 
@@ -882,9 +917,9 @@ export default function ServicesPreview() {
           display: flex;
           align-items: center;
           gap: 7px;
-          background: rgba(0,0,0,0.14);
-          border: 1px solid rgba(0,0,0,0.2);
-          color: #0A0A0A;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          color: #ffffff;
           padding: 10px 18px;
           border-radius: 10px;
           font-size: 13px;
@@ -896,8 +931,9 @@ export default function ServicesPreview() {
         }
 
         .sv-cta:hover {
-          background: rgba(0,0,0,0.22);
-          border-color: rgba(0,0,0,0.32);
+          background: rgba(200, 240, 77, 0.1);
+          border-color: #C8F04D;
+          color: #C8F04D;
           transform: translateY(-1px);
         }
 

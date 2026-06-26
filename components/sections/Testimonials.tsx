@@ -8,6 +8,7 @@ interface Testimonial {
   name: string;
   title: string;
   company: string;
+  rating: number;
 }
 
 const TESTIMONIALS: Testimonial[] = [
@@ -16,63 +17,72 @@ const TESTIMONIALS: Testimonial[] = [
     quote: "Vextiv transformed our digital presence completely. Our restaurant now gets orders from people who found us online — something that never happened before.",
     name: "Arjun Reddy",
     title: "Owner",
-    company: "Brew & Co."
+    company: "Brew & Co.",
+    rating: 5
   },
   {
     id: "t2",
     quote: "The website they built us looked better than anything I'd seen from agencies charging 3× more. Clear process, no surprises.",
     name: "Sneha Kapoor",
     title: "Founder",
-    company: "ShopFlow"
+    company: "ShopFlow",
+    rating: 4
   },
   {
     id: "t3",
     quote: "We went from zero online presence to ranking on Google's first page. The team understood exactly what a local business needs.",
     name: "Vikram Rao",
     title: "Director",
-    company: "EstateEdge"
+    company: "EstateEdge",
+    rating: 5
   },
   {
     id: "t4",
     quote: "Our conversion rates skyrocketed after the redesign. The user experience is flawless, and our customers constantly compliment the new look.",
     name: "Priya Sharma",
     title: "Marketing Head",
-    company: "TechNova"
+    company: "TechNova",
+    rating: 5
   },
   {
     id: "t5",
     quote: "Working with Vextiv was a breath of fresh air. They didn't just build a website; they built a revenue engine for our business.",
     name: "Rohan Desai",
     title: "CEO",
-    company: "Elevate Logistics"
+    company: "Elevate Logistics",
+    rating: 4
   },
   {
     id: "t6",
     quote: "The attention to detail and modern design aesthetic is unmatched. They perfectly captured our brand's luxury identity.",
     name: "Ananya Singh",
     title: "Creative Director",
-    company: "Luxe Interiors"
+    company: "Luxe Interiors",
+    rating: 5
   },
   {
     id: "t7",
     quote: "Fast, responsive, and incredibly professional. The site performance metrics improved by over 200% since launch.",
     name: "Karthik Iyer",
     title: "CTO",
-    company: "FinStream"
+    company: "FinStream",
+    rating: 5
   },
   {
     id: "t8",
     quote: "I was hesitant at first, but the results speak for themselves. We recouped our investment within the first two months.",
     name: "Meera Joshi",
     title: "Co-Founder",
-    company: "Wellness Box"
+    company: "Wellness Box",
+    rating: 3
   },
   {
     id: "t9",
     quote: "They took our messy ideas and turned them into a sleek, cohesive digital product. Absolute game-changers.",
     name: "Siddharth Nair",
     title: "Product Manager",
-    company: "CloudSync"
+    company: "CloudSync",
+    rating: 4
   }
 ];
 
@@ -96,7 +106,13 @@ export default function Testimonials() {
             <div key={`${item.id}-${idx}`} className="testimonial-card">
               <div className="testimonial-stars">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={16} fill="currentColor" strokeWidth={0} />
+                  <Star 
+                    key={i} 
+                    size={16} 
+                    fill={i < item.rating ? "currentColor" : "none"} 
+                    stroke="currentColor" 
+                    strokeWidth={1.5} 
+                  />
                 ))}
               </div>
               <p className="testimonial-quote">&ldquo;{item.quote}&rdquo;</p>
@@ -208,6 +224,10 @@ export default function Testimonials() {
           will-change: transform;
         }
 
+        .testimonials__col:hover .testimonials__track {
+          animation-play-state: paused;
+        }
+
         /* Different speeds per column */
         .testimonials__col--1 .testimonials__track {
           animation-duration: 20s;
@@ -248,7 +268,7 @@ export default function Testimonials() {
         .testimonial-stars {
           display: flex;
           gap: 4px;
-          color: var(--accent);
+          color: #FFC107;
           margin-bottom: 20px;
         }
 

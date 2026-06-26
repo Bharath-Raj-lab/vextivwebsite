@@ -130,7 +130,7 @@ export default function WorkClient({ initialCaseStudies }: { initialCaseStudies:
       {/* ── Project Grid ─────────────────────────────────────────── */}
       <motion.div
         layout
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8"
       >
         <AnimatePresence mode="popLayout" initial={false}>
           {filteredStudies.map((study) => (
@@ -180,11 +180,11 @@ export default function WorkClient({ initialCaseStudies }: { initialCaseStudies:
                   />
 
                   {/* Title + arrow — anchored to bottom of image */}
-                  <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between px-6 pb-6 pt-12">
+                  <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between px-3 pb-3 pt-6 md:px-6 md:pb-6 md:pt-12">
                     <h3
-                      className="font-display font-medium leading-tight flex-1 mr-3 text-white/80 group-hover:text-white transition-colors duration-400"
+                      className="font-display font-medium leading-tight flex-1 mr-2 md:mr-3 text-white/80 group-hover:text-white transition-colors duration-400"
                       style={{ 
-                        fontSize: 'clamp(18px, 1.8vw, 22px)', 
+                        fontSize: 'clamp(15px, 1.8vw, 22px)', 
                         letterSpacing: '-0.02em',
                       }}
                     >

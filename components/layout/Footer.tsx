@@ -119,7 +119,14 @@ export default function Footer() {
 
       {/* ── Watermark background effect ────────────────────────────────── */}
       <div className="footer__watermark" aria-hidden="true">
-        Ve<span className="footer__watermark-accent">X</span>tiv
+        <Image
+          src="/logo.svg"
+          alt=""
+          width={180}
+          height={180}
+          className="footer__watermark-logo"
+        />
+        <span>Ve<span className="footer__watermark-accent">X</span>tiv</span>
       </div>
 
       {/* ══════════════════════════════════════════════════════════════════
@@ -136,7 +143,7 @@ export default function Footer() {
             variants={fadeUp}
             custom={0}
           >
-            <Logo 
+            <Logo
               className="footer__logo-row"
               textClassName="footer__logo-text"
               imageSize={36}
@@ -148,16 +155,16 @@ export default function Footer() {
 
             {/* Social Icons */}
             <div className="footer__social-row" role="list" aria-label="Social media links">
-              <SocialIcon href="https://instagram.com/vextiv.tech" label="Vextiv on Instagram">
+              <SocialIcon href="https://instagram.com/vextiv.tech" label="Vextiv on Instagram" className="footer__social-btn--instagram">
                 <Instagram size={18} strokeWidth={1.75} aria-hidden="true" />
               </SocialIcon>
-              <SocialIcon href="https://linkedin.com/company/vextiv" label="Vextiv on LinkedIn">
+              <SocialIcon href="https://linkedin.com/company/vextiv" label="Vextiv on LinkedIn" className="footer__social-btn--linkedin">
                 <Linkedin size={18} strokeWidth={1.75} aria-hidden="true" />
               </SocialIcon>
               <SocialIcon href="https://www.facebook.com/people/Vextiv/61589618447564/" label="Vextiv on Facebook" className="footer__social-btn--facebook">
                 <Facebook size={18} strokeWidth={1.75} aria-hidden="true" />
               </SocialIcon>
-              <SocialIcon href={whatsappHref} label="Vextiv on WhatsApp" isWhatsApp>
+              <SocialIcon href={whatsappHref} label="Vextiv on WhatsApp" isWhatsApp className="footer__social-btn--whatsapp">
                 <MessageCircle size={18} strokeWidth={1.75} aria-hidden="true" />
               </SocialIcon>
             </div>
@@ -281,24 +288,38 @@ export default function Footer() {
           z-index: 0;
         }
 
-        /* ── Watermark ───────────────────────────────────────────────── */
         .footer__watermark {
           position: absolute;
           top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
+          left: 0;
+          right: 0;
+          transform: translateY(-50%);
           font-family: var(--font-display);
           font-weight: 800;
           font-size: clamp(60px, 15vw, 160px);
-          color: var(--text-watermark);
+          color: rgba(255, 255, 255, 0.09);
           z-index: 0;
           user-select: none;
           pointer-events: none;
           line-height: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: clamp(16px, 3vw, 40px);
+          white-space: nowrap;
+        }
+
+        .footer__watermark-logo {
+          opacity: 0.18;
+          width: auto;
+          height: clamp(90px, 20vw, 220px);
+          user-select: none;
+          pointer-events: none;
+          filter: brightness(0) invert(86%) sepia(21%) saturate(996%) hue-rotate(34deg) brightness(97%) contrast(92%);
         }
 
         .footer__watermark-accent {
-          color: var(--accent-fill-08);
+          color: rgba(200, 240, 77, 0.15);
         }
 
         /* ── Inner container ─────────────────────────────────────────── */
@@ -402,9 +423,27 @@ export default function Footer() {
           transform: translateY(-2px);
         }
 
+        .footer__social-btn--instagram:hover {
+          background: #E1306C;
+          border-color: #E1306C;
+          color: #ffffff;
+        }
+
+        .footer__social-btn--linkedin:hover {
+          background: #0077b5;
+          border-color: #0077b5;
+          color: #ffffff;
+        }
+
         .footer__social-btn--facebook:hover {
-          background: var(--facebook);
-          border-color: var(--facebook);
+          background: #1877F2;
+          border-color: #1877F2;
+          color: #ffffff;
+        }
+
+        .footer__social-btn--whatsapp:hover {
+          background: #25D366;
+          border-color: #25D366;
           color: #ffffff;
         }
 
