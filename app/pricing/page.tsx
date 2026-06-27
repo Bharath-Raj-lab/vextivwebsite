@@ -4,7 +4,7 @@ import { PricingCtaLink, AddonCtaLink, BottomCtaLink } from "./PricingCtaLinks";
 
 // ─── Metadata (SSG, Server Component) ─────────────────────────────────────────
 export const metadata: Metadata = {
-  title: "Pricing | VeXtiv Studio",
+  title: "Pricing | VeXtiv",
   description:
     "Transparent pricing for websites, QR ordering systems, social media management, and branding in Hyderabad. Honest packages, no hidden fees.",
 };

@@ -4,15 +4,15 @@ import Link from "next/link";
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL("https://vextiv.tech"),
-  title: "404 — Page Not Found | VeXtiv Studio",
+  title: "404 — Page Not Found | VeXtiv",
   description:
     "The page you're looking for doesn't exist or has been moved. Head back home to explore our work and learn more about our Hyderabad digital agency.",
   openGraph: {
-    title: "404 — Page Not Found | VeXtiv Studio",
+    title: "404 — Page Not Found | VeXtiv",
     description:
       "The page you're looking for doesn't exist or has been moved. Head back home to explore our work and learn more about our Hyderabad digital agency.",
     url: "https://vextiv.tech/not-found",
-    siteName: "VeXtiv Studio",
+    siteName: "VeXtiv",
     type: "website",
   },
   twitter: {

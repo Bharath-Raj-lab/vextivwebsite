@@ -25,9 +25,9 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "VeXtiv Studio",
+  title: "VeXtiv",
   metadataBase: new URL("https://vextiv.tech"),
-  description: "Digital solutions crafted with precision — VeXtiv Studio",
+  description: "Digital solutions crafted with precision — VeXtiv",
   icons: {
     icon: [
       { url: '/favicons/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 const localBusinessSchema: Record<string, unknown> = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  name: "VeXtiv Studio",
+  name: "VeXtiv",
   url: "https://vextiv.tech",
   // TODO: Replace with real telephone number (PRD §8.2 — not yet provided)
   telephone: "/* PLACEHOLDER: +91-XXXXXXXXXX */",
@@ -89,7 +89,7 @@ const localBusinessSchema: Record<string, unknown> = {
 const webSiteSchema: Record<string, unknown> = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "VeXtiv Studio",
+  name: "VeXtiv",
   url: "https://vextiv.tech",
   potentialAction: {
     "@type": "SearchAction",

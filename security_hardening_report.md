@@ -1,4 +1,4 @@
-# Security Hardening — Vextiv Studio
+# Security Hardening — Vextiv
 
 ## Summary
 

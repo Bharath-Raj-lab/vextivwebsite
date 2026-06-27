@@ -17,10 +17,10 @@ export default function Logo({
   priority = false,
 }: LogoProps) {
   return (
-    <Link href="/" className={className} aria-label="VeXtiv Studio — home">
+    <Link href="/" className={className} aria-label="VeXtiv — home">
       <Image
         src="/logo.svg"
-        alt="VeXtiv Studio"
+        alt="VeXtiv"
         width={120}
         height={imageSize}
         style={{ width: "auto", height: `${imageSize}px` }}

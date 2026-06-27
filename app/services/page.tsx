@@ -7,15 +7,15 @@ import { StickyServices } from "./StickyServices";
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL("https://vextiv.tech"),
-  title: "Services | VeXtiv Studio",
+  title: "Services | VeXtiv",
   description:
-    "From websites to branding, QR ordering systems to local SEO — VeXtiv Studio delivers end-to-end digital services for businesses across Hyderabad and beyond.",
+    "From websites to branding, QR ordering systems to local SEO — VeXtiv delivers end-to-end digital services for businesses across Hyderabad and beyond.",
   openGraph: {
-    title: "Services | VeXtiv Studio",
+    title: "Services | VeXtiv",
     description:
-      "From websites to branding, QR ordering systems to local SEO — VeXtiv Studio delivers end-to-end digital services for businesses across Hyderabad and beyond.",
+      "From websites to branding, QR ordering systems to local SEO — VeXtiv delivers end-to-end digital services for businesses across Hyderabad and beyond.",
     url: "https://vextiv.tech/services",
-    siteName: "VeXtiv Studio",
+    siteName: "VeXtiv",
     type: "website",
   },
   twitter: {
@@ -97,7 +97,7 @@ export default function ServicesPage() {
     description: service.description,
     provider: {
       '@type': 'LocalBusiness',
-      name: "VeXtiv Studio",
+      name: "VeXtiv",
       url: 'https://vextiv.tech',
     },
     // PRD §8.4 — areaServed list

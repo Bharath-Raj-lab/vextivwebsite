@@ -8,15 +8,15 @@ export const dynamic = "force-static";
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL("https://vextiv.tech"),
-  title: "FAQ | VeXtiv Studio — Hyderabad Digital Agency",
+  title: "FAQ | VeXtiv — Hyderabad Digital Agency",
   description:
-    "Common questions about working with Vextiv Studio — pricing, process, timelines, support, and more. Honest answers, no marketing fluff.",
+    "Common questions about working with Vextiv — pricing, process, timelines, support, and more. Honest answers, no marketing fluff.",
   openGraph: {
-    title: "FAQ | VeXtiv Studio — Hyderabad Digital Agency",
+    title: "FAQ | VeXtiv — Hyderabad Digital Agency",
     description:
-      "Common questions about working with Vextiv Studio — pricing, process, timelines, support, and more. Honest answers, no marketing fluff.",
+      "Common questions about working with Vextiv — pricing, process, timelines, support, and more. Honest answers, no marketing fluff.",
     url: "https://vextiv.tech/faq",
-    siteName: "VeXtiv Studio",
+    siteName: "VeXtiv",
     type: "website",
   },
   twitter: {
@@ -89,7 +89,7 @@ function FaqCTA() {
   return (
     <section
       className="fq-cta-section"
-      aria-label="Still have questions? Contact Vextiv Studio."
+      aria-label="Still have questions? Contact Vextiv."
     >
       <div className="fq-cta-glow" aria-hidden="true" />
       <div className="fq-cta-inner">
@@ -106,7 +106,7 @@ function FaqCTA() {
         <Link
           href={CONTACT_HREF}
           className="fq-cta-btn"
-          aria-label="Contact Vextiv Studio with your question"
+          aria-label="Contact Vextiv with your question"
         >
           <span>Get in Touch</span>
           <IconArrow />

@@ -17,10 +17,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
-  if (!post) return { title: "Not Found | VeXtiv Studio" };
+  if (!post) return { title: "Not Found | VeXtiv" };
 
-  const fullSuffix = " - Insights from VeXtiv Studio, Hyderabad.";
-  const shortSuffix = " — VeXtiv Studio, Hyderabad.";
+  const fullSuffix = " - Insights from VeXtiv, Hyderabad.";
+  const shortSuffix = " — VeXtiv, Hyderabad.";
   
   function trimAtWord(str: string, maxLen: number) {
     if (str.length <= maxLen) return str;
@@ -47,13 +47,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   return {
     metadataBase: new URL("https://vextiv.tech"),
-    title: post.title + " | VeXtiv Studio",
+    title: post.title + " | VeXtiv",
     description: desc,
     openGraph: {
-      title: post.title + " | VeXtiv Studio",
+      title: post.title + " | VeXtiv",
       description: desc,
       url: "https://vextiv.tech/blog/" + slug,
-      siteName: "VeXtiv Studio",
+      siteName: "VeXtiv",
       images: [post.thumbnail],
       type: 'article',
       publishedTime: post.date,
@@ -122,7 +122,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     ],
     publisher: {
       '@type': 'Organization',
-      name: "VeXtiv Studio",
+      name: "VeXtiv",
       url: 'https://vextiv.tech',
       logo: {
         '@type': 'ImageObject',
@@ -195,7 +195,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             Need help implementing this?
           </h2>
           <p className="text-[var(--text-secondary)] mb-8 relative z-10">
-            Our team of experts at VeXtiv Studio can help you build and scale your digital presence.
+            Our team of experts at VeXtiv can help you build and scale your digital presence.
           </p>
           <Link
             href="/contact"

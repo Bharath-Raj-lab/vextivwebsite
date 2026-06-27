@@ -89,7 +89,7 @@ export const SERVICES: ServiceItem[] = [
     ctaLabel: "See Pricing",
     ctaHref: "/pricing",
     colorRgb: "59, 130, 246", // Blue
-    image: "/stitch/web pic.png",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80",
     iconPath: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
         <rect x="2" y="4" width="24" height="20" rx="3" stroke="currentColor" strokeWidth="1.8" />
@@ -119,7 +119,7 @@ export const SERVICES: ServiceItem[] = [
     ctaLabel: "See Pricing",
     ctaHref: "/pricing",
     colorRgb: "236, 72, 153", // Pink
-    image: "/stitch/brand.png",
+    image: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?auto=format&fit=crop&w=800&q=80",
     iconPath: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
         <circle cx="14" cy="14" r="8" stroke="currentColor" strokeWidth="1.8" />
@@ -150,7 +150,7 @@ export const SERVICES: ServiceItem[] = [
     ctaLabel: "See Pricing",
     ctaHref: "/pricing",
     colorRgb: "249, 115, 22", // Orange
-    image: "/stitch/content.png",
+    image: "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=800&q=80",
     iconPath: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
         <rect x="2" y="4" width="24" height="17" rx="2.5" stroke="currentColor" strokeWidth="1.8" />
@@ -176,7 +176,7 @@ export const SERVICES: ServiceItem[] = [
     ctaLabel: "See Pricing",
     ctaHref: "/pricing",
     colorRgb: "168, 85, 247", // Purple
-    image: "/stitch/social.png",
+    image: "https://images.unsplash.com/photo-1611926653458-09294b3142bf?auto=format&fit=crop&w=800&q=80",
     iconPath: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
         <circle cx="22" cy="6" r="3.2" stroke="currentColor" strokeWidth="1.8" />
@@ -201,7 +201,7 @@ export const SERVICES: ServiceItem[] = [
     ctaLabel: "See Pricing",
     ctaHref: "/pricing",
     colorRgb: "34, 197, 94", // Green
-    image: "/stitch/local.png",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
     iconPath: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
         <circle cx="12" cy="11" r="7" stroke="currentColor" strokeWidth="1.8" />
@@ -226,7 +226,7 @@ export const SERVICES: ServiceItem[] = [
     ctaLabel: "See Pricing",
     ctaHref: "/pricing",
     colorRgb: "6, 182, 212", // Cyan
-    image: "/stitch/qr.png",
+    image: "https://images.unsplash.com/photo-1556742044-3c52d6e88c62?auto=format&fit=crop&w=800&q=80",
     iconPath: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
         <rect x="3" y="3" width="9" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.8" />

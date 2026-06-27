@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 
 // ─── SSG: no dynamic segments, statically generated at build time ─────────────
@@ -8,15 +7,15 @@ export const dynamic = "force-static";
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL("https://vextiv.tech"),
-  title: "About VeXtiv Studio | Hyderabad Digital Agency",
+  title: "About VeXtiv | Hyderabad Digital Agency",
   description:
-    "We're a digital studio founded in Hyderabad with one purpose: to give local businesses the online presence they deserve. Meet the team behind VeXtiv Studio.",
+    "We're a digital studio founded in Hyderabad with one purpose: to give local businesses the online presence they deserve. Meet the team behind VeXtiv.",
   openGraph: {
-    title: "About VeXtiv Studio | Hyderabad Digital Agency",
+    title: "About VeXtiv | Hyderabad Digital Agency",
     description:
-      "We're a digital studio founded in Hyderabad with one purpose: to give local businesses the online presence they deserve. Meet the team behind VeXtiv Studio.",
+      "We're a digital studio founded in Hyderabad with one purpose: to give local businesses the online presence they deserve. Meet the team behind VeXtiv.",
     url: "https://vextiv.tech/about",
-    siteName: "VeXtiv Studio",
+    siteName: "VeXtiv",
     type: "website",
   },
   twitter: {
@@ -29,15 +28,6 @@ export const metadata: Metadata = {
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
-interface TeamMember {
-  readonly id: string;
-  readonly name: string;
-  readonly role: string;
-  readonly bio: string;
-  readonly photo: string;
-  readonly photoAlt: string;
-}
-
 interface Value {
   readonly id: string;
   readonly title: string;
@@ -46,36 +36,9 @@ interface Value {
 }
 
 const STORY_PARAGRAPHS: readonly string[] = [
-  "VeXtiv Studio was born in Hyderabad out of a simple frustration: too many brilliant local businesses were invisible online. Restaurants with incredible food, boutiques with unique products, service providers with real talent — all underselling themselves with outdated websites, inconsistent branding, or no digital presence at all. We started Vextiv to fix that.",
+  "VeXtiv was born in Hyderabad out of a simple frustration: too many brilliant local businesses were invisible online. Restaurants with incredible food, boutiques with unique products, service providers with real talent — all underselling themselves with outdated websites, inconsistent branding, or no digital presence at all. We started Vextiv to fix that.",
   "From day one, we chose to stay close to home. Hyderabad's business community is fast-moving, deeply entrepreneurial, and fiercely loyal to quality. That energy shaped how we work — we move quickly, we stay direct, and we care about outcomes more than aesthetics for their own sake. Every project we take on is built to perform.",
   "Today we serve restaurants, startups, service businesses, and growing brands across the city and beyond. We're a small studio by design — it keeps us focused, keeps our work personal, and keeps our clients from becoming ticket numbers. We know the people we work with. That matters to us.",
-];
-
-const TEAM_MEMBERS: readonly TeamMember[] = [
-  {
-    id: "ganesh",
-    name: "Ganesh Raj",
-    role: "Founder & Strategy",
-    bio: "Ganesh started Vextiv with a conviction that local businesses deserve world-class digital work. He leads client relationships, strategy, and overall creative direction — making sure every project delivers real business results, not just a pretty deliverable.",
-    photo: "/team/ganesh.png",
-    photoAlt: "Ganesh Raj, Founder of VeXtiv Studio",
-  },
-  {
-    id: "priya",
-    name: "Priya Sharma",
-    role: "Lead Designer",
-    bio: "Priya is the visual mind behind Vextiv's work. She brings a meticulous eye to brand identity, UI, and content design — turning briefs into experiences that feel both intentional and effortless. She believes great design should be invisible until the moment it isn't.",
-    photo: "/team/priya.png",
-    photoAlt: "Priya Sharma, Lead Designer at VeXtiv Studio",
-  },
-  {
-    id: "arjun",
-    name: "Arjun Mehta",
-    role: "Developer & Tech Lead",
-    bio: "Arjun builds everything that lives under the surface — fast, accessible, and built to last. From Next.js sites to QR ordering systems, he writes code that holds up under real-world conditions and doesn't need to be rewritten in six months.",
-    photo: "/team/arjun.png",
-    photoAlt: "Arjun Mehta, Developer at VeXtiv Studio",
-  },
 ];
 
 const VALUES: readonly Value[] = [
@@ -152,7 +115,17 @@ function StudioStory() {
   );
 }
 
-// ─── Section: Team ────────────────────────────────────────────────────────────
+const CAROUSEL_MEMBERS = [
+  { id: "1", name: "Priya", role: "Design Lead", image: "/team/avatar_priya.png", isLeadership: false },
+  { id: "2", name: "Maya", role: "Product Manager", image: "/team/avatar_maya.png", isLeadership: false },
+  { id: "3", name: "Sarah", role: "UX Researcher", image: "/team/avatar_sarah.png", isLeadership: false },
+  { id: "4", name: "Bathini Ganesh", role: "Co-Founder & CTO", image: "/team/avatar_ganesh.png", isLeadership: true },
+  { id: "5", name: "Alloney Bharath Raj", role: "Founder & CEO", image: "/team/avatar_bharath.png", isLeadership: true },
+  { id: "6", name: "Yoganandh", role: "Co-Founder & COO", image: "/team/avatar_yoganandh.png", isLeadership: true },
+  { id: "7", name: "Rohan", role: "Data Wrangler", image: "/team/avatar_rohan.png", isLeadership: false },
+  { id: "8", name: "David", role: "Frontend Dev", image: "/team/avatar_david.png", isLeadership: false },
+];
+
 function TeamSection() {
   return (
     <section className="ab-section ab-team-section" aria-labelledby="ab-team-heading">
@@ -164,34 +137,50 @@ function TeamSection() {
             Who we are
           </h2>
         </div>
+      </div>
 
-        {/* Cards grid */}
-        <ul className="ab-team-grid" role="list">
-          {TEAM_MEMBERS.map((member) => (
-            <li key={member.id} className="ab-team-card">
-              {/* Photo */}
-              <div className="ab-team-photo-wrap">
-                <Image
-                  src={member.photo}
-                  alt={member.photoAlt}
-                  width={480}
-                  height={480}
-                  className="ab-team-photo"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
+      {/* Interactive Avatar Carousel */}
+      <div className="ab-carousel-container">
+        <ul className="ab-carousel-row" id="ab-team-carousel" role="list">
+          {CAROUSEL_MEMBERS.map((member) => (
+            <li
+              key={member.id}
+              className="ab-carousel-card"
+              tabIndex={0}
+            >
+              <div className="ab-carousel-avatar-wrap">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={member.image}
+                  alt={`${member.name} illustration`}
+                  className="ab-carousel-avatar"
                 />
-                {/* Accent corner glow */}
-                <div className="ab-team-photo-glow" aria-hidden="true" />
               </div>
-
-              {/* Meta */}
-              <div className="ab-team-meta">
-                <h3 className="ab-team-name">{member.name}</h3>
-                <p className="ab-team-role">{member.role}</p>
-                <p className="ab-team-bio">{member.bio}</p>
+              <div className="ab-carousel-text">
+                <p className="ab-carousel-meet">
+                  Meet {member.name}, {member.role}
+                </p>
               </div>
             </li>
           ))}
         </ul>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (typeof window !== 'undefined') {
+                setTimeout(function() {
+                  var el = document.getElementById('ab-team-carousel');
+                  if (el && window.innerWidth <= 900) {
+                    var target = el.children[3];
+                    if (target) {
+                      el.scrollLeft = target.offsetLeft - el.offsetLeft;
+                    }
+                  }
+                }, 50);
+              }
+            `,
+          }}
+        />
       </div>
     </section>
   );
@@ -235,7 +224,7 @@ function ValuesSection() {
 // ─── Section: CTA ─────────────────────────────────────────────────────────────
 function AboutCTA() {
   return (
-    <section className="ab-cta-section" aria-label="Get in touch with VeXtiv Studio">
+    <section className="ab-cta-section" aria-label="Get in touch with VeXtiv">
       <div className="ab-cta-inner">
         {/* Ambient glow blob */}
         <div className="ab-cta-glow" aria-hidden="true" />
@@ -250,7 +239,7 @@ function AboutCTA() {
           questions, and come back with a clear plan — no jargon, no templates,
           no wasted time.
         </p>
-        <Link href="/contact" className="ab-cta-btn" aria-label="Start a project with VeXtiv Studio">
+        <Link href="/contact" className="ab-cta-btn" aria-label="Start a project with VeXtiv">
           <span>Start a Conversation</span>
           {/* Arrow */}
           <svg
@@ -470,101 +459,104 @@ export default function AboutPage() {
         }
 
         /* ─────────────────────────────────────
-           TEAM
+           INTERACTIVE AVATAR CAROUSEL
         ───────────────────────────────────── */
 
         .ab-team-section {
           background-color: var(--bg-base);
+          overflow: hidden;
         }
 
-        .ab-team-grid {
+        .ab-carousel-container {
+          width: 100%;
+          max-width: 1600px;
+          margin: 0 auto;
+          padding: 20px clamp(24px, 5vw, 80px) 60px;
+          overflow-x: auto;
+          scrollbar-width: none; /* Firefox */
+          -ms-overflow-style: none;  /* IE and Edge */
+        }
+        
+        .ab-carousel-container::-webkit-scrollbar {
+          display: none; /* Chrome, Safari and Opera */
+        }
+
+        .ab-carousel-row {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 28px;
+          grid-template-columns: repeat(8, 1fr);
+          gap: clamp(4px, 1vw, 8px);
           list-style: none;
           padding: 0;
           margin: 0;
+          width: 100%;
         }
 
-        .ab-team-card {
+        .ab-carousel-card {
           display: flex;
           flex-direction: column;
-          background-color: var(--bg-surface-1);
-          border: 1px solid var(--border-default);
+          align-items: center;
+          gap: 20px;
+          width: 100%;
+          cursor: pointer;
+          outline: none;
+        }
+
+        .ab-carousel-avatar-wrap {
+          width: 100%;
+          aspect-ratio: 3 / 4;
+          background-color: #f3f4f6; /* light gray background */
           border-radius: 20px;
           overflow: hidden;
-          transition: border-color 0.3s ease, transform 0.3s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                      background-color 0.4s ease, 
+                      box-shadow 0.4s ease;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
 
-        .ab-team-card:hover {
-          border-color: var(--accent-border-hover);
-          transform: translateY(-4px);
-        }
-
-        .ab-team-photo-wrap {
-          position: relative;
-          aspect-ratio: 1 / 1;
-          overflow: hidden;
-        }
-
-        .ab-team-photo {
+        .ab-carousel-avatar {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          display: block;
-          transition: transform 0.5s ease;
+          object-position: center bottom;
+          filter: grayscale(100%) contrast(1.1); /* Black and white illustration effect */
         }
 
-        .ab-team-card:hover .ab-team-photo {
-          transform: scale(1.04);
+        /* Hover & Focus Effects */
+        .ab-carousel-card:hover .ab-carousel-avatar-wrap,
+        .ab-carousel-card:focus-visible .ab-carousel-avatar-wrap,
+        .ab-carousel-card:focus .ab-carousel-avatar-wrap,
+        .ab-carousel-card:active .ab-carousel-avatar-wrap {
+          transform: scale(1.15);
+          background-color: #ffffff; /* Solid white background */
+          box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15); /* Subtle drop shadow */
         }
 
-        .ab-team-photo-glow {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          height: 60%;
-          background: linear-gradient(
-            to top,
-            var(--bg-surface-1) 0%,
-            transparent 100%
-          );
-          pointer-events: none;
+        .ab-carousel-text {
+          opacity: 0;
+          transform: translateY(-8px);
+          transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
+          text-align: center;
+          min-height: 40px; /* Prevent layout shift when text appears */
         }
 
-        .ab-team-meta {
-          padding: 28px 28px 32px;
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
-          flex: 1;
+        .ab-carousel-card:hover .ab-carousel-text,
+        .ab-carousel-card:focus-visible .ab-carousel-text,
+        .ab-carousel-card:focus .ab-carousel-text,
+        .ab-carousel-card:active .ab-carousel-text {
+          opacity: 1;
+          transform: translateY(0);
         }
 
-        .ab-team-name {
-          font-family: var(--font-display);
-          font-size: var(--text-xl);
-          font-weight: 700;
-          letter-spacing: -0.01em;
-          color: var(--text-primary);
-          line-height: 1.2;
-        }
-
-        .ab-team-role {
+        .ab-carousel-meet {
           font-family: var(--font-body);
           font-size: var(--text-sm);
-          font-weight: 400;
-          color: var(--text-muted);
-          letter-spacing: 0.02em;
-          margin-bottom: 12px;
-        }
-
-        .ab-team-bio {
-          font-family: var(--font-body);
-          font-size: var(--text-base);
-          font-weight: 300;
-          line-height: var(--leading-body);
-          color: var(--text-secondary);
+          font-weight: 500;
+          color: #9ca3af; /* Light gray font */
+          line-height: 1.4;
+          margin: 0;
         }
 
         /* ─────────────────────────────────────
@@ -736,6 +728,18 @@ export default function AboutPage() {
         ───────────────────────────────────── */
 
         @media (max-width: 900px) {
+          .ab-carousel-row {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-top: 32px;
+            padding-bottom: 32px;
+            gap: 12px;
+          }
+          .ab-carousel-card {
+            flex: 0 0 calc(33.333% - 8px);
+            scroll-snap-align: start;
+          }
           .ab-story-inner {
             grid-template-columns: 1fr;
             gap: 32px;
@@ -773,10 +777,6 @@ export default function AboutPage() {
         }
 
         @media (max-width: 600px) {
-          .ab-team-grid {
-            grid-template-columns: 1fr;
-          }
-
           .ab-hero-title {
             font-size: clamp(32px, 9vw, 48px);
           }

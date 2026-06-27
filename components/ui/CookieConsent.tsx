@@ -112,7 +112,7 @@ export default function CookieConsent() {
           right: 0;
 
           /*
-           * Z-index layering (Vextiv Studio):
+           * Z-index layering (Vextiv):
            *   ExitIntent       =  50
            *   Cookie banner    =  45   ← below modal popups
            *   Navbar           =  40

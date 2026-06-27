@@ -23,7 +23,6 @@
  * form but the server will accept null (bots / edge cases).
  */
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useReducer, useRef } from 'react';
@@ -264,7 +263,6 @@ export default function AuditForm() {
   if (state.status === 'success') {
     return (
       <div className="audit-page">
-        <AuditMinimalNav />
         <main className="audit-main" id="main-content">
           <div className="audit-success" role="status" aria-live="polite">
             <div className="audit-success__icon" aria-hidden="true">✓</div>
@@ -278,7 +276,7 @@ export default function AuditForm() {
               we spot something worth discussing straight away.
             </p>
             <Link href="/" className="audit-success__cta">
-              Back to Vextiv Studio
+              Back to Vextiv
             </Link>
           </div>
         </main>
@@ -292,8 +290,6 @@ export default function AuditForm() {
   // ─── Form ───────────────────────────────────────────────────────────────────
   return (
     <div className="audit-page">
-      <AuditMinimalNav />
-
       <main className="audit-main" id="main-content">
         <div className="audit-container">
           {/* ── Left: copy ── */}
@@ -587,27 +583,6 @@ export default function AuditForm() {
   );
 }
 
-// ─── Minimal nav (logo only) ──────────────────────────────────────────────────
-
-function AuditMinimalNav() {
-  return (
-    <header className="audit-nav" role="banner">
-      <div className="audit-nav__inner">
-        <Link href="/" className="audit-nav__logo" aria-label="Vextiv Studio — home">
-          <Image
-            src="/logo.svg"
-            alt="Vextiv Studio"
-            width={120}
-            height={32}
-            style={{ width: 'auto', height: '28px' }}
-            priority
-          />
-        </Link>
-      </div>
-    </header>
-  );
-}
-
 // ─── Styles ───────────────────────────────────────────────────────────────────
 // All colors use CSS variable tokens — zero hardcoded hex values.
 
@@ -622,36 +597,6 @@ function AuditStyles() {
         background-color: var(--bg-base);
         color: var(--text-primary);
         font-family: var(--font-body);
-      }
-
-      /* ── Minimal nav ── */
-      .audit-nav {
-        position: sticky;
-        top: 0;
-        z-index: 20;
-        background-color: var(--bg-base);
-        border-bottom: 1px solid var(--border-default);
-      }
-      .audit-nav__inner {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 0 24px;
-        height: 60px;
-        display: flex;
-        align-items: center;
-      }
-      .audit-nav__logo {
-        display: inline-flex;
-        align-items: center;
-        text-decoration: none;
-        opacity: 0.95;
-        transition: opacity 200ms;
-      }
-      .audit-nav__logo:hover { opacity: 1; }
-      .audit-nav__logo:focus-visible {
-        outline: 2px solid var(--accent-focus);
-        outline-offset: 4px;
-        border-radius: 4px;
       }
 
       /* ── Main area ── */

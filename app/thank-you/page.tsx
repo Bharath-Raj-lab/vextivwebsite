@@ -6,13 +6,13 @@ export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vextiv.tech"),
-  title: "Message Received | VeXtiv Studio",
-  description: "Thank you for reaching out to VeXtiv Studio. We will review your details and be in touch shortly to discuss how we can help your Hyderabad business grow.",
+  title: "Message Received | VeXtiv",
+  description: "Thank you for reaching out to VeXtiv. We will review your details and be in touch shortly to discuss how we can help your Hyderabad business grow.",
   openGraph: {
-    title: "Message Received | VeXtiv Studio",
-    description: "Thank you for reaching out to VeXtiv Studio. We will review your details and be in touch shortly to discuss how we can help your Hyderabad business grow.",
+    title: "Message Received | VeXtiv",
+    description: "Thank you for reaching out to VeXtiv. We will review your details and be in touch shortly to discuss how we can help your Hyderabad business grow.",
     url: "https://vextiv.tech/thank-you",
-    siteName: "VeXtiv Studio",
+    siteName: "VeXtiv",
     type: "website",
   },
   twitter: {

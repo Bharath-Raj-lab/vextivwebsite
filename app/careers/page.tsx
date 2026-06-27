@@ -7,15 +7,15 @@ export const dynamic = "force-static";
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL("https://vextiv.tech"),
-  title: "Careers at VeXtiv Studio | Join Our Hyderabad Team",
+  title: "Careers at VeXtiv | Join Our Hyderabad Team",
   description:
     "We're a small, focused digital studio based in Hyderabad. No open roles right now, but we always want to hear from people who care about craft. Send us a message.",
   openGraph: {
-    title: "Careers at VeXtiv Studio | Join Our Hyderabad Team",
+    title: "Careers at VeXtiv | Join Our Hyderabad Team",
     description:
       "We're a small, focused digital studio based in Hyderabad. No open roles right now, but we always want to hear from people who care about craft. Send us a message.",
     url: "https://vextiv.tech/careers",
-    siteName: "VeXtiv Studio",
+    siteName: "VeXtiv",
     type: "website",
   },
   twitter: {
@@ -277,7 +277,7 @@ function CareersCTA() {
   return (
     <section
       className="cr-bottom-cta"
-      aria-label="See Vextiv Studio's work"
+      aria-label="See Vextiv's work"
     >
       <div className="cr-bottom-cta-glow" aria-hidden="true" />
       <div className="cr-bottom-cta-inner">
@@ -294,7 +294,7 @@ function CareersCTA() {
         <Link
           href="/work"
           className="cr-bottom-btn"
-          aria-label="Browse Vextiv Studio's portfolio"
+          aria-label="Browse Vextiv's portfolio"
         >
           <span>Browse Our Work</span>
           <IconArrow />

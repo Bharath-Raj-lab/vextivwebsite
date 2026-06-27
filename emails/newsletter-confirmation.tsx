@@ -20,13 +20,13 @@ export default function NewsletterConfirmation() {
   return (
     <Html>
       <Head />
-      <Preview>You're subscribed to the VeXtiv Studio blog!</Preview>
+      <Preview>You're subscribed to the VeXtiv blog!</Preview>
       <Body style={styles.body}>
         <Container style={styles.container}>
           <Heading style={styles.heading}>Welcome to the club 🚀</Heading>
 
           <Text style={styles.paragraph}>
-            Thanks for subscribing to the VeXtiv Studio blog. We'll keep you posted on new articles, strategies, and deep dives for Hyderabad businesses.
+            Thanks for subscribing to the VeXtiv blog. We'll keep you posted on new articles, strategies, and deep dives for Hyderabad businesses.
           </Text>
 
           <Text style={styles.paragraph}>
@@ -38,12 +38,12 @@ export default function NewsletterConfirmation() {
           <Text style={styles.signature}>
             Warm regards,
             <br />
-            The VeXtiv Studio Team
+            The VeXtiv Team
           </Text>
 
           <Hr style={styles.hr} />
           <Text style={styles.footer}>
-            © {new Date().getFullYear()} VeXtiv Studio · You received this
+            © {new Date().getFullYear()} VeXtiv · You received this
             because you subscribed to our newsletter via our website.
           </Text>
         </Container>

@@ -144,7 +144,7 @@ export default function TeamNotification({
 
           <Hr style={styles.hr} />
           <Text style={styles.footer}>
-            This notification was generated automatically by VeXtiv Studio.
+            This notification was generated automatically by VeXtiv.
           </Text>
         </Container>
       </Body>

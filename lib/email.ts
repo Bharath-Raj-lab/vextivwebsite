@@ -129,10 +129,10 @@ export async function sendClientConfirmation(
   let reactEl: React.ReactElement;
 
   if (params.source === 'contact') {
-    subject = "We've received your message — VeXtiv Studio";
+    subject = "We've received your message — VeXtiv";
     reactEl = ContactClientConfirmation({ name: params.name });
   } else {
-    subject = 'Your free digital audit is confirmed — VeXtiv Studio';
+    subject = 'Your free digital audit is confirmed — VeXtiv';
     reactEl = AuditClientConfirmation({ businessName: params.businessName });
   }
 
@@ -163,7 +163,7 @@ export async function sendNewsletterConfirmation(toEmail: string): Promise<void>
     from: FROM,
     to: toEmail,
     replyTo: 'vextiv.tech@gmail.com',
-    subject: 'Welcome to the VeXtiv Studio Blog 🚀',
+    subject: 'Welcome to the VeXtiv Blog 🚀',
     react: NewsletterConfirmation(),
   });
 

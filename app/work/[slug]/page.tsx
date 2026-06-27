@@ -18,23 +18,23 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const study = getCaseStudyBySlug(slug);
-  if (!study) return { title: "Not Found | VeXtiv Studio" };
+  if (!study) return { title: "Not Found | VeXtiv" };
 
-  const fullSuffix = " - Check out this project by VeXtiv Studio, a digital agency based in Hyderabad.";
-  const shortSuffix = " — VeXtiv Studio, Hyderabad.";
+  const fullSuffix = " - Check out this project by VeXtiv, a digital agency based in Hyderabad.";
+  const shortSuffix = " — VeXtiv, Hyderabad.";
   const desc = study.outcomeHeadline.length + fullSuffix.length <= 160 
     ? study.outcomeHeadline + fullSuffix 
     : study.outcomeHeadline + shortSuffix;
 
   return {
     metadataBase: new URL("https://vextiv.tech"),
-    title: study.title + " | VeXtiv Studio",
+    title: study.title + " | VeXtiv",
     description: desc,
     openGraph: {
-      title: study.title + " | VeXtiv Studio",
+      title: study.title + " | VeXtiv",
       description: desc,
       url: "https://vextiv.tech/work/" + slug,
-      siteName: "VeXtiv Studio",
+      siteName: "VeXtiv",
       images: [study.thumbnail],
       type: "article",
     },

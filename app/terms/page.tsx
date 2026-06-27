@@ -9,15 +9,15 @@ export const dynamic = "force-static";
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL("https://vextiv.tech"),
-  title: "Terms of Service | VeXtiv Studio",
+  title: "Terms of Service | VeXtiv",
   description:
-    "Terms and conditions governing all engagements with VeXtiv Studio. Read before hiring us — clear, plain English, no legal jargon where possible.",
+    "Terms and conditions governing all engagements with VeXtiv. Read before hiring us — clear, plain English, no legal jargon where possible.",
   openGraph: {
-    title: "Terms of Service | VeXtiv Studio",
+    title: "Terms of Service | VeXtiv",
     description:
-      "Terms and conditions governing all engagements with VeXtiv Studio. Read before hiring us — clear, plain English, no legal jargon where possible.",
+      "Terms and conditions governing all engagements with VeXtiv. Read before hiring us — clear, plain English, no legal jargon where possible.",
     url: "https://vextiv.tech/terms",
-    siteName: "VeXtiv Studio",
+    siteName: "VeXtiv",
     type: "website",
   },
   alternates: {
@@ -34,14 +34,14 @@ const EFFECTIVE_DATE = "20 June 2025" as const;
 const CONTACT_EMAIL = "vextiv.tech@gmail.com" as const;
 
 const INTRO =
-  "These Terms of Service ('Terms') govern the relationship between VeXtiv Studio ('we', 'us', 'our') — a digital agency operating in Hyderabad, Telangana, India — and any individual or business ('Client', 'you') who engages us for services. By engaging VeXtiv Studio for a project or service, you agree to be bound by these Terms. If you have questions before committing, please reach out at vextiv.tech@gmail.com.";
+  "These Terms of Service ('Terms') govern the relationship between VeXtiv ('we', 'us', 'our') — a digital agency operating in Hyderabad, Telangana, India — and any individual or business ('Client', 'you') who engages us for services. By engaging VeXtiv for a project or service, you agree to be bound by these Terms. If you have questions before committing, please reach out at vextiv.tech@gmail.com.";
 
 const SECTIONS: readonly ProseSection[] = [
   {
     id: "services",
     heading: "Services Offered",
     content: [
-      "VeXtiv Studio provides digital services to businesses including, but not limited to: website design and development, brand identity and visual design, social media management, content creation, local SEO and Google Business Profile optimisation, and QR-based ordering systems for restaurants and cafés.",
+      "VeXtiv provides digital services to businesses including, but not limited to: website design and development, brand identity and visual design, social media management, content creation, local SEO and Google Business Profile optimisation, and QR-based ordering systems for restaurants and cafés.",
       "The specific deliverables, timeline, and scope for each engagement are agreed upon in writing before work commences — either via a Proposal document, Statement of Work, or a written email exchange that both parties confirm. Anything outside the agreed scope constitutes additional work and will be separately quoted.",
     ],
   },
@@ -82,25 +82,25 @@ const SECTIONS: readonly ProseSection[] = [
     id: "intellectual-property",
     heading: "Intellectual Property",
     content: [
-      "All original creative work produced by VeXtiv Studio — including but not limited to design files, source code, written copy, and visual assets — remains the property of VeXtiv Studio until full payment of all outstanding invoices has been received.",
+      "All original creative work produced by VeXtiv — including but not limited to design files, source code, written copy, and visual assets — remains the property of VeXtiv until full payment of all outstanding invoices has been received.",
     ],
     subSections: [
       {
         heading: "On full payment",
         content: [
-          "Upon receipt of full and final payment, VeXtiv Studio assigns to the Client all rights, title, and interest in the final deliverables specific to their project. This includes, where applicable, source files, design files, and website code. Any third-party components (stock imagery, licensed fonts, open-source libraries) remain subject to their respective licences, which we will identify during project handoff.",
+          "Upon receipt of full and final payment, VeXtiv assigns to the Client all rights, title, and interest in the final deliverables specific to their project. This includes, where applicable, source files, design files, and website code. Any third-party components (stock imagery, licensed fonts, open-source libraries) remain subject to their respective licences, which we will identify during project handoff.",
         ],
       },
       {
         heading: "Portfolio rights",
         content: [
-          "VeXtiv Studio retains the perpetual, irrevocable right to display project work in its portfolio, on its website, and on social media for promotional purposes, unless the Client requests confidentiality in writing prior to project commencement.",
+          "VeXtiv retains the perpetual, irrevocable right to display project work in its portfolio, on its website, and on social media for promotional purposes, unless the Client requests confidentiality in writing prior to project commencement.",
         ],
       },
       {
         heading: "Pre-existing materials",
         content: [
-          "Any materials, assets, or content provided by the Client to VeXtiv Studio for use in a project remain the Client's property. By providing these materials, the Client warrants that they have the right to use them and grants VeXtiv Studio a licence to incorporate them into the deliverables.",
+          "Any materials, assets, or content provided by the Client to VeXtiv for use in a project remain the Client's property. By providing these materials, the Client warrants that they have the right to use them and grants VeXtiv a licence to incorporate them into the deliverables.",
         ],
       },
     ],
@@ -133,7 +133,7 @@ const SECTIONS: readonly ProseSection[] = [
       {
         heading: "Cancellation by the Client — project work",
         content: [
-          "If you cancel a project after work has commenced, the deposit paid is non-refundable. If cancellation occurs after more than 50% of the agreed deliverables have been completed (as assessed by VeXtiv Studio), the full project fee becomes payable. Completed work and any transferable assets created up to the point of cancellation will be provided upon receipt of payment for work done.",
+          "If you cancel a project after work has commenced, the deposit paid is non-refundable. If cancellation occurs after more than 50% of the agreed deliverables have been completed (as assessed by VeXtiv), the full project fee becomes payable. Completed work and any transferable assets created up to the point of cancellation will be provided upon receipt of payment for work done.",
         ],
       },
       {
@@ -143,15 +143,15 @@ const SECTIONS: readonly ProseSection[] = [
         ],
       },
       {
-        heading: "Cancellation by VeXtiv Studio",
+        heading: "Cancellation by VeXtiv",
         content: [
-          "VeXtiv Studio reserves the right to terminate an engagement if the Client fails to make payment within 30 days of the due date, provides materially misleading project information, behaves in a manner that is abusive or threatening toward our team, or requests deliverables that violate applicable law or our ethical standards. In such cases, fees for work completed will remain due and payable.",
+          "VeXtiv reserves the right to terminate an engagement if the Client fails to make payment within 30 days of the due date, provides materially misleading project information, behaves in a manner that is abusive or threatening toward our team, or requests deliverables that violate applicable law or our ethical standards. In such cases, fees for work completed will remain due and payable.",
         ],
       },
       {
         heading: "Client-caused delays",
         content: [
-          "If a project is placed on hold for more than 60 days due to lack of Client response, missing content, or missing approvals, VeXtiv Studio reserves the right to de-prioritise the project and charge a project reactivation fee of ₹5,000 to resume work.",
+          "If a project is placed on hold for more than 60 days due to lack of Client response, missing content, or missing approvals, VeXtiv reserves the right to de-prioritise the project and charge a project reactivation fee of ₹5,000 to resume work.",
         ],
       },
     ],
@@ -160,14 +160,14 @@ const SECTIONS: readonly ProseSection[] = [
     id: "liability",
     heading: "Limitation of Liability",
     content: [
-      "To the maximum extent permitted by applicable law, VeXtiv Studio's total liability to the Client for any claim arising out of or related to a project or these Terms shall not exceed the total fees paid by the Client to VeXtiv Studio for the specific project or service giving rise to the claim.",
-      "VeXtiv Studio shall not be liable for any indirect, incidental, consequential, or punitive damages, including but not limited to: loss of business revenue or profit, loss of data, business interruption, reputational damage, or third-party claims — even if advised of the possibility of such damages.",
+      "To the maximum extent permitted by applicable law, VeXtiv's total liability to the Client for any claim arising out of or related to a project or these Terms shall not exceed the total fees paid by the Client to VeXtiv for the specific project or service giving rise to the claim.",
+      "VeXtiv shall not be liable for any indirect, incidental, consequential, or punitive damages, including but not limited to: loss of business revenue or profit, loss of data, business interruption, reputational damage, or third-party claims — even if advised of the possibility of such damages.",
     ],
     subSections: [
       {
         heading: "Third-party platforms",
         content: [
-          "VeXtiv Studio is not liable for changes made by third-party platforms (including but not limited to Google, Meta, Instagram, or hosting providers) that affect deliverables or results after project delivery. We are not liable for website downtime, security breaches, or data loss resulting from your hosting environment or third-party services outside our direct control.",
+          "VeXtiv is not liable for changes made by third-party platforms (including but not limited to Google, Meta, Instagram, or hosting providers) that affect deliverables or results after project delivery. We are not liable for website downtime, security breaches, or data loss resulting from your hosting environment or third-party services outside our direct control.",
         ],
       },
       {
@@ -182,14 +182,14 @@ const SECTIONS: readonly ProseSection[] = [
     id: "governing-law",
     heading: "Governing Law",
     content: [
-      "These Terms of Service shall be governed by and construed in accordance with the laws of India. Any disputes arising out of or in connection with these Terms, or any project engagement with VeXtiv Studio, shall be subject to the exclusive jurisdiction of the courts located in Hyderabad, Telangana, India.",
+      "These Terms of Service shall be governed by and construed in accordance with the laws of India. Any disputes arising out of or in connection with these Terms, or any project engagement with VeXtiv, shall be subject to the exclusive jurisdiction of the courts located in Hyderabad, Telangana, India.",
       "We will always try to resolve any dispute directly and amicably before initiating formal proceedings. If you have a concern, contact us at vextiv.tech@gmail.com and we will respond promptly.",
     ],
     subSections: [
       {
         heading: "Entire agreement",
         content: [
-          "These Terms, together with any Proposal, Statement of Work, or written agreement for a specific project, constitute the entire agreement between you and VeXtiv Studio. They supersede any prior understandings, representations, or agreements relating to the subject matter hereof. Any amendment to these Terms must be made in writing and agreed to by both parties.",
+          "These Terms, together with any Proposal, Statement of Work, or written agreement for a specific project, constitute the entire agreement between you and VeXtiv. They supersede any prior understandings, representations, or agreements relating to the subject matter hereof. Any amendment to these Terms must be made in writing and agreed to by both parties.",
         ],
       },
       {

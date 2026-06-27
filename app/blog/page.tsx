@@ -7,15 +7,15 @@ export const revalidate = 900; // ISR revalidate 900
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vextiv.tech"),
-  title: "Blog | VeXtiv Studio",
+  title: "Blog | VeXtiv",
   description:
     "Insights, strategies, and deep dives on digital transformation, local SEO, and online growth for modern restaurants and local businesses in Hyderabad.",
   openGraph: {
-    title: "Blog | VeXtiv Studio",
+    title: "Blog | VeXtiv",
     description:
       "Insights, strategies, and deep dives on digital transformation, local SEO, and online growth for modern restaurants and local businesses in Hyderabad.",
     url: "https://vextiv.tech/blog",
-    siteName: "VeXtiv Studio",
+    siteName: "VeXtiv",
     type: "website",
   },
   twitter: {

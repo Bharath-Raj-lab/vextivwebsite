@@ -29,7 +29,7 @@ export default function AuditClientConfirmation({
     <Html>
       <Head />
       <Preview>
-        Your free audit request is confirmed — VeXtiv Studio
+        Your free audit request is confirmed — VeXtiv
       </Preview>
       <Body style={styles.body}>
         <Container style={styles.container}>
@@ -37,7 +37,7 @@ export default function AuditClientConfirmation({
 
           <Text style={styles.paragraph}>
             Hi {businessName}, thanks for requesting your free digital audit
-            from <strong>VeXtiv Studio</strong>.
+            from <strong>VeXtiv</strong>.
           </Text>
 
           <Text style={styles.paragraph}>
@@ -56,12 +56,12 @@ export default function AuditClientConfirmation({
           <Text style={styles.signature}>
             Warm regards,
             <br />
-            The VeXtiv Studio Team
+            The VeXtiv Team
           </Text>
 
           <Hr style={styles.hr} />
           <Text style={styles.footer}>
-            © {new Date().getFullYear()} VeXtiv Studio · You received this
+            © {new Date().getFullYear()} VeXtiv · You received this
             because you requested a free digital audit.
           </Text>
         </Container>

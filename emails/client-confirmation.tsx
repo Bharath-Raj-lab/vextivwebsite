@@ -26,7 +26,7 @@ export default function ClientConfirmation({ name }: ClientConfirmationProps) {
   return (
     <Html>
       <Head />
-      <Preview>We&apos;ve received your message — VeXtiv Studio</Preview>
+      <Preview>We&apos;ve received your message — VeXtiv</Preview>
       <Body style={styles.body}>
         <Container style={styles.container}>
           <Heading style={styles.heading}>Thanks for reaching out! 👋</Heading>
@@ -46,12 +46,12 @@ export default function ClientConfirmation({ name }: ClientConfirmationProps) {
           <Text style={styles.signature}>
             Warm regards,
             <br />
-            The VeXtiv Studio Team
+            The VeXtiv Team
           </Text>
 
           <Hr style={styles.hr} />
           <Text style={styles.footer}>
-            © {new Date().getFullYear()} VeXtiv Studio · You received this
+            © {new Date().getFullYear()} VeXtiv · You received this
             because you contacted us via our website.
           </Text>
         </Container>

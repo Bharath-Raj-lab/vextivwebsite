@@ -13,5 +13,5 @@ ALTER TABLE public.leads
   ADD COLUMN IF NOT EXISTS website_url    text;
 
 COMMENT ON COLUMN public.leads.primary_goal  IS 'Audit form: what the business wants to achieve (e.g. "Get more customers online")';
-COMMENT ON COLUMN public.leads.hear_about_us IS 'Audit form: how the lead heard about Vextiv Studio';
+COMMENT ON COLUMN public.leads.hear_about_us IS 'Audit form: how the lead heard about Vextiv';
 COMMENT ON COLUMN public.leads.website_url   IS 'Audit form: the business website URL to be audited (optional)';

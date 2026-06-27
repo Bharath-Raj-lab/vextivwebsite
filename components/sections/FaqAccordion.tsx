@@ -25,9 +25,9 @@ const FAQ_CATEGORIES: readonly FaqCategory[] = [
     items: [
       {
         id: "what-does-vextiv-do",
-        question: "What does Vextiv Studio do?",
+        question: "What does Vextiv do?",
         answer:
-          "Vextiv Studio is a digital agency based in Hyderabad. We design and build websites, develop brand identities, manage social media, create content, run local SEO, and deploy QR-based ordering systems. In short, we handle everything a local business needs to compete and grow online — under one roof.",
+          "Vextiv is a digital agency based in Hyderabad. We design and build websites, develop brand identities, manage social media, create content, run local SEO, and deploy QR-based ordering systems. In short, we handle everything a local business needs to compete and grow online — under one roof.",
       },
       {
         id: "where-are-you-based",

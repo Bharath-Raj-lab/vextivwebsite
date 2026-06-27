@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useReducer, useRef } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
@@ -25,6 +25,28 @@ export default function Navbar() {
   const [isOpen,   setIsOpen]   = useReducer((_: boolean, v: boolean) => v, false);
   const closeRef     = useRef<HTMLButtonElement>(null);
   const hamburgerRef  = useRef<HTMLButtonElement>(null);
+
+  const [isVisible, setIsVisible] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY < 0) return; // ignore rubber banding
+      
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -79,6 +101,7 @@ export default function Navbar() {
   const entranceVariants = {
     hidden:  { opacity: 0, y: prefersReduced ? 0 : -8, x: "-50%" },
     visible: { opacity: 1, y: 0, x: "-50%", transition: { duration: 0.4, ease: "easeOut" } },
+    hiddenTop: { opacity: 0, y: -100, x: "-50%", transition: { duration: 0.3, ease: "easeInOut" } },
   };
 
   return (
@@ -93,7 +116,7 @@ export default function Navbar() {
         role="banner"
         variants={entranceVariants}
         initial="hidden"
-        animate="visible"
+        animate={isVisible ? "visible" : "hiddenTop"}
       >
         <nav className="navbar__inner" aria-label="Main navigation">
           {/* Logo + Text */}
