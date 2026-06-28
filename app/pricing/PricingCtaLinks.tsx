@@ -33,7 +33,7 @@ function ArrowIcon() {
   );
 }
 
-// ─── Tracked CTA link ─────────────────────────────────────────────────────────
+// ─── Pricing plan CTA ─────────────────────────────────────────────────────────
 export function PricingCtaLink({
   href,
   label,
@@ -48,7 +48,7 @@ export function PricingCtaLink({
   return (
     <Link
       href={href}
-      className={`pricing-cta pricing-cta--${variant}`}
+      className={`pricing-cta pricing-cta--${variant} ${variant === "popular" ? "btn-premium" : "btn-premium-ghost"}`}
       onClick={() => trackEvent("pricing_plan_click", { plan })}
     >
       <span>{label}</span>
@@ -57,21 +57,17 @@ export function PricingCtaLink({
   );
 }
 
-// ─── Tracked addon CTA ────────────────────────────────────────────────────────
-export function AddonCtaLink({
-  href,
-  plan,
-}: {
-  href: string;
-  plan: string;
-}) {
+// ─── Custom Solutions discovery call CTA ──────────────────────────────────────
+export function CustomSolutionCtaLink() {
   return (
     <Link
-      href={href}
-      className="pricing-addon-cta"
-      onClick={() => trackEvent("pricing_plan_click", { plan })}
+      href="/contact"
+      className="custom-solutions-cta-btn btn-premium-ghost"
+      onClick={() =>
+        trackEvent("pricing_plan_click", { plan: "Custom Solutions Discovery Call" })
+      }
     >
-      <span>Get in Touch</span>
+      <span>Book a Free Strategy Call</span>
       <ArrowIcon />
     </Link>
   );
@@ -82,12 +78,12 @@ export function BottomCtaLink() {
   return (
     <Link
       href="/contact"
-      className="pricing-bottom-btn"
+      className="pricing-bottom-btn btn-premium"
       onClick={() =>
         trackEvent("pricing_plan_click", { plan: "Free Consultation CTA" })
       }
     >
-      <span>Book a Free Consultation</span>
+      <span>Book a Free Strategy Call</span>
       <ArrowIcon />
     </Link>
   );

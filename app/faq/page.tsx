@@ -445,7 +445,7 @@ export default function FaqPage() {
           display: inline-flex;
           align-items: center;
           gap: 10px;
-          background-color: var(--accent);
+          background: var(--gradient-btn);
           color: var(--bg-base);
           font-family: var(--font-body);
           font-size: var(--text-sm);

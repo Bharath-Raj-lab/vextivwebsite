@@ -499,7 +499,7 @@ export default function CareersPage() {
           width: 6px;
           height: 6px;
           border-radius: 50%;
-          background-color: var(--accent);
+          background: var(--gradient-btn);
           flex-shrink: 0;
           margin-top: 9px;
         }
@@ -592,7 +592,7 @@ export default function CareersPage() {
           display: inline-flex;
           align-items: center;
           gap: 10px;
-          background-color: var(--accent);
+          background: var(--gradient-btn);
           color: var(--bg-base);
           font-family: var(--font-body);
           font-size: var(--text-sm);

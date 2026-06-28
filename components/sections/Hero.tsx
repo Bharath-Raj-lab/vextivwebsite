@@ -218,7 +218,7 @@ export default function Hero() {
             <div className="hero__ctas">
               <Link
                 href="/contact"
-                className="hero__cta-primary"
+                className="hero__cta-primary btn-premium"
                 onClick={() =>
                   trackEvent("cta_click", { label: "Start a Project" })
                 }
@@ -228,7 +228,7 @@ export default function Hero() {
               </Link>
               <Link
                 href="/work"
-                className="hero__cta-secondary"
+                className="hero__cta-secondary btn-premium-ghost"
                 onClick={() =>
                   trackEvent("cta_click", { label: "View Our Work" })
                 }

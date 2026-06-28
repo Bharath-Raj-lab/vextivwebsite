@@ -359,7 +359,7 @@ export default function FaqAccordion() {
 
         .faq-tab--active {
           color: var(--bg-base);
-          background-color: var(--accent);
+          background: var(--gradient-btn);
           border-color: var(--accent);
         }
 

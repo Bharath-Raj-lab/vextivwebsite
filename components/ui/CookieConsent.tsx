@@ -247,7 +247,7 @@ export default function CookieConsent() {
 
         /* Accent variant (Accept) */
         .cookie-consent__btn--accent {
-          background: var(--accent);
+          background: var(--gradient-btn);
           color: var(--bg-base);
           box-shadow: 0 2px 12px -4px var(--accent-fill-35);
         }

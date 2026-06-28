@@ -263,3 +263,48 @@
 :focus:not(:focus-visible) {
   outline: none;
 }
+
+/* ═══════════════════════════════════════════════
+   Premium Button System
+   ═══════════════════════════════════════════════ */
+
+.btn-premium {
+  background: linear-gradient(135deg, #D4F85A 0%, #C8F04D 50%, #BCE43F 100%) !important;
+  color: #080808 !important;
+  border-radius: 9999px !important;
+  border: none !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease !important;
+  box-shadow: 0 4px 12px rgba(200, 240, 77, 0.15) !important;
+}
+
+.btn-premium:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px -6px rgba(200, 240, 77, 0.45) !important;
+  filter: brightness(1.05) !important;
+}
+
+.btn-premium:focus-visible {
+  outline: 2px solid var(--accent-focus) !important;
+  outline-offset: 4px !important;
+}
+
+.btn-premium-ghost {
+  background: transparent !important;
+  color: var(--text-primary) !important;
+  border-radius: 9999px !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.btn-premium-ghost:hover {
+  background: rgba(200, 240, 77, 0.08) !important;
+  border-color: rgba(200, 240, 77, 0.4) !important;
+  color: var(--accent) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px -6px rgba(200, 240, 77, 0.2) !important;
+}
+
+.btn-premium-ghost:focus-visible {
+  outline: 2px solid var(--accent-focus) !important;
+  outline-offset: 4px !important;
+}

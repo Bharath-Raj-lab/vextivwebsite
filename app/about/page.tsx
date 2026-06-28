@@ -318,7 +318,7 @@ export default function AboutPage() {
         }
 
         .ab-section {
-          padding: clamp(80px, 10vw, 128px) 0;
+          padding: clamp(48px, 6vw, 80px) 0;
         }
 
         .ab-eyebrow {
@@ -342,7 +342,7 @@ export default function AboutPage() {
         }
 
         .ab-section-hdr {
-          margin-bottom: clamp(48px, 6vw, 72px);
+          margin-bottom: clamp(32px, 5vw, 56px);
         }
 
         .ab-section-title {
@@ -361,7 +361,7 @@ export default function AboutPage() {
         .ab-hero {
           position: relative;
           background-color: var(--bg-section-hero);
-          padding: clamp(128px, 16vw, 196px) 0 clamp(80px, 10vw, 120px);
+          padding: clamp(120px, 14vw, 160px) 0 clamp(56px, 8vw, 80px);
           overflow: hidden;
         }
 
@@ -589,7 +589,7 @@ export default function AboutPage() {
 
         .ab-timeline-hdr {
           text-align: center;
-          margin-bottom: clamp(64px, 8vw, 100px);
+          margin-bottom: clamp(40px, 6vw, 72px);
         }
 
         .ab-timeline-container {
@@ -619,7 +619,7 @@ export default function AboutPage() {
           width: 10px;
           height: 10px;
           border-radius: 50%;
-          background-color: var(--accent);
+          background: var(--gradient-btn);
           box-shadow: 0 0 12px var(--accent-fill-25);
           z-index: 2;
           flex-shrink: 0;
@@ -725,7 +725,7 @@ export default function AboutPage() {
         .ab-cta-section {
           position: relative;
           background-color: var(--bg-base);
-          padding: clamp(80px, 12vw, 140px) 0;
+          padding: clamp(56px, 10vw, 100px) 0;
           overflow: hidden;
           border-top: 1px solid var(--border-subtle);
           text-align: center;
@@ -786,7 +786,7 @@ export default function AboutPage() {
           display: inline-flex;
           align-items: center;
           gap: 10px;
-          background-color: var(--accent);
+          background: var(--gradient-btn);
           color: var(--bg-base);
           font-family: var(--font-body);
           font-size: var(--text-sm);

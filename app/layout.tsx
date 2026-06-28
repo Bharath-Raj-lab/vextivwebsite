@@ -9,6 +9,7 @@ import GtagLoader from "@/components/layout/GtagLoader";
 import MetaPixel from "@/components/layout/MetaPixel";
 import CookieConsent from "@/components/ui/CookieConsent";
 import ClientProviders from "@/components/layout/ClientProviders";
+import NextTopLoader from "nextjs-toploader";
 
 const syne = Syne({
   weight: ["700", "800"],
@@ -49,22 +50,19 @@ const localBusinessSchema: Record<string, unknown> = {
   "@type": "LocalBusiness",
   name: "VeXtiv",
   url: "https://vextiv.tech",
-  // TODO: Replace with real telephone number (PRD §8.2 — not yet provided)
-  telephone: "/* PLACEHOLDER: +91-XXXXXXXXXX */",
+  telephone: "+91-6300318824",
   address: {
     "@type": "PostalAddress",
-    // TODO: Replace with real street address (PRD §8.2 — not yet provided)
-    streetAddress: "/* PLACEHOLDER: Street Address */",
+    streetAddress: "Saroornagar",
     addressLocality: "Hyderabad",
     addressRegion: "Telangana",
-    postalCode: "500001",
+    postalCode: "500035",
     addressCountry: "IN",
   },
   geo: {
     "@type": "GeoCoordinates",
-    // TODO: Replace with real office latitude/longitude (not yet provided)
-    latitude: 0, // PLACEHOLDER
-    longitude: 0, // PLACEHOLDER
+    latitude: 17.3541, // Saroornagar general coordinates
+    longitude: 78.5323,
   },
   // PRD §8.4 — full areaServed list
   areaServed: [
@@ -81,7 +79,9 @@ const localBusinessSchema: Record<string, unknown> = {
   ],
   openingHours: "Mo-Fr 09:00-18:00",
   sameAs: [
-    // TODO: Add verified social profile URLs when available
+    "https://www.instagram.com/vextiv.tech",
+    "https://www.linkedin.com/company/vextiv/",
+    "https://www.facebook.com/people/Vextiv/61589618447564/",
   ],
 };
 
@@ -111,7 +111,8 @@ export default function RootLayout({
       lang="en"
       className={`${syne.variable} ${dmSans.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        <NextTopLoader color="#C8F04D" showSpinner={false} />
         <ClientProviders>
           {/* Site-wide structured data */}
           <JsonLd schema={localBusinessSchema} />

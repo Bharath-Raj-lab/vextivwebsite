@@ -65,7 +65,7 @@ const FORM_ID = 'contact-form';
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function ContactForm() {
-  const router       = useRouter();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const hasTrackedStart = useRef(false);
 
@@ -78,16 +78,16 @@ export default function ContactForm() {
   } = useForm<ContactFormInput>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
-      name:         '',
-      email:        '',
-      phone:        '',
-      company:      null,
-      service:      null,
-      budget:       null,
-      brief:        null,
-      website:      '',
-      utm_source:   null,
-      utm_medium:   null,
+      name: '',
+      email: '',
+      phone: '',
+      company: null,
+      service: null,
+      budget: null,
+      brief: null,
+      website: '',
+      utm_source: null,
+      utm_medium: null,
       utm_campaign: null,
     },
   });
@@ -102,11 +102,11 @@ export default function ContactForm() {
       setValue('service', serviceParam as ContactFormInput['service']);
     }
 
-    const utmSource   = searchParams.get('utm_source');
-    const utmMedium   = searchParams.get('utm_medium');
+    const utmSource = searchParams.get('utm_source');
+    const utmMedium = searchParams.get('utm_medium');
     const utmCampaign = searchParams.get('utm_campaign');
-    if (utmSource)   setValue('utm_source',   utmSource);
-    if (utmMedium)   setValue('utm_medium',   utmMedium);
+    if (utmSource) setValue('utm_source', utmSource);
+    if (utmMedium) setValue('utm_medium', utmMedium);
     if (utmCampaign) setValue('utm_campaign', utmCampaign);
   }, [searchParams, setValue]);
 
@@ -128,19 +128,19 @@ export default function ContactForm() {
      * converts absent keys to null server-side).
      */
     const body: Record<string, string | null> = {
-      name:    data.name,
-      email:   data.email,
-      phone:   data.phone,
-      company: data.company  ?? null,
-      service: data.service  ?? null,
-      budget:  data.budget   ?? null,
-      brief:   data.brief    ?? null,
-      website: data.website  ?? '',   // honeypot — always ''
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      company: data.company ?? null,
+      service: data.service ?? null,
+      budget: data.budget ?? null,
+      brief: data.brief ?? null,
+      website: data.website ?? '',   // honeypot — always ''
     };
 
     // Include UTM fields only when a value was actually captured from the URL
-    if (data.utm_source)   body.utm_source   = data.utm_source;
-    if (data.utm_medium)   body.utm_medium   = data.utm_medium;
+    if (data.utm_source) body.utm_source = data.utm_source;
+    if (data.utm_medium) body.utm_medium = data.utm_medium;
     if (data.utm_campaign) body.utm_campaign = data.utm_campaign;
 
     try {
@@ -151,7 +151,7 @@ export default function ContactForm() {
       });
 
       const json = await res.json() as
-        | { success: true;  message: string }
+        | { success: true; message: string }
         | { success: false; message: string; errors?: Record<string, string> };
 
       if (json.success) {
@@ -215,19 +215,19 @@ export default function ContactForm() {
               <ol className="cp-steps" role="list">
                 {([
                   {
-                    n:     '01',
+                    n: '01',
                     label: 'We review your brief',
-                    body:  'Our team reads every submission within one business day.',
+                    body: 'Our team reads every submission within one business day.',
                   },
                   {
-                    n:     '02',
+                    n: '02',
                     label: 'Discovery call',
-                    body:  'We schedule a short call to align on goals and timeline.',
+                    body: 'We schedule a short call to align on goals and timeline.',
                   },
                   {
-                    n:     '03',
+                    n: '03',
                     label: 'Tailored proposal',
-                    body:  'You receive a clear, itemised proposal — no hidden costs.',
+                    body: 'You receive a clear, itemised proposal — no hidden costs.',
                   },
                 ] as const).map(({ n, label, body }) => (
                   <li key={n} className="cp-step">
@@ -480,8 +480,8 @@ export default function ContactForm() {
               <button
                 id="cp-submit"
                 type="submit"
-                className="cp-submit"
                 disabled={isSubmitting}
+                className="contact-submit-btn btn-premium"
                 aria-disabled={isSubmitting}
               >
                 {isSubmitting ? (
@@ -814,7 +814,7 @@ function ContactStyles() {
         justify-content: center;
         width: 100%;
         padding: 15px 28px;
-        background-color: var(--accent);
+        background: var(--gradient-btn);
         color: var(--bg-base);
         font-family: var(--font-body);
         font-size: var(--text-sm);

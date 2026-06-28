@@ -12,19 +12,19 @@ import Logo from "@/components/ui/Logo";
 // ─── Nav links ───────────────────────────────────────────────────────────────
 const NAV_LINKS = [
   { label: "Services", href: "/services" },
-  { label: "Work",     href: "/work"     },
-  { label: "Pricing",  href: "/pricing"  },
-  { label: "About",    href: "/about"    },
-  { label: "Blog",     href: "/blog"     },
+  { label: "Work", href: "/work" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "About", href: "/about" },
+  { label: "Blog", href: "/blog" },
 ] as const;
 
 // ─── Component ────────────────────────────────────────────────────────────────
 export default function Navbar() {
-  const pathname        = usePathname();
-  const prefersReduced  = useReducedMotion();
-  const [isOpen,   setIsOpen]   = useReducer((_: boolean, v: boolean) => v, false);
-  const closeRef     = useRef<HTMLButtonElement>(null);
-  const hamburgerRef  = useRef<HTMLButtonElement>(null);
+  const pathname = usePathname();
+  const prefersReduced = useReducedMotion();
+  const [isOpen, setIsOpen] = useReducer((_: boolean, v: boolean) => v, false);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const hamburgerRef = useRef<HTMLButtonElement>(null);
 
   const [isVisible, setIsVisible] = useState(true);
   const lastScrollY = useRef(0);
@@ -32,15 +32,15 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       if (currentScrollY < 0) return; // ignore rubber banding
-      
+
       if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
         setIsVisible(false);
       } else {
         setIsVisible(true);
       }
-      
+
       lastScrollY.current = currentScrollY;
     };
 
@@ -66,7 +66,7 @@ export default function Navbar() {
       ? Array.from(overlay.querySelectorAll<HTMLElement>(focusableSelectors))
       : [];
     const first = focusable[0];
-    const last  = focusable[focusable.length - 1];
+    const last = focusable[focusable.length - 1];
 
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setIsOpen(false);
@@ -78,7 +78,7 @@ export default function Navbar() {
       if (e.shiftKey) {
         if (document.activeElement === first) { e.preventDefault(); last.focus(); }
       } else {
-        if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
       }
     };
 
@@ -99,7 +99,7 @@ export default function Navbar() {
 
   // Entrance animation (respects prefers-reduced-motion)
   const entranceVariants = {
-    hidden:  { opacity: 0, y: prefersReduced ? 0 : -8, x: "-50%" },
+    hidden: { opacity: 0, y: prefersReduced ? 0 : -8, x: "-50%" },
     visible: { opacity: 1, y: 0, x: "-50%", transition: { duration: 0.4, ease: "easeOut" } },
     hiddenTop: { opacity: 0, y: -100, x: "-50%", transition: { duration: 0.3, ease: "easeInOut" } },
   };
@@ -150,7 +150,7 @@ export default function Navbar() {
           <div className="navbar__actions">
             <Link
               href="/contact"
-              className="navbar__cta-capsule"
+              className="navbar__cta-capsule btn-premium"
               aria-label="Book a call with Vextiv"
               onClick={() => trackEvent('cta_click', { label: 'Book a Call', location: 'navbar' })}
             >
@@ -166,52 +166,90 @@ export default function Navbar() {
               aria-controls="mobile-menu"
               onClick={() => setIsOpen(!isOpen)}
             >
-              {isOpen ? <X size={20} strokeWidth={2} /> : <Menu size={20} strokeWidth={2} />}
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <motion.path
+                  d="M4 6H20"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  animate={isOpen ? { d: "M6 6L18 18" } : { d: "M4 6H20" }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                />
+                <motion.path
+                  d="M4 12H20"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  animate={isOpen ? { opacity: 0, x: -10 } : { opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                />
+                <motion.path
+                  d="M4 18H20"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  animate={isOpen ? { d: "M6 18L18 6" } : { d: "M4 18H20" }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                />
+              </svg>
             </button>
           </div>
         </nav>
 
-        {/* Mobile overlay */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              id="mobile-menu"
-              role="dialog"
-              aria-modal="true"
-              aria-label="Navigation menu"
-              className="navbar__mobile-overlay"
-              initial={{ opacity: 0, y: prefersReduced ? 0 : -12 }}
-              animate={{ opacity: 1, y: 0, transition: { duration: 0.25, ease: "easeOut" } }}
-              exit={{ opacity: 0, y: prefersReduced ? 0 : -8, transition: { duration: 0.2 } }}
-            >
-              <button
-                ref={closeRef}
-                className="navbar__mobile-close"
-                aria-label="Close menu"
-                onClick={() => setIsOpen(false)}
-              >
-                <X size={22} strokeWidth={2} />
-              </button>
-
-              <nav aria-label="Mobile navigation" style={{ width: "100%" }}>
-                <ul className="navbar__mobile-links" role="list">
-                  {NAV_LINKS.map(({ label, href }) => (
-                    <li key={href}>
-                      <Link
-                        href={href}
-                        className={`navbar__mobile-link${pathname === href ? " navbar__mobile-link--active" : ""}`}
-                        onClick={() => setIsOpen(false)}
-                      >
-                        {label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </motion.header>
+
+      {/* Mobile overlay */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation menu"
+            className="navbar__mobile-overlay"
+            initial={{ opacity: 0, y: prefersReduced ? 0 : -12 }}
+            animate={{ opacity: 1, y: 0, transition: { duration: 0.25, ease: "easeOut" } }}
+            exit={{ opacity: 0, y: prefersReduced ? 0 : -8, transition: { duration: 0.2 } }}
+          >
+            <nav aria-label="Mobile navigation" style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <motion.ul 
+                className="navbar__mobile-links" 
+                role="list"
+                initial="closed"
+                animate="open"
+                exit="closed"
+                variants={{
+                  open: {
+                    transition: { staggerChildren: 0.05, delayChildren: 0.1 }
+                  },
+                  closed: {
+                    transition: { staggerChildren: 0.05, staggerDirection: -1 }
+                  }
+                }}
+              >
+                {NAV_LINKS.map(({ label, href }) => (
+                  <motion.li 
+                    key={href}
+                    variants={{
+                      open: { opacity: 1, y: 0 },
+                      closed: { opacity: 0, y: 20 }
+                    }}
+                    transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  >
+                    <Link
+                      href={href}
+                      className={`navbar__mobile-link${pathname === href ? " navbar__mobile-link--active" : ""}`}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {label}
+                    </Link>
+                  </motion.li>
+                ))}
+              </motion.ul>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ─── Styles ─────────────────────────────────────────────────────── */}
       <style>{`
@@ -248,7 +286,7 @@ export default function Navbar() {
           width: 100%;
           max-width: 1500px;
           padding: 0 clamp(24px, 4vw, 64px);
-          z-index: 40;
+          z-index: 50;
           pointer-events: none;
         }
 
@@ -260,6 +298,7 @@ export default function Navbar() {
           justify-content: space-between;
           width: 100%;
           pointer-events: auto;
+          z-index: 50;
         }
 
         /* Brand Area (Left) */
@@ -397,10 +436,12 @@ export default function Navbar() {
           border-radius: 9999px;
           color: #ffffff;
           cursor: pointer;
-          transition: background-color 200ms;
+          transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
         }
         .navbar__hamburger:hover {
-          background-color: rgba(255, 255, 255, 0.1);
+          background-color: rgba(255, 255, 255, 0.12);
+          border-color: rgba(255, 255, 255, 0.2);
+          transform: scale(1.05);
         }
         .navbar__hamburger:focus-visible {
           outline: 2px solid var(--accent-focus);
@@ -411,70 +452,46 @@ export default function Navbar() {
         .navbar__mobile-overlay {
           position: fixed;
           inset: 0;
-          background: var(--bg-base);
+          background: rgba(10, 10, 10, 0.85);
+          backdrop-filter: blur(24px);
+          -webkit-backdrop-filter: blur(24px);
           z-index: 40;
           display: flex;
           flex-direction: column;
           padding: 24px;
-          padding-top: 100px; /* Space for floating navbar */
           pointer-events: auto;
-        }
-
-        .navbar__mobile-close {
-          align-self: flex-end;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 48px;
-          height: 48px;
-          background: transparent;
-          border: 1px solid rgba(255,255,255,0.1);
-          border-radius: 9999px;
-          color: #ffffff;
-          cursor: pointer;
-          margin-bottom: 32px;
-          transition: background-color 200ms;
-        }
-        .navbar__mobile-close:hover {
-          background-color: rgba(255,255,255,0.05);
-        }
-        .navbar__mobile-close:focus-visible {
-          outline: 2px solid var(--accent-focus);
-          outline-offset: 2px;
         }
 
         .navbar__mobile-links {
           list-style: none;
           display: flex;
           flex-direction: column;
-          gap: 8px;
+          gap: 16px;
+          align-items: center;
+          text-align: center;
         }
 
         .navbar__mobile-link {
-          display: flex;
-          align-items: center;
-          padding: 16px 24px;
-          min-height: 48px;
-          font-family: var(--font-body);
-          font-size: 18px;
-          font-weight: 500;
-          color: #000000;
+          display: inline-block;
+          font-family: var(--font-display, sans-serif);
+          font-size: clamp(32px, 8vw, 48px);
+          font-weight: 700;
+          color: rgba(255, 255, 255, 0.5);
           text-decoration: none;
-          background: #ffffff;
-          border-radius: 9999px;
-          transition: color 200ms, background-color 200ms;
+          transition: color 300ms, transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+          padding: 8px 16px;
         }
         .navbar__mobile-link:hover {
-          color: #000000;
-          background: var(--accent);
+          color: #ffffff;
+          transform: scale(1.05);
         }
         .navbar__mobile-link--active {
-          color: #000000;
-          background: var(--accent);
+          color: #ffffff;
         }
         .navbar__mobile-link:focus-visible {
           outline: 2px solid var(--accent-focus);
           outline-offset: 2px;
+          border-radius: 8px;
         }
 
         /* Responsive Breakpoints */

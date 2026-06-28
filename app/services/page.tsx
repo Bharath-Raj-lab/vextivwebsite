@@ -124,7 +124,7 @@ export default function ServicesPage() {
       {serviceSchemas.map((schema, i) => (
         <JsonLd key={i} schema={schema} />
       ))}
-      
+
       <ServicesHero />
 
       <main className="bg-black">
@@ -142,7 +142,7 @@ export default function ServicesPage() {
             Tell us about your business and we&apos;ll recommend the best
             starting point — no pressure, no jargon.
           </p>
-          <Link href="/contact" className="svc-bottom-btn">
+          <Link href="/contact" className="svc-bottom-btn btn-premium">
             <span>Book a Free Consultation</span>
             <ArrowIcon />
           </Link>
@@ -342,7 +342,7 @@ export default function ServicesPage() {
           text-transform: uppercase;
           text-decoration: none;
           color: var(--bg-base);
-          background-color: var(--accent);
+          background: var(--gradient-btn);
           border-radius: 9999px;
           padding: 14px 32px;
           transition: filter 0.2s ease, transform 0.2s ease;

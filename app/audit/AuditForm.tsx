@@ -207,8 +207,8 @@ export default function AuditForm() {
     };
 
     // Strip explicit null UTM keys so the schema receives undefined (treated as null via .nullish())
-    if (!body.utm_source)   delete body.utm_source;
-    if (!body.utm_medium)   delete body.utm_medium;
+    if (!body.utm_source) delete body.utm_source;
+    if (!body.utm_medium) delete body.utm_medium;
     if (!body.utm_campaign) delete body.utm_campaign;
 
     logger.debug('[AuditForm] POST /api/audit body:', JSON.stringify(body, null, 2));
@@ -553,7 +553,7 @@ export default function AuditForm() {
               <button
                 id="audit-submit"
                 type="submit"
-                className="audit-submit"
+                className="audit-submit-btn btn-premium"
                 disabled={status === 'submitting'}
                 aria-disabled={status === 'submitting'}
               >
@@ -822,7 +822,7 @@ function AuditStyles() {
         justify-content: center;
         width: 100%;
         padding: 14px 24px;
-        background-color: var(--accent);
+        background: var(--gradient-btn);
         color: var(--bg-base);
         font-family: var(--font-body);
         font-size: var(--text-sm);
@@ -931,7 +931,7 @@ function AuditStyles() {
         align-items: center;
         gap: 6px;
         padding: 12px 24px;
-        background-color: var(--accent);
+        background: var(--gradient-btn);
         color: var(--bg-base);
         font-family: var(--font-body);
         font-size: var(--text-sm);
