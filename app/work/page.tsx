@@ -56,8 +56,8 @@ export default function WorkPage() {
       </div>
       <div className="relative z-10">
         <JsonLd schema={breadcrumbSchema} />
-      <div className="container mx-auto px-6 max-w-7xl">
-        <header className="mb-16">
+      <div className="w-full">
+        <header className="mb-16 px-4 md:px-8 lg:px-12">
           <h1 className="text-[length:var(--text-section)] font-display font-bold tracking-tight mb-4">
             Our <span className="text-[var(--accent)]">Work</span>
           </h1>

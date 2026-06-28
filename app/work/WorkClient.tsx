@@ -130,7 +130,7 @@ export default function WorkClient({ initialCaseStudies }: { initialCaseStudies:
       {/* ── Project Grid ─────────────────────────────────────────── */}
       <motion.div
         layout
-        className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8"
+        className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 md:gap-6 px-4 md:px-8 lg:px-12"
       >
         <AnimatePresence mode="popLayout" initial={false}>
           {filteredStudies.map((study) => (

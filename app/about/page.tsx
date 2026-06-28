@@ -257,7 +257,7 @@ function AboutCTA() {
           questions, and come back with a clear plan — no jargon, no templates,
           no wasted time.
         </p>
-        <Link href="/contact" className="ab-cta-btn" aria-label="Start a project with VeXtiv">
+        <Link href="/contact" className="ab-cta-btn btn-premium" aria-label="Start a project with VeXtiv">
           <span>Start a Conversation</span>
           {/* Arrow */}
           <svg
@@ -786,8 +786,6 @@ export default function AboutPage() {
           display: inline-flex;
           align-items: center;
           gap: 10px;
-          background: var(--gradient-btn);
-          color: var(--bg-base);
           font-family: var(--font-body);
           font-size: var(--text-sm);
           font-weight: 700;
@@ -795,19 +793,6 @@ export default function AboutPage() {
           text-transform: uppercase;
           text-decoration: none;
           padding: 16px 32px;
-          border-radius: 9999px;
-          transition: transform 0.2s ease, filter 0.2s ease;
-          box-shadow: 0 0 32px var(--accent-fill-25);
-        }
-
-        .ab-cta-btn:hover {
-          transform: scale(1.04);
-          filter: brightness(1.08);
-        }
-
-        .ab-cta-btn:focus-visible {
-          outline: 2px solid var(--accent-focus);
-          outline-offset: 4px;
         }
 
         /* ─────────────────────────────────────
