@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { caseStudies } from '@/lib/case-studies';
 import WorkClient from './WorkClient';
 import JsonLd from '@/components/seo/JsonLd';
+import PageBackground from "@/components/ui/PageBackground";
 
 export const revalidate = 3600; // SSG + ISR
 
@@ -48,8 +49,13 @@ const breadcrumbSchema: Record<string, unknown> = {
 
 export default function WorkPage() {
   return (
-    <div className="min-h-screen bg-[var(--bg-base)] pt-[calc(var(--navbar-height)+4rem)] pb-24">
-      <JsonLd schema={breadcrumbSchema} />
+    <div className="relative min-h-screen bg-[var(--bg-base)] pt-[calc(var(--navbar-height)+4rem)] pb-24">
+      <div className="absolute top-0 left-0 w-full h-[60vh] min-h-[500px] overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
+        <PageBackground />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[var(--bg-base)] pointer-events-none" />
+      </div>
+      <div className="relative z-10">
+        <JsonLd schema={breadcrumbSchema} />
       <div className="container mx-auto px-6 max-w-7xl">
         <header className="mb-16">
           <h1 className="text-[length:var(--text-section)] font-display font-bold tracking-tight mb-4">
@@ -61,6 +67,7 @@ export default function WorkPage() {
         </header>
 
         <WorkClient initialCaseStudies={caseStudies} />
+      </div>
       </div>
     </div>
   );

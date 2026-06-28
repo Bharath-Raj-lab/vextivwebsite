@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import FaqAccordion from "@/components/sections/FaqAccordion";
+import PageBackground from "@/components/ui/PageBackground";
 
 // ─── SSG ──────────────────────────────────────────────────────────────────────
 export const dynamic = "force-static";
@@ -67,6 +68,7 @@ function IconArrow() {
 function FaqHero() {
   return (
     <div className="fq-hero">
+      <PageBackground />
       <div className="fq-hero-glow" aria-hidden="true" />
       <div className="fq-hero-grid" aria-hidden="true" />
 

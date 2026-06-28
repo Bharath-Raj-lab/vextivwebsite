@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import PageBackground from "@/components/ui/PageBackground";
 
 // ─── SSG ──────────────────────────────────────────────────────────────────────
 export const dynamic = "force-static";
@@ -160,6 +161,7 @@ function IconMail() {
 function CareersHero() {
   return (
     <div className="cr-hero">
+      <PageBackground />
       <div className="cr-hero-glow" aria-hidden="true" />
       <div className="cr-hero-grid" aria-hidden="true" />
 

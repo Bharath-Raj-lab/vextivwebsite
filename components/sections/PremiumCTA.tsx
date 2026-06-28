@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
+import WordSpinner from "@/components/ui/WordSpinner";
 
 // ─── CTA Section ──────────────────────────────────────────────────────────────
 // Layout: two-column, content left / image right (with subtle tilt like reference).
@@ -61,7 +62,7 @@ export default function PremiumCTA() {
                 color: "#ffffff",
               }}
             >
-              Ready To Grow<br />Your Business Online?
+              Ready To Grow<br />Your <WordSpinner words={["Business", "Brand", "Audience", "Startup", "Sales"]} style={{ color: "#C8F04D" }} /> Online?
             </h2>
 
             {/* Description */}

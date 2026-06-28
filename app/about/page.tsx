@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import PageBackground from "@/components/ui/PageBackground";
 
 // ─── SSG: no dynamic segments, statically generated at build time ─────────────
 export const dynamic = "force-static";
@@ -66,6 +67,7 @@ const VALUES: readonly Value[] = [
 function AboutHero() {
   return (
     <div className="ab-hero">
+      <PageBackground />
       {/* Ambient glow */}
       <div className="ab-hero-glow" aria-hidden="true" />
       {/* Dot grid */}
@@ -116,14 +118,14 @@ function StudioStory() {
 }
 
 const CAROUSEL_MEMBERS = [
-  { id: "1", name: "Priya", role: "Design Lead", image: "/team/avatar_priya.png", isLeadership: false },
-  { id: "2", name: "Maya", role: "Product Manager", image: "/team/avatar_maya.png", isLeadership: false },
+  { id: "1", name: "Maya", role: "Design Lead", image: "/team/avatar_priya.png", isLeadership: false },
+  { id: "2", name: "Sowmya", role: "Product Manager", image: "/team/avatar_maya.png", isLeadership: false },
   { id: "3", name: "Sarah", role: "UX Researcher", image: "/team/avatar_sarah.png", isLeadership: false },
   { id: "4", name: "Bathini Ganesh", role: "Co-Founder & CTO", image: "/team/avatar_ganesh.png", isLeadership: true },
   { id: "5", name: "Alloney Bharath Raj", role: "Founder & CEO", image: "/team/avatar_bharath.png", isLeadership: true },
   { id: "6", name: "Yoganandh", role: "Co-Founder & COO", image: "/team/avatar_yoganandh.png", isLeadership: true },
   { id: "7", name: "Rohan", role: "Data Wrangler", image: "/team/avatar_rohan.png", isLeadership: false },
-  { id: "8", name: "David", role: "Frontend Dev", image: "/team/avatar_david.png", isLeadership: false },
+  { id: "8", name: "Vishnu", role: "Frontend Dev", image: "/team/avatar_david.png", isLeadership: false },
 ];
 
 function TeamSection() {
@@ -189,33 +191,49 @@ function TeamSection() {
 // ─── Section: Values ─────────────────────────────────────────────────────────
 function ValuesSection() {
   return (
-    <section className="ab-section ab-values-section" aria-labelledby="ab-values-heading">
+    <section className="ab-section ab-timeline-section" aria-labelledby="ab-values-heading">
       <div className="ab-inner">
         {/* Header */}
-        <div className="ab-section-hdr">
+        <div className="ab-section-hdr ab-timeline-hdr">
           <p className="ab-eyebrow">What We Stand For</p>
           <h2 id="ab-values-heading" className="ab-section-title">
             Three things we never compromise on.
           </h2>
         </div>
 
-        {/* Values list */}
-        <ul className="ab-values-grid" role="list">
-          {VALUES.map((value, i) => (
-            <li key={value.id} className="ab-value-item">
-              {/* Number */}
-              <span className="ab-value-num" aria-hidden="true">
-                0{i + 1}
-              </span>
-              {/* Icon */}
-              <span className="ab-value-icon" aria-hidden="true">
-                {value.icon}
-              </span>
-              <h3 className="ab-value-title">{value.title}</h3>
-              <p className="ab-value-body">{value.body}</p>
-            </li>
-          ))}
-        </ul>
+        {/* Timeline Container */}
+        <div className="ab-timeline-container">
+
+          {/* Background SVG Path */}
+          <div className="ab-timeline-svg-wrap">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="ab-timeline-svg">
+              <path
+                d="M 50,0 C 50,15 55,5 55,20 C 55,35 45,35 45,50 C 45,65 55,65 55,80 C 55,95 50,85 50,100"
+                stroke="var(--accent)"
+                strokeWidth="1.5"
+                fill="none"
+                vectorEffect="non-scaling-stroke"
+              />
+            </svg>
+          </div>
+
+          {/* Items */}
+          <div className="ab-timeline-items">
+            {VALUES.map((val, i) => (
+              <div key={val.id} className={`ab-timeline-item item-${i + 1}`}>
+                <div className="ab-timeline-dot" aria-hidden="true"></div>
+                <div className="ab-timeline-content">
+                  <div className="ab-timeline-title-wrap">
+                    <span className="ab-timeline-num">0{i + 1}.</span>
+                    <h3 className="ab-timeline-title">{val.title}</h3>
+                  </div>
+                  <p className="ab-timeline-body">{val.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
       </div>
     </section>
   );
@@ -560,75 +578,144 @@ export default function AboutPage() {
         }
 
         /* ─────────────────────────────────────
-           VALUES
+           VALUES (TIMELINE)
         ───────────────────────────────────── */
 
-        .ab-values-section {
+        .ab-timeline-section {
           background-color: var(--bg-surface-1);
           border-top: 1px solid var(--border-subtle);
-        }
-
-        .ab-values-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 2px;
-          list-style: none;
-          padding: 0;
-          margin: 0;
-          border: 1px solid var(--border-default);
-          border-radius: 20px;
           overflow: hidden;
         }
 
-        .ab-value-item {
+        .ab-timeline-hdr {
+          text-align: center;
+          margin-bottom: clamp(64px, 8vw, 100px);
+        }
+
+        .ab-timeline-container {
+          position: relative;
+          width: 100%;
+          height: 800px; /* Increased height for better vertical pacing */
+        }
+
+        .ab-timeline-svg-wrap {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+        }
+
+        .ab-timeline-svg {
+          width: 100%;
+          height: 100%;
+          overflow: visible;
+        }
+
+        .ab-timeline-item {
+          position: absolute;
+          display: flex;
+        }
+
+        .ab-timeline-dot {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background-color: var(--accent);
+          box-shadow: 0 0 12px var(--accent-fill-25);
+          z-index: 2;
+          flex-shrink: 0;
+        }
+
+        .ab-timeline-content {
           display: flex;
           flex-direction: column;
-          gap: 16px;
-          padding: clamp(32px, 4vw, 48px);
-          background-color: var(--bg-surface-2);
-          border-right: 1px solid var(--border-default);
-          transition: background-color 0.25s ease;
-          position: relative;
+          width: 100%;
         }
 
-        .ab-value-item:last-child {
-          border-right: none;
+        .ab-timeline-title-wrap {
+          display: flex;
+          align-items: baseline;
+          gap: 8px;
+          margin-bottom: 12px;
         }
 
-        .ab-value-item:hover {
-          background-color: var(--accent-fill-08);
-        }
-
-        .ab-value-num {
-          font-family: var(--font-body);
-          font-size: var(--text-2xs);
+        .ab-timeline-num {
+          font-family: var(--font-display);
+          font-size: var(--text-lg);
           font-weight: 700;
-          letter-spacing: var(--tracking-number);
-          color: var(--text-very-muted);
-        }
-
-        .ab-value-icon {
-          font-size: 28px;
-          line-height: 1;
           color: var(--text-accent);
-          display: block;
+          font-style: italic;
         }
 
-        .ab-value-title {
+        .ab-timeline-title {
           font-family: var(--font-display);
           font-size: var(--text-2xl);
           font-weight: 700;
-          letter-spacing: -0.02em;
           color: var(--text-primary);
-          line-height: 1.2;
+          letter-spacing: -0.02em;
         }
 
-        .ab-value-body {
+        .ab-timeline-body {
           font-family: var(--font-body);
-          font-size: var(--text-base);
+          font-size: var(--text-md);
           font-weight: 300;
-          line-height: 1.75;
           color: var(--text-secondary);
+          line-height: 1.6;
+          max-width: 440px; /* Balanced text width */
+        }
+
+        /* Desktop Positioning */
+        .ab-timeline-item.item-1 {
+          top: 20%;
+          right: 45%; /* Matches SVG path x=55 */
+          left: 0;
+          transform: translateY(-50%);
+          padding-right: 40px; /* More space from dot to text */
+        }
+        .item-1 .ab-timeline-dot {
+          position: absolute;
+          right: -5px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+        .item-1 .ab-timeline-content {
+          text-align: right;
+          align-items: flex-end;
+        }
+
+        .ab-timeline-item.item-2 {
+          top: 50%;
+          left: 45%; /* Matches SVG path x=45 */
+          right: 0;
+          transform: translateY(-50%);
+          padding-left: 40px;
+        }
+        .item-2 .ab-timeline-dot {
+          position: absolute;
+          left: -5px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+        .item-2 .ab-timeline-content {
+          text-align: left;
+          align-items: flex-start;
+        }
+
+        .ab-timeline-item.item-3 {
+          top: 80%;
+          right: 45%; /* Matches SVG path x=55 */
+          left: 0;
+          transform: translateY(-50%);
+          padding-right: 40px;
+        }
+        .item-3 .ab-timeline-dot {
+          position: absolute;
+          right: -5px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+        .item-3 .ab-timeline-content {
+          text-align: right;
+          align-items: flex-end;
         }
 
         /* ─────────────────────────────────────
@@ -762,17 +849,48 @@ export default function AboutPage() {
             grid-template-columns: repeat(2, 1fr);
           }
 
-          .ab-values-grid {
-            grid-template-columns: 1fr;
+          .ab-timeline-container {
+            height: auto;
+            padding-left: 40px; 
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
+            width: 100%;
           }
-
-          .ab-value-item {
-            border-right: none;
-            border-bottom: 1px solid var(--border-default);
+          .ab-timeline-svg-wrap {
+            display: none;
           }
-
-          .ab-value-item:last-child {
-            border-bottom: none;
+          .ab-timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 16px; 
+            width: 2px;
+            background: var(--accent);
+            opacity: 0.3;
+          }
+          .ab-timeline-item {
+            position: relative !important;
+            top: auto !important;
+            left: auto !important;
+            right: auto !important;
+            transform: none !important;
+            padding: 0 !important;
+            width: 100% !important;
+          }
+          .ab-timeline-dot {
+            position: absolute !important;
+            left: -28px !important; 
+            top: 8px !important;
+            right: auto !important;
+            transform: none !important;
+          }
+          .item-1 .ab-timeline-content,
+          .item-2 .ab-timeline-content,
+          .item-3 .ab-timeline-content {
+            text-align: left !important;
+            align-items: flex-start !important;
           }
         }
 

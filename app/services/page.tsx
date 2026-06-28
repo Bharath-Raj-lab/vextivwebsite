@@ -3,6 +3,7 @@ import Link from "next/link";
 import JsonLd from "@/components/seo/JsonLd";
 import { SERVICES } from "./servicesData";
 import { StickyServices } from "./StickyServices";
+import PageBackground from "@/components/ui/PageBackground";
 
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
@@ -60,6 +61,7 @@ function ArrowIcon() {
 function ServicesHero() {
   return (
     <div className="svc-hero">
+      <PageBackground />
       <div className="svc-hero-glow" aria-hidden="true" />
       <div className="svc-hero-grid" aria-hidden="true" />
 

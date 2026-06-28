@@ -31,6 +31,7 @@ import {
   trackFormSubmitSuccess,
   trackFormSubmitError,
 } from '@/lib/analytics';
+import PageBackground from "@/components/ui/PageBackground";
 
 // Use the INPUT type (pre-transform) for useForm — zodResolver returns this
 // to RHF. Both the form and submit handler share the same input type;
@@ -188,6 +189,7 @@ export default function ContactForm() {
 
       {/* ── Hero header ── */}
       <section className="cp-hero" aria-label="Contact page header">
+        <PageBackground />
         <div className="cp-hero__inner">
           <p className="cp-eyebrow">Let&apos;s work together</p>
           <h1 className="cp-hero__heading">

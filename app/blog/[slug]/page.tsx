@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { blogPosts, getPostBySlug, getRelatedPosts } from '@/lib/blog';
 import BlogArticleClient from './BlogArticleClient';
 import JsonLd from '@/components/seo/JsonLd';
+import PageBackground from "@/components/ui/PageBackground";
 
 export const revalidate = 3600;
 
@@ -136,8 +137,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   };
 
   return (
-    <div className="min-h-screen bg-[var(--bg-base)] pt-[calc(var(--navbar-height)+4rem)] pb-24">
-      <JsonLd schema={breadcrumbSchema} />
+    <div className="relative min-h-screen bg-[var(--bg-base)] pt-[calc(var(--navbar-height)+4rem)] pb-24">
+      <div className="absolute top-0 left-0 w-full h-[60vh] min-h-[500px] overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
+        <PageBackground />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[var(--bg-base)] pointer-events-none" />
+      </div>
+      <div className="relative z-10">
+        <JsonLd schema={breadcrumbSchema} />
       <JsonLd schema={articleSchema} />
       <BlogArticleClient slug={post.slug} />
 
@@ -239,6 +245,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </section>
         )}
       </article>
+      </div>
     </div>
   );
 }

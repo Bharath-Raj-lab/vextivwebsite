@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PricingFaqAccordion from "./PricingFaqAccordion";
 import { PricingCtaLink, AddonCtaLink, BottomCtaLink } from "./PricingCtaLinks";
+import PageBackground from "@/components/ui/PageBackground";
 
 // ─── Metadata (SSG, Server Component) ─────────────────────────────────────────
 export const metadata: Metadata = {
@@ -475,6 +476,7 @@ function ServiceGroup({
 function PricingHero() {
   return (
     <div className="pricing-hero">
+      <PageBackground />
       <div className="pricing-hero-glow" aria-hidden="true" />
       <div className="pricing-hero-grid" aria-hidden="true" />
       <div className="pricing-hero-inner">
