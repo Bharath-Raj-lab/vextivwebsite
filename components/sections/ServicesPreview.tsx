@@ -428,11 +428,8 @@ export default function ServicesPreview() {
 
       <div className="sv-inner">
         {/* Header */}
-        <motion.div
-          className="sv-header"
-          initial={{ opacity: 0, y: 30 }}
-          animate={visible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        <div
+          className={`sv-header ${visible ? 'animate-fade-up' : 'opacity-0'}`}
         >
           <p className="sv-eyebrow">What We Do</p>
           <h2 className="sv-title">
@@ -444,16 +441,13 @@ export default function ServicesPreview() {
               ? 'Tap any card to explore our services.'
               : 'Move your cursor across the cards to explore our services.'}
           </p>
-        </motion.div>
+        </div>
 
         {/* Fan Deck */}
-        <motion.div
-          className="sv-deck"
+        <div
+          className={`sv-deck ${visible ? 'animate-fade-up-lg delay-200' : 'opacity-0'}`}
           style={{ height: deckHeight }}
           onMouseLeave={() => !isMobile && setActiveIndex(null)}
-          initial={{ opacity: 0, y: 60 }}
-          animate={visible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
         >
           {SERVICES.map((service, index) => {
             const { y, scale } = getWave(index);
@@ -471,7 +465,7 @@ export default function ServicesPreview() {
               />
             );
           })}
-        </motion.div>
+        </div>
 
         {/* Mobile Modal Overlay */}
         <AnimatePresence>

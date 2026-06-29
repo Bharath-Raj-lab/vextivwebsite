@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import Link from 'next/link';
+
 import { caseStudies, getCaseStudyBySlug } from '@/lib/case-studies';
 import CaseStudyClient, { CaseStudyCtaLink, CaseStudyLiveLink } from './CaseStudyClient';
 import JsonLd from '@/components/seo/JsonLd';
@@ -172,7 +172,13 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                       {metric.value}
                     </p>
                     <p className="text-sm text-[var(--text-secondary)]">
-                      {metric.label} {metric.isIllustrative && <span className="italic text-[var(--text-muted)] text-xs ml-1">(Illustrative)</span>}
+                      {metric.label}{' '}
+                      {metric.isIllustrative && metric.status !== 'estimate' && (
+                        <span className="italic text-[var(--text-muted)] text-xs ml-1">(Illustrative)</span>
+                      )}
+                      {metric.status === 'estimate' && (
+                        <span className="inline-block text-[10px] uppercase tracking-wider text-amber-400 border border-amber-400/40 px-1.5 py-0.5 rounded-sm ml-1">Estimate</span>
+                      )}
                     </p>
                   </div>
                 ))}

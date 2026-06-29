@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 interface InteractiveProjectGalleryProps {
   images: string[];
@@ -163,12 +164,11 @@ export default function InteractiveProjectGallery({ images }: InteractiveProject
               const animClass = `float-anim-${globalIndex % 6}`;
 
               return (
-                <motion.div
+                <ScrollReveal
                   key={globalIndex}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                  animationClass="animate-fade-up-lg"
+                  delayClass={`delay-${(i % 10) * 100}`}
+                  rootMargin="-100px"
                   style={{
                     position: "absolute",
                     top: style.top,
@@ -190,7 +190,7 @@ export default function InteractiveProjectGallery({ images }: InteractiveProject
                     />
                     <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
                   </div>
-                </motion.div>
+                </ScrollReveal>
               );
             })}
           </div>
@@ -202,12 +202,10 @@ export default function InteractiveProjectGallery({ images }: InteractiveProject
         {images.map((img, i) => {
           const animClass = `float-anim-${i % 6}`;
           return (
-            <motion.div
+            <ScrollReveal
               key={i}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6 }}
+              animationClass="animate-fade-scale"
+              rootMargin="-50px"
               className={`group relative flex-none w-[85vw] h-[50vh] snap-center rounded-2xl overflow-hidden border border-white/10 shadow-xl cursor-pointer ${animClass}`}
               onClick={() => openLightbox(i)}
             >
@@ -221,7 +219,7 @@ export default function InteractiveProjectGallery({ images }: InteractiveProject
                 />
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
               </div>
-            </motion.div>
+            </ScrollReveal>
           );
         })}
         <div className="flex-none w-[4vw]" />

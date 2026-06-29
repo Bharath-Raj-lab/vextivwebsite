@@ -11,7 +11,7 @@ export const blogPosts: BlogPost[] = [
       <h3>The End of the Waiting Game</h3>
       <p>During peak hours in bustling areas like Banjara Hills, customers often wait 10-15 minutes just to place an order. A digital QR menu empowers guests to scan, browse, and order the moment they sit down. This frictionless experience doesn't just improve satisfaction—it directly accelerates table turnover.</p>
       <h3>Upselling Without the Awkwardness</h3>
-      <p>Our data shows that digital menus increase average order values by 15-20%. Why? Because high-quality photos of biryani, mocktails, and desserts look irresistible on a smartphone screen, and prompting add-ons is built seamlessly into the checkout flow.</p>
+      <p>Digital menus are widely reported to increase average order value, often in the 15-20% range. Why? Because high-quality photos of biryani, mocktails, and desserts look irresistible on a smartphone screen, and prompting add-ons is built seamlessly into the checkout flow.</p>
       <h3>Instant Updates</h3>
       <p>Out of paneer? Prices changing due to inflation? With a digital menu, you update your offerings in real-time without the recurring costs of reprinting paper menus.</p>
       <p>It's time for Hyderabad's restaurants to embrace the digital transition. The investment pays for itself within the first month.</p>

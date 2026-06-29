@@ -9,6 +9,8 @@ interface Testimonial {
   title: string;
   company: string;
   rating: number;
+  /** Set to true only after the client quote has been confirmed as genuine. */
+  verified: boolean;
 }
 
 const TESTIMONIALS: Testimonial[] = [
@@ -18,7 +20,8 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Arjun Reddy",
     title: "Owner",
     company: "Brew & Co.",
-    rating: 5
+    rating: 5,
+    verified: true
   },
   {
     id: "t2",
@@ -26,7 +29,8 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Sneha Kapoor",
     title: "Founder",
     company: "ShopFlow",
-    rating: 4
+    rating: 4,
+    verified: true
   },
   {
     id: "t3",
@@ -34,7 +38,8 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Vikram Rao",
     title: "Director",
     company: "EstateEdge",
-    rating: 5
+    rating: 5,
+    verified: true
   },
   {
     id: "t4",
@@ -42,7 +47,8 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Priya Sharma",
     title: "Marketing Head",
     company: "TechNova",
-    rating: 5
+    rating: 5,
+    verified: true
   },
   {
     id: "t5",
@@ -50,7 +56,8 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Rohan Desai",
     title: "CEO",
     company: "Elevate Logistics",
-    rating: 4
+    rating: 4,
+    verified: true
   },
   {
     id: "t6",
@@ -58,23 +65,28 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Ananya Singh",
     title: "Creative Director",
     company: "Luxe Interiors",
-    rating: 5
+    rating: 5,
+    verified: true
   },
+  // UNVERIFIED — confirm with actual client before flipping to true. Do not fabricate a quote to replace this.
   {
     id: "t7",
     quote: "Fast, responsive, and incredibly professional. The site performance metrics improved by over 200% since launch.",
     name: "Karthik Iyer",
     title: "CTO",
     company: "FinStream",
-    rating: 5
+    rating: 5,
+    verified: false
   },
+  // UNVERIFIED — confirm with actual client before flipping to true. Do not fabricate a quote to replace this.
   {
     id: "t8",
     quote: "I was hesitant at first, but the results speak for themselves. We recouped our investment within the first two months.",
     name: "Meera Joshi",
     title: "Co-Founder",
     company: "Wellness Box",
-    rating: 3
+    rating: 3,
+    verified: false
   },
   {
     id: "t9",
@@ -82,7 +94,8 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Siddharth Nair",
     title: "Product Manager",
     company: "CloudSync",
-    rating: 4
+    rating: 4,
+    verified: true
   }
 ];
 
@@ -90,12 +103,28 @@ const getInitials = (name: string) => {
   return name.split(" ").map(n => n[0]).join("").substring(0, 2);
 };
 
+/** Fallback rendered when fewer than 2 verified testimonials are available. */
+const TRUST_TAGS = [
+  "Restaurants & Cafes",
+  "Real Estate",
+  "Health & Fitness",
+  "Hospitality",
+  "Events & Entertainment",
+  "Food & Beverage",
+  "Retail",
+  "Startups",
+];
+
 export default function Testimonials() {
-  const col1 = [TESTIMONIALS[0], TESTIMONIALS[3], TESTIMONIALS[6]];
-  const col2 = [TESTIMONIALS[1], TESTIMONIALS[4], TESTIMONIALS[7]];
-  const col3 = [TESTIMONIALS[2], TESTIMONIALS[5], TESTIMONIALS[8]];
+  // Only render testimonials that have been confirmed with the actual client.
+  const verified = TESTIMONIALS.filter((t) => t.verified);
+
+  const col1 = [verified[0], verified[3], verified[6]].filter(Boolean) as Testimonial[];
+  const col2 = [verified[1], verified[4], verified[7]].filter(Boolean) as Testimonial[];
+  const col3 = [verified[2], verified[5], verified[8]].filter(Boolean) as Testimonial[];
 
   const renderColumn = (items: Testimonial[], colIndex: number) => {
+    if (items.length === 0) return null;
     // Duplicate the items array to create a seamless infinite scroll loop
     const duplicatedItems = [...items, ...items];
 
@@ -147,11 +176,23 @@ export default function Testimonials() {
           Results Our Clients Talk About
         </h2>
 
-        <div className="testimonials__wall">
-          {renderColumn(col1, 1)}
-          {renderColumn(col2, 2)}
-          {renderColumn(col3, 3)}
-        </div>
+        {verified.length >= 2 ? (
+          <div className="testimonials__wall">
+            {renderColumn(col1, 1)}
+            {renderColumn(col2, 2)}
+            {renderColumn(col3, 3)}
+          </div>
+        ) : (
+          /* Fallback: industry trust bar when not enough verified testimonials exist */
+          <div className="testimonials__trust-bar">
+            <p className="testimonials__trust-label">Industries we work with</p>
+            <div className="testimonials__trust-tags">
+              {TRUST_TAGS.map((tag) => (
+                <span key={tag} className="testimonials__trust-tag">{tag}</span>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       <style>{`
@@ -349,6 +390,39 @@ export default function Testimonials() {
           .testimonial-card {
             padding: 24px;
           }
+        }
+        /* Fallback: industry trust bar */
+        .testimonials__trust-bar {
+          text-align: center;
+          padding: 48px 0 16px;
+        }
+
+        .testimonials__trust-label {
+          font-family: var(--font-body);
+          font-size: 13px;
+          font-weight: 500;
+          letter-spacing: var(--tracking-eyebrow);
+          text-transform: uppercase;
+          color: var(--text-muted);
+          margin-bottom: 24px;
+        }
+
+        .testimonials__trust-tags {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 12px;
+        }
+
+        .testimonials__trust-tag {
+          display: inline-block;
+          padding: 8px 18px;
+          border-radius: 999px;
+          border: 1px solid var(--border-subtle);
+          background: rgba(255, 255, 255, 0.03);
+          font-family: var(--font-body);
+          font-size: 14px;
+          color: var(--text-secondary);
         }
       `}</style>
     </section>

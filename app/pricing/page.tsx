@@ -209,7 +209,7 @@ const BRANDING_TIERS: PricingTier[] = [
   {
     id: "brand-starter",
     name: "Starter",
-    price: "₹7,999",
+    price: "₹5,999",
     oneTimeNote: "One-time fee · no recurring charges",
     isMostChosen: false,
     tagline: "A professional identity to launch your brand.",
@@ -232,7 +232,7 @@ const BRANDING_TIERS: PricingTier[] = [
   {
     id: "brand-business",
     name: "Business",
-    price: "₹14,999",
+    price: "₹9,999",
     oneTimeNote: "One-time fee · no recurring charges",
     isMostChosen: true,
     tagline: "A brand system people remember and trust.",
@@ -541,7 +541,7 @@ function QuickLaunchCard() {
       </div>
       <div className="quick-launch-right">
         <p className="quick-launch-from">Starting from</p>
-        <p className="quick-launch-price">₹9,999</p>
+        <p className="quick-launch-price">₹5,999</p>
         <PricingCtaLink
           href="/contact"
           label="Get Started"
@@ -668,7 +668,7 @@ function WebsiteSection() {
             <span className="web-option-badge">One-Time</span>
           </span>
           <span className="web-option-cell">Long-term ownership, pay once</span>
-          <span className="web-option-cell web-option-cell--hide-mobile web-option-price">₹9,999–₹49,999+</span>
+          <span className="web-option-cell web-option-cell--hide-mobile web-option-price">₹5,999–₹49,999+</span>
         </div>
       </div>
 
@@ -716,7 +716,7 @@ function CustomSolutions() {
           </h2>
           <p className="custom-solutions-sub">
             Not every business fits a standard package. If you need a tailored
-            solution, we'll build it from scratch — scoped to your exact
+            solution, we&apos;ll build it from scratch — scoped to your exact
             requirements and budget.
           </p>
           <div className="custom-solutions-tags">
@@ -1464,7 +1464,24 @@ export default function PricingPage() {
 
         @media (max-width: 960px) {
           .pricing-cards-grid {
-            grid-template-columns: 1fr;
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            gap: 16px;
+            padding-top: 20px;
+            padding-bottom: 24px;
+            margin: -20px -20px 0 -20px;
+            padding-left: 20px;
+            padding-right: 20px;
+            scrollbar-width: none;
+          }
+          .pricing-cards-grid::-webkit-scrollbar {
+            display: none;
+          }
+          .pricing-cards-grid > .pricing-card {
+            flex: 0 0 calc(100% - 32px);
+            scroll-snap-align: center;
           }
         }
 
@@ -1509,7 +1526,7 @@ export default function PricingPage() {
           top: -1px;
           left: 50%;
           transform: translateX(-50%) translateY(-50%);
-          background: var(--accent);
+          background: var(--gradient-btn);
           color: #000;
           font-family: var(--font-body);
           font-size: var(--text-2xs);

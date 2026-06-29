@@ -158,7 +158,7 @@ export default function PremiumCTA() {
               }}
             >
               <Image
-                src="/cta-panel.png"
+                src="/cta-panel.webp"
                 alt="Vextiv digital workspace"
                 width={800}
                 height={520}

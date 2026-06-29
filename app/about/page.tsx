@@ -118,14 +118,14 @@ function StudioStory() {
 }
 
 const CAROUSEL_MEMBERS = [
-  { id: "1", name: "Maya", role: "Design Lead", image: "/team/avatar_priya.png", isLeadership: false },
-  { id: "2", name: "Sowmya", role: "Product Manager", image: "/team/avatar_maya.png", isLeadership: false },
-  { id: "3", name: "Sarah", role: "UX Researcher", image: "/team/avatar_sarah.png", isLeadership: false },
-  { id: "4", name: "Bathini Ganesh", role: "Co-Founder & CTO", image: "/team/avatar_ganesh.png", isLeadership: true },
-  { id: "5", name: "Alloney Bharath Raj", role: "Founder & CEO", image: "/team/avatar_bharath.png", isLeadership: true },
-  { id: "6", name: "Yoganandh", role: "Co-Founder & COO", image: "/team/avatar_yoganandh.png", isLeadership: true },
-  { id: "7", name: "Rohan", role: "Data Wrangler", image: "/team/avatar_rohan.png", isLeadership: false },
-  { id: "8", name: "Vishnu", role: "Frontend Dev", image: "/team/avatar_david.png", isLeadership: false },
+  { id: "1", name: "Maya", role: "Design Lead", image: "/team/avatar_priya.webp", isLeadership: false },
+  { id: "2", name: "Sowmya", role: "Product Manager", image: "/team/avatar_maya.webp", isLeadership: false },
+  { id: "3", name: "Sarah", role: "UX Researcher", image: "/team/avatar_sarah.webp", isLeadership: false },
+  { id: "4", name: "Bathini Ganesh", role: "Co-Founder & CTO", image: "/team/avatar_ganesh.webp", isLeadership: true },
+  { id: "5", name: "Alloney Bharath Raj", role: "Founder & CEO", image: "/team/avatar_bharath.webp", isLeadership: true },
+  { id: "6", name: "Yoganandh", role: "Co-Founder & COO", image: "/team/avatar_yoganandh.webp", isLeadership: true },
+  { id: "7", name: "Rohan", role: "Data Wrangler", image: "/team/avatar_rohan.webp", isLeadership: false },
+  { id: "8", name: "Vishnu", role: "Frontend Dev", image: "/team/avatar_david.webp", isLeadership: false },
 ];
 
 function TeamSection() {

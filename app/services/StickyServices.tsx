@@ -4,6 +4,7 @@ import React, { useRef, memo } from "react";
 import { motion, useScroll, useTransform, useSpring, MotionValue } from "framer-motion";
 import { ServiceItem } from "./servicesData";
 import Link from "next/link";
+import { useInViewCss } from "@/hooks/useInViewCss";
 
 export const StickyServices = ({ services }: { services: ServiceItem[] }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -57,17 +58,15 @@ const ServiceCard = memo(({
     restDelta: 0.001
   });
 
+  const { ref, isInView } = useInViewCss<HTMLDivElement>({ threshold: 0, rootMargin: "-50px", once: true });
+
   return (
-    <div id={service.id} className="sticky top-[100px] h-[92vh] lg:h-[85vh] w-full flex items-center justify-center">
+    <div id={service.id} ref={ref} className="sticky top-[100px] h-[92vh] lg:h-[85vh] w-full flex items-center justify-center">
       {service.image && (
         <link rel="preload" as="image" href={service.image} />
       )}
 
       <motion.div
-        initial={{ y: 80, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         style={{
           scale,
           willChange: "transform",
@@ -79,7 +78,7 @@ const ServiceCard = memo(({
           borderRadius: "28px",
           boxShadow: "0 30px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(255,255,255,0.05)"
         }}
-        className="group w-full h-full relative overflow-hidden flex flex-col lg:flex-row p-6 lg:p-8 gap-6 lg:gap-8 origin-top transition-colors duration-1000 hover:border-white/30"
+        className={`group w-full h-full relative overflow-hidden flex flex-col lg:flex-row p-6 lg:p-8 gap-6 lg:gap-8 origin-top transition-colors duration-1000 hover:border-white/30 ${isInView ? 'animate-fade-up-lg' : 'opacity-0'}`}
       >
         {/* MOBILE FULL BACKGROUND IMAGE */}
         <div className="absolute inset-0 z-0 block lg:hidden">

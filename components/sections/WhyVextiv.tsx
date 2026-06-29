@@ -156,7 +156,7 @@ function ReactiveLetter({
       unsubX();
       unsubY();
     };
-  }, [after, isHovered, isTapped, mouseX, mouseY, x, y, i]);
+  }, [after, isHovered, isTapped, mouseX, mouseY, x, y, i, prefersReducedMotion]);
 
   return (
     <motion.span

@@ -12,7 +12,6 @@ import {
   ArrowRight,
   MapPin,
   Mail,
-  Phone,
 } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 import Logo from "@/components/ui/Logo";

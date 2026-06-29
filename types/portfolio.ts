@@ -4,6 +4,8 @@ export interface CaseStudyMetric {
   label: string;
   value: string;
   isIllustrative: boolean;
+  /** Verification tier for this individual metric. Default: 'illustrative'. */
+  status: 'real' | 'estimate' | 'illustrative';
 }
 
 export interface CaseStudyContent {

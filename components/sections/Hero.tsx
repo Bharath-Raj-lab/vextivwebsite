@@ -112,31 +112,7 @@ export default function Hero() {
     };
   }, [prefersReduced, updateMask]);
 
-  // ── Animation variants ─────────────────────────────────────────────────────
-  const fadeUp = {
-    hidden: { opacity: 0, y: prefersReduced ? 0 : 28 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        delay: 0.3 + i * 0.18,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
-    }),
-  };
-
-  const fadeIn = {
-    hidden: { opacity: 0 },
-    visible: (i: number) => ({
-      opacity: 1,
-      transition: {
-        duration: 0.9,
-        delay: 0.5 + i * 0.15,
-        ease: "easeOut",
-      },
-    }),
-  };
+  // Removed animation variants as they are now handled by CSS
 
   return (
     <section
@@ -171,49 +147,37 @@ export default function Hero() {
         {/* Center headline */}
         <div className="hero__headline-wrap">
           <h1 id="hero-heading" className="hero__headline">
-            <motion.span
-              className="hero__headline-italic"
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              custom={0}
+            <span
+              className="hero__headline-italic animate-fade-up delay-300"
+              style={prefersReduced ? { animationDuration: '0.01ms' } : {}}
             >
               More Visibility.
-            </motion.span>
-            <motion.span
-              className="hero__headline-bold"
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              custom={1}
+            </span>
+            <span
+              className="hero__headline-bold animate-fade-up delay-500"
+              style={prefersReduced ? { animationDuration: '0.01ms' } : {}}
             >
               More Customers. More <span style={{ color: "#C8F04D" }}>Growth</span>.
-            </motion.span>
+            </span>
           </h1>
         </div>
 
         {/* Bottom content row */}
         <div className="hero__bottom">
           {/* Left description */}
-          <motion.div
-            className="hero__bottom-left"
-            variants={fadeIn}
-            initial="hidden"
-            animate="visible"
-            custom={2}
+          <div
+            className="hero__bottom-left animate-fade-in delay-800"
+            style={prefersReduced ? { animationDuration: '0.01ms' } : {}}
           >
             <p className="hero__description">
               We help businesses stand out with websites, branding, content, and smart digital systems.
             </p>
-          </motion.div>
+          </div>
 
           {/* Right CTA block */}
-          <motion.div
-            className="hero__bottom-right"
-            variants={fadeIn}
-            initial="hidden"
-            animate="visible"
-            custom={3}
+          <div
+            className="hero__bottom-right animate-fade-in delay-1000"
+            style={prefersReduced ? { animationDuration: '0.01ms' } : {}}
           >
             <div className="hero__ctas">
               <Link
@@ -236,7 +200,7 @@ export default function Hero() {
                 View Our Work
               </Link>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
@@ -268,7 +232,7 @@ export default function Hero() {
         .hero__base-img {
           width: 100%;
           height: 100%;
-          background-image: url('/assets/hero-bg-dark.png');
+          background-image: url('/assets/hero-bg-dark.webp');
           background-size: cover;
           background-position: center;
         }
@@ -301,7 +265,7 @@ export default function Hero() {
           pointer-events: none;
           opacity: 0;
           transition: opacity 0.8s ease;
-          background-image: url('/assets/hero-bg-reveal.png');
+          background-image: url('/assets/hero-bg-reveal.webp');
           background-size: cover;
           background-position: center;
           mix-blend-mode: screen;

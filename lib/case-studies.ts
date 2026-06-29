@@ -13,9 +13,9 @@ export const caseStudies: CaseStudy[] = [
     metricStatus: 'illustrative',
     thumbnail: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=1200',
     metrics: [
-      { label: 'Order Processing Time', value: '-30%', isIllustrative: true },
-      { label: 'Average Order Value', value: '+15%', isIllustrative: true },
-      { label: 'Customer Satisfaction', value: '4.8/5', isIllustrative: true },
+      { label: 'Order Processing Time', value: '-30%', isIllustrative: true, status: 'illustrative' },
+      { label: 'Average Order Value', value: '+15%', isIllustrative: true, status: 'illustrative' },
+      { label: 'Customer Satisfaction', value: '4.8/5', isIllustrative: true, status: 'illustrative' },
     ],
     content: {
       problem: 'Nizam Bistro was struggling with slow order taking during peak hours, leading to long wait times and occasional order errors. Their paper menus were also costly to update frequently.',
@@ -43,9 +43,9 @@ export const caseStudies: CaseStudy[] = [
     metricStatus: 'illustrative',
     thumbnail: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=1200',
     metrics: [
-      { label: 'Follower Growth', value: '+50k', isIllustrative: true },
-      { label: 'Engagement Rate', value: '8.5%', isIllustrative: true },
-      { label: 'Lead Generation', value: '+300%', isIllustrative: true },
+      { label: 'Follower Growth', value: '+50k', isIllustrative: true, status: 'illustrative' },
+      { label: 'Engagement Rate', value: '8.5%', isIllustrative: true, status: 'illustrative' },
+      { label: 'Lead Generation', value: '+300%', isIllustrative: true, status: 'illustrative' },
     ],
     content: {
       problem: 'IronCore Fitness had a great local presence but struggled to translate that into an engaging online community. Their content was inconsistent and lacked a clear visual identity.',
@@ -73,9 +73,9 @@ export const caseStudies: CaseStudy[] = [
     metricStatus: 'illustrative',
     thumbnail: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=1200',
     metrics: [
-      { label: 'Property Inquiries', value: '+200%', isIllustrative: true },
-      { label: 'Time on Site', value: '+3.5m', isIllustrative: true },
-      { label: 'Search Speed', value: '<0.5s', isIllustrative: true },
+      { label: 'Property Inquiries', value: '+200%', isIllustrative: true, status: 'illustrative' },
+      { label: 'Time on Site', value: '+3.5m', isIllustrative: true, status: 'illustrative' },
+      { label: 'Search Speed', value: '<0.5s', isIllustrative: true, status: 'illustrative' },
     ],
     content: {
       problem: 'Horizon Estates struggled with an antiquated property listing site that made it difficult for high-net-worth individuals to find luxury homes quickly. The mobile experience was practically non-existent.',
@@ -103,9 +103,9 @@ export const caseStudies: CaseStudy[] = [
     metricStatus: 'illustrative',
     thumbnail: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=1200',
     metrics: [
-      { label: 'Direct Bookings', value: '+45%', isIllustrative: true },
-      { label: 'Average Daily Rate', value: '+30%', isIllustrative: true },
-      { label: 'Guest Retention', value: '+15%', isIllustrative: true },
+      { label: 'Direct Bookings', value: '+45%', isIllustrative: true, status: 'illustrative' },
+      { label: 'Average Daily Rate', value: '+30%', isIllustrative: true, status: 'illustrative' },
+      { label: 'Guest Retention', value: '+15%', isIllustrative: true, status: 'illustrative' },
     ],
     content: {
       problem: 'The Monarch Retreat had a rich history but their visual identity felt dated, making it hard to justify premium pricing compared to newer, modern competitors in the area.',
@@ -133,9 +133,9 @@ export const caseStudies: CaseStudy[] = [
     metricStatus: 'illustrative',
     thumbnail: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&q=80&w=1200',
     metrics: [
-      { label: 'Entry Speed', value: '3s/person', isIllustrative: true },
-      { label: 'Fraudulent Tickets', value: '0%', isIllustrative: true },
-      { label: 'Peak Scans/Min', value: '450', isIllustrative: true },
+      { label: 'Entry Speed', value: '3s/person', isIllustrative: true, status: 'illustrative' },
+      { label: 'Fraudulent Tickets', value: '0%', isIllustrative: true, status: 'illustrative' },
+      { label: 'Peak Scans/Min', value: '450', isIllustrative: true, status: 'illustrative' },
     ],
     content: {
       problem: 'Previous iterations of the Sonic Waves Festival suffered from massive bottlenecks at the entrance due to slow ticket scanning and issues with counterfeit paper tickets.',
@@ -163,9 +163,9 @@ export const caseStudies: CaseStudy[] = [
     metricStatus: 'illustrative',
     thumbnail: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&q=80&w=1200',
     metrics: [
-      { label: 'Retail Distribution', value: '+50 Stores', isIllustrative: true },
-      { label: 'Brand Recognition', value: '+60%', isIllustrative: true },
-      { label: 'Packaging Costs', value: '-15%', isIllustrative: true },
+      { label: 'Retail Distribution', value: '+50 Stores', isIllustrative: true, status: 'illustrative' },
+      { label: 'Brand Recognition', value: '+60%', isIllustrative: true, status: 'illustrative' },
+      { label: 'Packaging Costs', value: '-15%', isIllustrative: true, status: 'illustrative' },
     ],
     content: {
       problem: 'Elevate Coffee Co. produced high-quality, ethically sourced beans, but their generic packaging failed to stand out on crowded supermarket shelves or convey their premium quality.',
@@ -193,9 +193,9 @@ export const caseStudies: CaseStudy[] = [
     metricStatus: 'illustrative',
     thumbnail: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=80&w=1200',
     metrics: [
-      { label: 'Engagement Rate', value: '11%', isIllustrative: true },
-      { label: 'Follower Growth', value: '+15k', isIllustrative: true },
-      { label: 'Weekend Bookings', value: '+20%', isIllustrative: true },
+      { label: 'Engagement Rate', value: '11%', isIllustrative: true, status: 'illustrative' },
+      { label: 'Follower Growth', value: '+15k', isIllustrative: true, status: 'illustrative' },
+      { label: 'Weekend Bookings', value: '+20%', isIllustrative: true, status: 'illustrative' },
     ],
     content: {
       problem: 'The Spice Trail had incredible food but minimal online presence. They relied heavily on walk-ins and word-of-mouth, missing out on a large audience of food enthusiasts on social media.',

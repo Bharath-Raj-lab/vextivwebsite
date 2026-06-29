@@ -33,13 +33,7 @@ export default function WhatsAppButton() {
   const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
 
   if (!phoneNumber) {
-    if (typeof window !== "undefined") {
-      console.warn(
-        "[WhatsAppButton] NEXT_PUBLIC_WHATSAPP_NUMBER is not set. " +
-          "The WhatsApp button will render as disabled. " +
-          "Set this env var in your .env.local to enable it."
-      );
-    }
+    // Intentionally omitting console warning per user request
   }
 
   const href = phoneNumber

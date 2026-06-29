@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useId, useRef, useEffect } from 'react';
+import { useState, useId } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
@@ -62,9 +62,6 @@ const indicatorVariants = {
 export default function WorkClient({ initialCaseStudies }: { initialCaseStudies: CaseStudy[] }) {
   const [activeFilter, setActiveFilter] = useState<PortfolioCategory>('All');
   const layoutId = useId();
-  
-  const containerRef = useRef<HTMLDivElement>(null);
-  const buttonRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({});
 
   const handleFilterClick = (category: PortfolioCategory) => {
     setActiveFilter(category);
