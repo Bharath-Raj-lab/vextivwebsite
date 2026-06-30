@@ -30,14 +30,14 @@ export default function WhatsAppButton() {
   // Do not render on excluded pages
   if (EXCLUDED_PATHS.includes(pathname)) return null;
 
-  const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+  const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "916300318824";
 
   if (!phoneNumber) {
     // Intentionally omitting console warning per user request
   }
 
   const href = phoneNumber
-    ? `https://wa.me/91${phoneNumber}?text=Hi%20Vextiv%2C%20I%27d%20like%20to%20discuss%20a%20project`
+    ? `https://wa.me/${phoneNumber}?text=Hi%20Vextiv%2C%20I%27d%20like%20to%20discuss%20a%20project`
     : undefined;
 
   const handleClick = () => {
@@ -115,7 +115,7 @@ export default function WhatsAppButton() {
           className="wa-btn wa-btn--disabled"
           aria-label="Chat with Vextiv on WhatsApp (unavailable)"
           aria-disabled="true"
-          role="img"
+          role="button"
         >
           <WhatsAppIcon />
         </span>

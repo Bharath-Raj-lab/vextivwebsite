@@ -10,9 +10,11 @@ import Testimonials from "@/components/sections/Testimonials";
 import PremiumCTA from "@/components/sections/PremiumCTA";
 import ScrollDepthTracker from "@/components/sections/ScrollDepthTracker";
 
+import { BASE_URL } from "@/lib/constants";
+
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vextiv.tech"),
+  metadataBase: new URL(BASE_URL),
   title: "VeXtiv | Digital Growth Agency in Hyderabad",
   description:
     "VeXtiv builds websites, QR systems, branding, and social media for restaurants, startups, and local businesses in Hyderabad. Get a free consultation.",
@@ -20,7 +22,7 @@ export const metadata: Metadata = {
     title: "VeXtiv | Digital Growth Agency in Hyderabad",
     description:
       "VeXtiv builds websites, QR systems, branding, and social media for restaurants, startups, and local businesses in Hyderabad. Get a free consultation.",
-    url: "https://vextiv.tech",
+    url: BASE_URL,
     siteName: "VeXtiv",
     type: "website",
   },
@@ -28,7 +30,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   alternates: {
-    canonical: "https://vextiv.tech",
+    canonical: BASE_URL,
   },
 };
 

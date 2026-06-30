@@ -365,6 +365,7 @@ function ServiceCard({
               href={`/services#${service.id}`}
               className="sv-cta"
               onClick={(e) => e.stopPropagation()}
+              onTouchEnd={(e) => e.stopPropagation()}
             >
               Learn More
               <ArrowRight size={14} />
@@ -959,7 +960,7 @@ export default function ServicesPreview() {
             overflow-y: hidden;
             display: flex;
             align-items: flex-end;
-            justify-content: flex-start;
+            justify-content: center;
             padding: 0 24px;
             gap: 8px;
             -ms-overflow-style: none;

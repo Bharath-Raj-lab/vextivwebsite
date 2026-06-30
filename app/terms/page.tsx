@@ -6,22 +6,24 @@ import ProseLayout, {
 // ─── SSG ──────────────────────────────────────────────────────────────────────
 export const dynamic = "force-static";
 
+import { BASE_URL } from "@/lib/constants";
+
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vextiv.tech"),
+  metadataBase: new URL(BASE_URL),
   title: "Terms of Service | VeXtiv",
   description:
-    "Terms and conditions governing all engagements with VeXtiv. Read before hiring us — clear, plain English, no legal jargon where possible.",
+    "Read the terms and conditions governing all client engagements with VeXtiv. Written in clear, plain English with no unnecessary legal jargon where possible.",
   openGraph: {
     title: "Terms of Service | VeXtiv",
     description:
-      "Terms and conditions governing all engagements with VeXtiv. Read before hiring us — clear, plain English, no legal jargon where possible.",
-    url: "https://vextiv.tech/terms",
+      "Read the terms and conditions governing all client engagements with VeXtiv. Written in clear, plain English with no unnecessary legal jargon where possible.",
+    url: `${BASE_URL}/terms`,
     siteName: "VeXtiv",
     type: "website",
   },
   alternates: {
-    canonical: "https://vextiv.tech/terms",
+    canonical: `${BASE_URL}/terms`,
   },
   twitter: {
     card: "summary_large_image",

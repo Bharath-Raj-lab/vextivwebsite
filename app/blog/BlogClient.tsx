@@ -58,7 +58,7 @@ export default function BlogClient({ initialPosts }: { initialPosts: BlogPost[] 
         setIsError(true);
         setMessage(data.message || 'Something went wrong. Please try again.');
       }
-    } catch (err) {
+    } catch {
       setIsError(true);
       setMessage('Something went wrong. Please try again.');
     } finally {

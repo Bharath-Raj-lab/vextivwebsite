@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+import { BASE_URL } from '@/lib/constants';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -7,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/thank-you', '/audit', '/api/'],
     },
-    sitemap: 'https://vextiv.tech/sitemap.xml',
+    sitemap: `${BASE_URL}/sitemap.xml`,
   };
 }

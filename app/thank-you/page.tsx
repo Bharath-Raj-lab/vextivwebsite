@@ -4,14 +4,16 @@ import Link from "next/link";
 // ─── SSG + noindex ────────────────────────────────────────────────────────────
 export const dynamic = "force-static";
 
+import { BASE_URL } from "@/lib/constants";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vextiv.tech"),
+  metadataBase: new URL(BASE_URL),
   title: "Message Received | VeXtiv",
   description: "Thank you for reaching out to VeXtiv. We will review your details and be in touch shortly to discuss how we can help your Hyderabad business grow.",
   openGraph: {
     title: "Message Received | VeXtiv",
     description: "Thank you for reaching out to VeXtiv. We will review your details and be in touch shortly to discuss how we can help your Hyderabad business grow.",
-    url: "https://vextiv.tech/thank-you",
+    url: `${BASE_URL}/thank-you`,
     siteName: "VeXtiv",
     type: "website",
   },
@@ -19,7 +21,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   alternates: {
-    canonical: "https://vextiv.tech/thank-you",
+    canonical: `${BASE_URL}/thank-you`,
   },
   robots: {
     index: false,

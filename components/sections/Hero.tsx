@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "framer-motion";
 import { trackEvent } from "@/lib/analytics";
 import { ArrowRight } from "lucide-react";
 

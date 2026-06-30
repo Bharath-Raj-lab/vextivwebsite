@@ -202,10 +202,8 @@ export default function InteractiveProjectGallery({ images }: InteractiveProject
         {images.map((img, i) => {
           const animClass = `float-anim-${i % 6}`;
           return (
-            <ScrollReveal
+            <div
               key={i}
-              animationClass="animate-fade-scale"
-              rootMargin="-50px"
               className={`group relative flex-none w-[85vw] h-[50vh] snap-center rounded-2xl overflow-hidden border border-white/10 shadow-xl cursor-pointer ${animClass}`}
               onClick={() => openLightbox(i)}
             >
@@ -219,7 +217,7 @@ export default function InteractiveProjectGallery({ images }: InteractiveProject
                 />
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
               </div>
-            </ScrollReveal>
+            </div>
           );
         })}
         <div className="flex-none w-[4vw]" />

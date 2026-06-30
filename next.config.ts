@@ -107,11 +107,11 @@ const securityHeaders = [
   // max-age=63072000 = 2 years, as recommended by hstspreload.org
   ...(isProd
     ? [
-        {
-          key: 'Strict-Transport-Security',
-          value: 'max-age=63072000; includeSubDomains; preload',
-        },
-      ]
+      {
+        key: 'Strict-Transport-Security',
+        value: 'max-age=63072000; includeSubDomains; preload',
+      },
+    ]
     : []),
 ];
 

@@ -746,6 +746,16 @@ function AuditStyles() {
         -webkit-appearance: none;
         appearance: none;
       }
+      .audit-input:-webkit-autofill,
+      .audit-input:-webkit-autofill:hover,
+      .audit-input:-webkit-autofill:focus,
+      .audit-select:-webkit-autofill,
+      .audit-select:-webkit-autofill:hover,
+      .audit-select:-webkit-autofill:focus {
+        -webkit-box-shadow: 0 0 0px 1000px var(--bg-surface-2) inset !important;
+        -webkit-text-fill-color: var(--text-primary) !important;
+        transition: background-color 5000s ease-in-out 0s;
+      }
       .audit-input::placeholder {
         color: var(--text-very-muted);
       }

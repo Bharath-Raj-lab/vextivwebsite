@@ -58,7 +58,7 @@ All variables are read from `.env.local` (never committed — already in `.gitig
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | `lib/supabase.ts` — browser-side Supabase queries (RLS enforced) | **Public** | Supabase Dashboard → Project → Settings → API → `anon` / `public` key |
 | `SUPABASE_SERVICE_ROLE_KEY` | `lib/supabase-admin.ts` — server-side admin operations (bypasses RLS) | **Server only — never expose** | Supabase Dashboard → Project → Settings → API → `service_role` key |
 | `RESEND_API_KEY` | `lib/email.ts` — sends contact form and audit confirmation emails via Resend | **Server only** | [resend.com](https://resend.com) → API Keys |
-| `RESEND_FROM_EMAIL` | `lib/email.ts` — the `From:` address on all outbound emails | **Server only** | A domain you have verified in Resend (e.g. `hello@vextiv.com`) |
+| `RESEND_FROM_EMAIL` | `lib/email.ts` — the `From:` address on all outbound emails | **Server only** | A domain you have verified in Resend (e.g. `hello@vextiv.tech`) |
 | `TEAM_EMAIL` | `lib/email.ts` — internal recipient for new lead / contact notifications | **Server only** | Your team inbox address |
 | `UPSTASH_REDIS_REST_URL` | `lib/rate-limit.ts` — contact form rate limiting via Upstash Redis | **Server only** | [console.upstash.com](https://console.upstash.com) → Database → REST URL |
 | `UPSTASH_REDIS_REST_TOKEN` | `lib/rate-limit.ts` — Upstash auth token | **Server only** | Upstash Console → Database → REST Token |
@@ -80,6 +80,18 @@ vextivwebsite/
 ├── hooks/          Custom React hooks
 └── supabase/       Supabase migration files and schema definitions
 ```
+
+---
+
+## Content Management
+
+Case studies (`/work`) and blog posts (`/blog`) are currently hardcoded as static data in [`lib/case-studies.ts`](./lib/case-studies.ts) and [`lib/blog.ts`](./lib/blog.ts) — they are not stored in Supabase.
+
+To add, edit, or remove a case study or blog post right now, edit the relevant array in that file directly and redeploy. There is no CMS or admin dashboard yet.
+
+This is intentional for launch: the site ships with 3 seed case studies and 3 seed blog posts per PRD Section 13.2, so this is not a bug or an incomplete feature.
+
+A Supabase-backed admin dashboard for non-developer content editing is planned for a future phase. When that ships, it will also require updating sitemap generation, the ISR revalidation strategy, and `generateStaticParams` for dynamic slugs — not just adding a database table.
 
 ---
 

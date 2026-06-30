@@ -7,9 +7,11 @@ import {
 } from "./PricingCtaLinks";
 import PageBackground from "@/components/ui/PageBackground";
 
+import { BASE_URL } from "@/lib/constants";
+
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vextiv.tech"),
+  metadataBase: new URL(BASE_URL),
   title: "Pricing | VeXtiv",
   description:
     "Transparent pricing for websites, social media management, and branding in Hyderabad. No hidden fees, no lock-in contracts — just clear deliverables and fair rates.",
@@ -17,7 +19,7 @@ export const metadata: Metadata = {
     title: "Pricing | VeXtiv",
     description:
       "Transparent pricing for websites, social media management, and branding in Hyderabad. No hidden fees, no lock-in contracts — just clear deliverables and fair rates.",
-    url: "https://vextiv.tech/pricing",
+    url: `${BASE_URL}/pricing`,
     siteName: "VeXtiv",
     type: "website",
   },
@@ -25,7 +27,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   alternates: {
-    canonical: "https://vextiv.tech/pricing",
+    canonical: `${BASE_URL}/pricing`,
   },
 };
 
@@ -133,7 +135,7 @@ const SOCIAL_TIERS: PricingTier[] = [
   {
     id: "social-starter",
     name: "Starter",
-    price: "₹5,999",
+    price: "₹9,999",
     priceSuffix: "/month",
     isMostChosen: false,
     tagline: "Stay visible on social without the stress.",
@@ -156,7 +158,7 @@ const SOCIAL_TIERS: PricingTier[] = [
   {
     id: "social-business",
     name: "Business",
-    price: "₹11,999",
+    price: "₹19,999",
     priceSuffix: "/month",
     isMostChosen: true,
     tagline: "Consistent presence that attracts customers.",
@@ -180,7 +182,7 @@ const SOCIAL_TIERS: PricingTier[] = [
   {
     id: "social-scale",
     name: "Scale",
-    price: "₹19,999",
+    price: "₹34,999",
     priceSuffix: "/month",
     isMostChosen: false,
     tagline: "Full-stack social media for serious growth.",
@@ -232,7 +234,7 @@ const BRANDING_TIERS: PricingTier[] = [
   {
     id: "brand-business",
     name: "Business",
-    price: "₹9,999",
+    price: "₹14,999",
     oneTimeNote: "One-time fee · no recurring charges",
     isMostChosen: true,
     tagline: "A brand system people remember and trust.",

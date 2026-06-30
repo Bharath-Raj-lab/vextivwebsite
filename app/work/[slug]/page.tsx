@@ -8,6 +8,8 @@ import JsonLd from '@/components/seo/JsonLd';
 import InteractiveProjectGallery from '@/components/work/InteractiveProjectGallery';
 import PageBackground from "@/components/ui/PageBackground";
 
+import { BASE_URL } from "@/lib/constants";
+
 export const revalidate = 3600;
 
 export async function generateStaticParams() {
@@ -21,20 +23,26 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const study = getCaseStudyBySlug(slug);
   if (!study) return { title: "Not Found | VeXtiv" };
 
-  const fullSuffix = " - Check out this project by VeXtiv, a digital agency based in Hyderabad.";
-  const shortSuffix = " — VeXtiv, Hyderabad.";
-  const desc = study.outcomeHeadline.length + fullSuffix.length <= 160 
-    ? study.outcomeHeadline + fullSuffix 
-    : study.outcomeHeadline + shortSuffix;
+  const rawDesc = `${study.outcomeHeadline} — ${study.content.problem}`;
+  const suffix = " Case study by VeXtiv, Hyderabad.";
+  const maxLen = 157 - suffix.length; // 124 chars
+  let mainDesc = rawDesc;
+  if (mainDesc.length > maxLen) {
+    mainDesc = mainDesc.substring(0, maxLen);
+    const lastSpace = mainDesc.lastIndexOf(" ");
+    if (lastSpace > 0) mainDesc = mainDesc.substring(0, lastSpace);
+    mainDesc += "...";
+  }
+  const desc = mainDesc + suffix;
 
   return {
-    metadataBase: new URL("https://vextiv.tech"),
+    metadataBase: new URL(BASE_URL),
     title: study.title + " | VeXtiv",
     description: desc,
     openGraph: {
       title: study.title + " | VeXtiv",
       description: desc,
-      url: "https://vextiv.tech/work/" + slug,
+      url: `${BASE_URL}/work/${slug}`,
       siteName: "VeXtiv",
       images: [study.thumbnail],
       type: "article",
@@ -43,7 +51,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       card: "summary_large_image",
     },
     alternates: {
-      canonical: "https://vextiv.tech/work/" + slug,
+      canonical: `${BASE_URL}/work/${slug}`,
     },
   };
 }
@@ -65,19 +73,19 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://vextiv.tech/',
+        item: `${BASE_URL}/`,
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Work',
-        item: 'https://vextiv.tech/work',
+        item: `${BASE_URL}/work`,
       },
       {
         '@type': 'ListItem',
         position: 3,
         name: study.title,
-        item: `https://vextiv.tech/work/${study.slug}`,
+        item: `${BASE_URL}/work/${study.slug}`,
       },
     ],
   };

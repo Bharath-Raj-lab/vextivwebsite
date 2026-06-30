@@ -4,18 +4,20 @@ import WorkClient from './WorkClient';
 import JsonLd from '@/components/seo/JsonLd';
 import PageBackground from "@/components/ui/PageBackground";
 
+import { BASE_URL } from "@/lib/constants";
+
 export const revalidate = 3600; // SSG + ISR
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vextiv.tech"),
+  metadataBase: new URL(BASE_URL),
   title: "Our Work | VeXtiv",
   description:
-    "Explore our portfolio of digital experiences, branding, and QR systems designed for modern businesses across Hyderabad and globally.",
+    "Explore our portfolio of custom websites, branding, and QR ordering systems designed for modern businesses in Hyderabad and globally. Book a free consultation.",
   openGraph: {
     title: "Our Work | VeXtiv",
     description:
-      "Explore our portfolio of digital experiences, branding, and QR systems designed for modern businesses across Hyderabad and globally.",
-    url: "https://vextiv.tech/work",
+      "Explore our portfolio of custom websites, branding, and QR ordering systems designed for modern businesses in Hyderabad and globally. Book a free consultation.",
+    url: `${BASE_URL}/work`,
     siteName: "VeXtiv",
     type: "website",
   },
@@ -23,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   alternates: {
-    canonical: "https://vextiv.tech/work",
+    canonical: `${BASE_URL}/work`,
   },
 };
 
@@ -36,13 +38,13 @@ const breadcrumbSchema: Record<string, unknown> = {
       '@type': 'ListItem',
       position: 1,
       name: 'Home',
-      item: 'https://vextiv.tech/',
+      item: `${BASE_URL}/`,
     },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Work',
-      item: 'https://vextiv.tech/work',
+      item: `${BASE_URL}/work`,
     },
   ],
 };

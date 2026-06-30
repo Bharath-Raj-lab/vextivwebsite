@@ -11,16 +11,18 @@ import AuditForm from './AuditForm';
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 // noindex + nofollow — this funnel page must never appear in search results.
 
+import { BASE_URL } from "@/lib/constants";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vextiv.tech"),
+  metadataBase: new URL(BASE_URL),
   title: "Free Digital Audit | VeXtiv",
   description:
-    "Get a free personalised digital audit for your business in Hyderabad. Fill in the form and our team will be in touch within 1–2 business days.",
+    "Get a free, personalised digital audit for your business in Hyderabad. Simply fill in our brief form and our team will get back to you within 1–2 business days.",
   openGraph: {
     title: "Free Digital Audit | VeXtiv",
     description:
-      "Get a free personalised digital audit for your business in Hyderabad. Fill in the form and our team will be in touch within 1–2 business days.",
-    url: "https://vextiv.tech/audit",
+      "Get a free, personalised digital audit for your business in Hyderabad. Simply fill in our brief form and our team will get back to you within 1–2 business days.",
+    url: `${BASE_URL}/audit`,
     siteName: "VeXtiv",
     type: "website",
   },
@@ -28,7 +30,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   alternates: {
-    canonical: "https://vextiv.tech/audit",
+    canonical: `${BASE_URL}/audit`,
   },
   robots: {
     index: false,

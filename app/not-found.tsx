@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { BASE_URL } from "@/lib/constants";
+
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vextiv.tech"),
+  metadataBase: new URL(BASE_URL),
   title: "404 — Page Not Found | VeXtiv",
   description:
     "The page you're looking for doesn't exist or has been moved. Head back home to explore our work and learn more about our Hyderabad digital agency.",
@@ -11,7 +13,7 @@ export const metadata: Metadata = {
     title: "404 — Page Not Found | VeXtiv",
     description:
       "The page you're looking for doesn't exist or has been moved. Head back home to explore our work and learn more about our Hyderabad digital agency.",
-    url: "https://vextiv.tech/not-found",
+    url: `${BASE_URL}/not-found`,
     siteName: "VeXtiv",
     type: "website",
   },
@@ -19,7 +21,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   alternates: {
-    canonical: "https://vextiv.tech/not-found",
+    canonical: `${BASE_URL}/not-found`,
   },
 };
 

@@ -295,7 +295,7 @@ export default function Footer() {
           transform: translateY(-50%);
           font-family: var(--font-display);
           font-weight: 800;
-          font-size: clamp(60px, 15vw, 160px);
+          font-size: clamp(32px, 15vw, 160px);
           color: rgba(255, 255, 255, 0.09);
           z-index: 0;
           user-select: none;
@@ -304,14 +304,14 @@ export default function Footer() {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: clamp(16px, 3vw, 40px);
+          gap: clamp(8px, 3vw, 40px);
           white-space: nowrap;
         }
 
         .footer__watermark-logo {
           opacity: 0.18;
           width: auto;
-          height: clamp(90px, 20vw, 220px);
+          height: clamp(48px, 20vw, 220px);
           user-select: none;
           pointer-events: none;
           filter: brightness(0) invert(86%) sepia(21%) saturate(996%) hue-rotate(34deg) brightness(97%) contrast(92%);

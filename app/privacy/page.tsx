@@ -6,22 +6,24 @@ import ProseLayout, {
 // ─── SSG ──────────────────────────────────────────────────────────────────────
 export const dynamic = "force-static";
 
+import { BASE_URL } from "@/lib/constants";
+
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vextiv.tech"),
+  metadataBase: new URL(BASE_URL),
   title: "Privacy Policy | VeXtiv",
   description:
-    "How VeXtiv collects, uses, and protects your personal data. Compliant with India's Digital Personal Data Protection Act 2023.",
+    "Learn how VeXtiv collects, uses, and protects your personal data. Our privacy policy is fully compliant with India's Digital Personal Data Protection Act 2023.",
   openGraph: {
     title: "Privacy Policy | VeXtiv",
     description:
-      "How VeXtiv collects, uses, and protects your personal data. Compliant with India's Digital Personal Data Protection Act 2023.",
-    url: "https://vextiv.tech/privacy",
+      "Learn how VeXtiv collects, uses, and protects your personal data. Our privacy policy is fully compliant with India's Digital Personal Data Protection Act 2023.",
+    url: `${BASE_URL}/privacy`,
     siteName: "VeXtiv",
     type: "website",
   },
   alternates: {
-    canonical: "https://vextiv.tech/privacy",
+    canonical: `${BASE_URL}/privacy`,
   },
   twitter: {
     card: "summary_large_image",

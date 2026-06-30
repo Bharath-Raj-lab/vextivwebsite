@@ -5,17 +5,19 @@ import PageBackground from "@/components/ui/PageBackground";
 // ─── SSG ──────────────────────────────────────────────────────────────────────
 export const dynamic = "force-static";
 
+import { BASE_URL } from "@/lib/constants";
+
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vextiv.tech"),
+  metadataBase: new URL(BASE_URL),
   title: "Careers at VeXtiv | Join Our Hyderabad Team",
   description:
-    "We're a small, focused digital studio based in Hyderabad. No open roles right now, but we always want to hear from people who care about craft. Send us a message.",
+    "We're a focused digital studio in Hyderabad. No open roles right now, but we always want to hear from talented people who care about their craft. Message us.",
   openGraph: {
     title: "Careers at VeXtiv | Join Our Hyderabad Team",
     description:
-      "We're a small, focused digital studio based in Hyderabad. No open roles right now, but we always want to hear from people who care about craft. Send us a message.",
-    url: "https://vextiv.tech/careers",
+      "We're a focused digital studio in Hyderabad. No open roles right now, but we always want to hear from talented people who care about their craft. Message us.",
+    url: `${BASE_URL}/careers`,
     siteName: "VeXtiv",
     type: "website",
   },
@@ -23,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   alternates: {
-    canonical: "https://vextiv.tech/careers",
+    canonical: `${BASE_URL}/careers`,
   },
 };
 

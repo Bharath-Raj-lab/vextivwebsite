@@ -4,10 +4,12 @@ import BlogClient from './BlogClient';
 import JsonLd from '@/components/seo/JsonLd';
 import PageBackground from "@/components/ui/PageBackground";
 
+import { BASE_URL } from "@/lib/constants";
+
 export const revalidate = 900; // ISR revalidate 900
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vextiv.tech"),
+  metadataBase: new URL(BASE_URL),
   title: "Blog | VeXtiv",
   description:
     "Insights, strategies, and deep dives on digital transformation, local SEO, and online growth for modern restaurants and local businesses in Hyderabad.",
@@ -15,7 +17,7 @@ export const metadata: Metadata = {
     title: "Blog | VeXtiv",
     description:
       "Insights, strategies, and deep dives on digital transformation, local SEO, and online growth for modern restaurants and local businesses in Hyderabad.",
-    url: "https://vextiv.tech/blog",
+    url: `${BASE_URL}/blog`,
     siteName: "VeXtiv",
     type: "website",
   },
@@ -23,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   alternates: {
-    canonical: "https://vextiv.tech/blog",
+    canonical: `${BASE_URL}/blog`,
   },
 };
 
@@ -36,13 +38,13 @@ const breadcrumbSchema: Record<string, unknown> = {
       '@type': 'ListItem',
       position: 1,
       name: 'Home',
-      item: 'https://vextiv.tech/',
+      item: `${BASE_URL}/`,
     },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Blog',
-      item: 'https://vextiv.tech/blog',
+      item: `${BASE_URL}/blog`,
     },
   ],
 };

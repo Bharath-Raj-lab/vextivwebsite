@@ -737,6 +737,19 @@ function ContactStyles() {
         -webkit-appearance: none;
         appearance: none;
       }
+      .cp-input:-webkit-autofill,
+      .cp-input:-webkit-autofill:hover,
+      .cp-input:-webkit-autofill:focus,
+      .cp-select:-webkit-autofill,
+      .cp-select:-webkit-autofill:hover,
+      .cp-select:-webkit-autofill:focus,
+      .cp-textarea:-webkit-autofill,
+      .cp-textarea:-webkit-autofill:hover,
+      .cp-textarea:-webkit-autofill:focus {
+        -webkit-box-shadow: 0 0 0px 1000px var(--bg-surface-2) inset !important;
+        -webkit-text-fill-color: var(--text-primary) !important;
+        transition: background-color 5000s ease-in-out 0s;
+      }
       .cp-input::placeholder,
       .cp-textarea::placeholder {
         color: var(--text-very-muted);
@@ -882,6 +895,13 @@ function ContactStyles() {
         .cp-main { padding: 48px 16px 72px; }
         .cp-form-card { padding: 28px 20px; border-radius: 14px; }
         .cp-row { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 768px) {
+        .cp-input,
+        .cp-select,
+        .cp-textarea {
+          font-size: 16px;
+        }
       }
     `}</style>
   );

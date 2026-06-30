@@ -5,9 +5,11 @@ import PageBackground from "@/components/ui/PageBackground";
 // ─── SSG: no dynamic segments, statically generated at build time ─────────────
 export const dynamic = "force-static";
 
+import { BASE_URL } from "@/lib/constants";
+
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vextiv.tech"),
+  metadataBase: new URL(BASE_URL),
   title: "About VeXtiv | Hyderabad Digital Agency",
   description:
     "We're a digital studio founded in Hyderabad with one purpose: to give local businesses the online presence they deserve. Meet the team behind VeXtiv.",
@@ -15,7 +17,7 @@ export const metadata: Metadata = {
     title: "About VeXtiv | Hyderabad Digital Agency",
     description:
       "We're a digital studio founded in Hyderabad with one purpose: to give local businesses the online presence they deserve. Meet the team behind VeXtiv.",
-    url: "https://vextiv.tech/about",
+    url: `${BASE_URL}/about`,
     siteName: "VeXtiv",
     type: "website",
   },
@@ -23,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   alternates: {
-    canonical: "https://vextiv.tech/about",
+    canonical: `${BASE_URL}/about`,
   },
 };
 
@@ -173,9 +175,10 @@ function TeamSection() {
                 setTimeout(function() {
                   var el = document.getElementById('ab-team-carousel');
                   if (el && window.innerWidth <= 900) {
-                    var target = el.children[3];
+                    var target = el.children[4];
                     if (target) {
-                      el.scrollLeft = target.offsetLeft - el.offsetLeft;
+                      var centerOffset = (target.offsetLeft - el.offsetLeft) - (el.clientWidth / 2) + (target.clientWidth / 2);
+                      el.scrollLeft = centerOffset;
                     }
                   }
                 }, 50);

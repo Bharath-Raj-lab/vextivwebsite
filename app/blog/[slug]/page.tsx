@@ -7,6 +7,8 @@ import BlogArticleClient from './BlogArticleClient';
 import JsonLd from '@/components/seo/JsonLd';
 import PageBackground from "@/components/ui/PageBackground";
 
+import { BASE_URL } from "@/lib/constants";
+
 export const revalidate = 3600;
 
 export async function generateStaticParams() {
@@ -47,13 +49,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   return {
-    metadataBase: new URL("https://vextiv.tech"),
+    metadataBase: new URL(BASE_URL),
     title: post.title + " | VeXtiv",
     description: desc,
     openGraph: {
       title: post.title + " | VeXtiv",
       description: desc,
-      url: "https://vextiv.tech/blog/" + slug,
+      url: `${BASE_URL}/blog/${slug}`,
       siteName: "VeXtiv",
       images: [post.thumbnail],
       type: 'article',
@@ -64,7 +66,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       card: "summary_large_image",
     },
     alternates: {
-      canonical: "https://vextiv.tech/blog/" + slug,
+      canonical: `${BASE_URL}/blog/${slug}`,
     },
   };
 }
@@ -88,19 +90,19 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://vextiv.tech/',
+        item: `${BASE_URL}/`,
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Blog',
-        item: 'https://vextiv.tech/blog',
+        item: `${BASE_URL}/blog`,
       },
       {
         '@type': 'ListItem',
         position: 3,
         name: post.title,
-        item: `https://vextiv.tech/blog/${post.slug}`,
+        item: `${BASE_URL}/blog/${post.slug}`,
       },
     ],
   };
@@ -124,15 +126,15 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     publisher: {
       '@type': 'Organization',
       name: "VeXtiv",
-      url: 'https://vextiv.tech',
+      url: BASE_URL,
       logo: {
         '@type': 'ImageObject',
-        url: 'https://vextiv.tech/favicons/favicon-32x32.png',
+        url: `${BASE_URL}/favicons/favicon-32x32.png`,
       },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://vextiv.tech/blog/${post.slug}`,
+      '@id': `${BASE_URL}/blog/${post.slug}`,
     },
   };
 

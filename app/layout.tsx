@@ -11,6 +11,8 @@ import CookieConsent from "@/components/ui/CookieConsent";
 import ClientProviders from "@/components/layout/ClientProviders";
 import NextTopLoader from "nextjs-toploader";
 
+import { BASE_URL } from "@/lib/constants";
+
 const syne = Syne({
   weight: ["700", "800"],
   subsets: ["latin"],
@@ -27,7 +29,7 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   title: "VeXtiv",
-  metadataBase: new URL("https://vextiv.tech"),
+  metadataBase: new URL(BASE_URL),
   description: "Digital solutions crafted with precision — VeXtiv",
   icons: {
     icon: [
@@ -49,7 +51,7 @@ const localBusinessSchema: Record<string, unknown> = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   name: "VeXtiv",
-  url: "https://vextiv.tech",
+  url: BASE_URL,
   telephone: "+91-6300318824",
   address: {
     "@type": "PostalAddress",
@@ -90,12 +92,12 @@ const webSiteSchema: Record<string, unknown> = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "VeXtiv",
-  url: "https://vextiv.tech",
+  url: BASE_URL,
   potentialAction: {
     "@type": "SearchAction",
     target: {
       "@type": "EntryPoint",
-      urlTemplate: "https://vextiv.tech/blog?q={search_term_string}",
+      urlTemplate: `${BASE_URL}/blog?q={search_term_string}`,
     },
     "query-input": "required name=search_term_string",
   },
@@ -111,7 +113,7 @@ export default function RootLayout({
       lang="en"
       className={`${syne.variable} ${dmSans.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+      <body className="min-h-full flex flex-col overflow-x-hidden" suppressHydrationWarning>
         <NextTopLoader color="#C8F04D" showSpinner={false} />
         <ClientProviders>
           {/* Site-wide structured data */}

@@ -5,9 +5,11 @@ import { SERVICES } from "./servicesData";
 import { StickyServices } from "./StickyServices";
 import PageBackground from "@/components/ui/PageBackground";
 
+import { BASE_URL } from "@/lib/constants";
+
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vextiv.tech"),
+  metadataBase: new URL(BASE_URL),
   title: "Services | VeXtiv",
   description:
     "From websites to branding, QR ordering systems to local SEO — VeXtiv delivers end-to-end digital services for businesses across Hyderabad and beyond.",
@@ -15,7 +17,7 @@ export const metadata: Metadata = {
     title: "Services | VeXtiv",
     description:
       "From websites to branding, QR ordering systems to local SEO — VeXtiv delivers end-to-end digital services for businesses across Hyderabad and beyond.",
-    url: "https://vextiv.tech/services",
+    url: `${BASE_URL}/services`,
     siteName: "VeXtiv",
     type: "website",
   },
@@ -23,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   alternates: {
-    canonical: "https://vextiv.tech/services",
+    canonical: `${BASE_URL}/services`,
   },
 };
 
@@ -100,7 +102,7 @@ export default function ServicesPage() {
     provider: {
       '@type': 'LocalBusiness',
       name: "VeXtiv",
-      url: 'https://vextiv.tech',
+      url: BASE_URL,
     },
     // PRD §8.4 — areaServed list
     areaServed: [
@@ -115,7 +117,7 @@ export default function ServicesPage() {
       'Telangana',
       'Andhra Pradesh',
     ],
-    url: `https://vextiv.tech/services#${service.id}`,
+    url: `${BASE_URL}/services#${service.id}`,
   }));
 
   return (

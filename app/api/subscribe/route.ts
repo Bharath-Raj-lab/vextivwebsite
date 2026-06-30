@@ -51,9 +51,11 @@ export async function POST(request: NextRequest) {
     }
 
     // Supabase Insert
-    const { error: dbError } = await supabaseAdmin
-  .from('leads')
-  .insert({ email: data.email, name: '' });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const client = supabaseAdmin as any;
+    const { error: dbError } = await client
+      .from('subscribers')
+      .insert({ email: data.email, source: 'blog' });
 
     if (dbError) {
       if (dbError.code === '23505') { // Unique constraint violation code

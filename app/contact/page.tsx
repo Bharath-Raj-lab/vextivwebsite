@@ -9,8 +9,10 @@ import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import ContactForm from './ContactForm';
 
+import { BASE_URL } from "@/lib/constants";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vextiv.tech"),
+  metadataBase: new URL(BASE_URL),
   title: "Contact Us | VeXtiv",
   description:
     "Get in touch with VeXtiv. Tell us about your project in Hyderabad or beyond, and we'll respond within 1–2 business days with a tailored proposal.",
@@ -18,7 +20,7 @@ export const metadata: Metadata = {
     title: "Contact Us | VeXtiv",
     description:
       "Get in touch with VeXtiv. Tell us about your project in Hyderabad or beyond, and we'll respond within 1–2 business days with a tailored proposal.",
-    url: "https://vextiv.tech/contact",
+    url: `${BASE_URL}/contact`,
     siteName: "VeXtiv",
     type: "website",
   },
@@ -26,7 +28,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   alternates: {
-    canonical: "https://vextiv.tech/contact",
+    canonical: `${BASE_URL}/contact`,
   },
 };
 

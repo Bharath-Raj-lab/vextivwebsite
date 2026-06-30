@@ -6,17 +6,19 @@ import PageBackground from "@/components/ui/PageBackground";
 // ─── SSG ──────────────────────────────────────────────────────────────────────
 export const dynamic = "force-static";
 
+import { BASE_URL } from "@/lib/constants";
+
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vextiv.tech"),
+  metadataBase: new URL(BASE_URL),
   title: "FAQ | VeXtiv — Hyderabad Digital Agency",
   description:
-    "Common questions about working with Vextiv — pricing, process, timelines, support, and more. Honest answers, no marketing fluff.",
+    "Get honest, fluff-free answers to common questions about working with VeXtiv — including our pricing, process, timelines, and post-launch support in Hyderabad.",
   openGraph: {
     title: "FAQ | VeXtiv — Hyderabad Digital Agency",
     description:
-      "Common questions about working with Vextiv — pricing, process, timelines, support, and more. Honest answers, no marketing fluff.",
-    url: "https://vextiv.tech/faq",
+      "Get honest, fluff-free answers to common questions about working with VeXtiv — including our pricing, process, timelines, and post-launch support in Hyderabad.",
+    url: `${BASE_URL}/faq`,
     siteName: "VeXtiv",
     type: "website",
   },
@@ -24,7 +26,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   alternates: {
-    canonical: "https://vextiv.tech/faq",
+    canonical: `${BASE_URL}/faq`,
   },
 };
 

@@ -1,9 +1,10 @@
 import { MetadataRoute } from 'next';
 import { caseStudies } from '@/lib/case-studies';
 import { blogPosts } from '@/lib/blog';
+import { BASE_URL } from '@/lib/constants';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://vextiv.tech';
+  const baseUrl = BASE_URL;
   
   // Base static routes
   const staticRoutes: MetadataRoute.Sitemap = [
