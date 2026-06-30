@@ -204,6 +204,16 @@ export default function Hero() {
         </div>
       </div>
 
+      {/* ── Scroll Indicator (animated bounce) ─────────────────────────── */}
+      <div className="hero__scroll-indicator" aria-hidden="true">
+        <div className="hero__scroll-indicator-inner">
+          <span className="hero__scroll-text">Scroll to explore</span>
+          <div className="hero__scroll-mouse">
+            <div className="hero__scroll-wheel" />
+          </div>
+        </div>
+      </div>
+
       {/* ─── Styles ──────────────────────────────────────────────────────── */}
       <style>{`
         /* ═══ HERO SECTION ═══════════════════════════════════════════════ */
@@ -428,6 +438,79 @@ export default function Hero() {
           outline-offset: 4px;
         }
 
+        /* ── Scroll Indicator ────────────────────────────────────────── */
+        .hero__scroll-indicator {
+          position: absolute;
+          bottom: 24px;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 12;
+          pointer-events: none;
+        }
+
+        .hero__scroll-indicator-inner {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+          animation: scrollBounce 2s ease-in-out infinite;
+        }
+
+        .hero__scroll-text {
+          font-family: var(--font-body);
+          font-size: 10px;
+          font-weight: 600;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          color: rgba(255, 255, 255, 0.4);
+        }
+
+        .hero__scroll-mouse {
+          width: 20px;
+          height: 32px;
+          border: 1.5px solid rgba(255, 255, 255, 0.25);
+          border-radius: 10px;
+          position: relative;
+        }
+
+        .hero__scroll-wheel {
+          width: 3px;
+          height: 6px;
+          background-color: var(--accent);
+          border-radius: 1px;
+          position: absolute;
+          top: 6px;
+          left: 50%;
+          transform: translateX(-50%);
+          animation: scrollWheel 2s infinite;
+        }
+
+        @keyframes scrollWheel {
+          0% {
+            opacity: 0;
+            transform: translate(-50%, 0);
+          }
+          20% {
+            opacity: 1;
+          }
+          60% {
+            opacity: 0;
+            transform: translate(-50%, 10px);
+          }
+          100% {
+            opacity: 0;
+          }
+        }
+
+        @keyframes scrollBounce {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(6px);
+          }
+        }
+
         /* ── Responsive ──────────────────────────────────────────────── */
         @media (max-width: 1024px) {
           .hero__content {
@@ -445,7 +528,7 @@ export default function Hero() {
           }
 
           .hero__content {
-            padding: 100px 20px 32px;
+            padding: 100px 20px 72px;
           }
 
           .hero__headline-wrap {
@@ -461,7 +544,7 @@ export default function Hero() {
           .hero__bottom {
             flex-direction: column;
             align-items: stretch;
-            gap: 24px;
+            gap: 20px;
           }
 
           .hero__bottom-left {
@@ -494,7 +577,11 @@ export default function Hero() {
             justify-content: center;
           }
 
-          /* Reveal layer visible on mobile — driven by touch */
+          .hero__scroll-indicator {
+            display: flex;
+            bottom: 12px;
+            transform: translateX(-50%) scale(0.85);
+          }
         }
       `}</style>
     </section>
