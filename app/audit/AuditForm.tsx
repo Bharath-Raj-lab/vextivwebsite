@@ -605,7 +605,7 @@ function AuditStyles() {
         display: flex;
         align-items: flex-start;
         justify-content: center;
-        padding: 56px 24px 80px;
+        padding: clamp(100px, 10vw, 120px) 24px 80px;
       }
 
       /* ── Two-column container ── */
@@ -984,7 +984,7 @@ function AuditStyles() {
       }
       @media (max-width: 540px) {
         .audit-main {
-          padding: 32px 16px 60px;
+          padding: 88px 16px 60px;
         }
         .audit-form-wrapper {
           padding: 28px 20px;
