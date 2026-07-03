@@ -17,11 +17,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: "Free Digital Audit | VeXtiv",
   description:
-    "Get a free, personalised digital audit for your business in Hyderabad. Simply fill in our brief form and our team will get back to you within 1–2 business days.",
+    "Get a free digital audit for your Hyderabad business. Fill in our brief form and our team will respond within 1–2 business days.",
   openGraph: {
     title: "Free Digital Audit | VeXtiv",
     description:
-      "Get a free, personalised digital audit for your business in Hyderabad. Simply fill in our brief form and our team will get back to you within 1–2 business days.",
+      "Get a free digital audit for your Hyderabad business. Fill in our brief form and our team will respond within 1–2 business days.",
     url: `${BASE_URL}/audit`,
     siteName: "VeXtiv",
     type: "website",

@@ -14,11 +14,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: "Pricing | VeXtiv",
   description:
-    "Transparent pricing for websites, social media management, and branding in Hyderabad. No hidden fees, no lock-in contracts — just clear deliverables and fair rates.",
+    "Transparent pricing for websites, social media & branding in Hyderabad. No hidden fees, no lock-in — just clear deliverables and fair rates.",
   openGraph: {
     title: "Pricing | VeXtiv",
     description:
-      "Transparent pricing for websites, social media management, and branding in Hyderabad. No hidden fees, no lock-in contracts — just clear deliverables and fair rates.",
+      "Transparent pricing for websites, social media & branding in Hyderabad. No hidden fees, no lock-in — just clear deliverables and fair rates.",
     url: `${BASE_URL}/pricing`,
     siteName: "VeXtiv",
     type: "website",

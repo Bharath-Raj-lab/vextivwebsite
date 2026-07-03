@@ -206,10 +206,23 @@ export default function Hero() {
 
       {/* ── Scroll Indicator (animated bounce) ─────────────────────────── */}
       <div className="hero__scroll-indicator" aria-hidden="true">
-        <div className="hero__scroll-indicator-inner">
+        {/* Desktop: subtle mouse + wheel */}
+        <div className="hero__scroll-indicator-inner hero__scroll-desktop">
           <span className="hero__scroll-text">Scroll to explore</span>
           <div className="hero__scroll-mouse">
             <div className="hero__scroll-wheel" />
+          </div>
+        </div>
+        {/* Mobile: bold chevron arrow */}
+        <div className="hero__scroll-mobile">
+          <span className="hero__scroll-mobile-label">Scroll</span>
+          <div className="hero__scroll-chevron-wrap">
+            <svg className="hero__scroll-chevron" width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <polyline points="5,10 14,19 23,10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            <svg className="hero__scroll-chevron hero__scroll-chevron--delay" width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <polyline points="5,10 14,19 23,10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </div>
         </div>
       </div>
@@ -448,7 +461,8 @@ export default function Hero() {
           pointer-events: none;
         }
 
-        .hero__scroll-indicator-inner {
+        /* Desktop scroll indicator */
+        .hero__scroll-desktop {
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -485,6 +499,11 @@ export default function Hero() {
           animation: scrollWheel 2s infinite;
         }
 
+        /* Mobile scroll indicator — hidden on desktop */
+        .hero__scroll-mobile {
+          display: none;
+        }
+
         @keyframes scrollWheel {
           0% {
             opacity: 0;
@@ -503,12 +522,23 @@ export default function Hero() {
         }
 
         @keyframes scrollBounce {
-          0%, 100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(6px);
-          }
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(6px); }
+        }
+
+        @keyframes chevronDrop {
+          0%, 100% { transform: translateY(0); opacity: 0.9; }
+          50% { transform: translateY(8px); opacity: 0.4; }
+        }
+
+        @keyframes chevronDropDelay {
+          0%, 100% { transform: translateY(0); opacity: 0.4; }
+          50% { transform: translateY(8px); opacity: 0.1; }
+        }
+
+        @keyframes mobileScrollPulse {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(200, 240, 77, 0.5); }
+          50% { box-shadow: 0 0 0 10px rgba(200, 240, 77, 0); }
         }
 
         /* ── Responsive ──────────────────────────────────────────────── */
@@ -577,10 +607,55 @@ export default function Hero() {
             justify-content: center;
           }
 
+          /* Hide desktop indicator, show mobile indicator */
+          .hero__scroll-desktop {
+            display: none;
+          }
+
           .hero__scroll-indicator {
+            bottom: 18px;
+            transform: translateX(-50%);
+          }
+
+          .hero__scroll-mobile {
             display: flex;
-            bottom: 12px;
-            transform: translateX(-50%) scale(0.85);
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+          }
+
+          .hero__scroll-mobile-label {
+            font-family: var(--font-body);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            opacity: 0.85;
+          }
+
+          .hero__scroll-chevron-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0px;
+            background: rgba(200, 240, 77, 0.08);
+            border: 1px solid rgba(200, 240, 77, 0.25);
+            border-radius: 50px;
+            padding: 6px 10px 4px;
+            animation: mobileScrollPulse 2s ease-in-out infinite;
+          }
+
+          .hero__scroll-chevron {
+            color: var(--accent);
+            display: block;
+            animation: chevronDrop 1.4s ease-in-out infinite;
+          }
+
+          .hero__scroll-chevron--delay {
+            animation: chevronDropDelay 1.4s ease-in-out infinite;
+            margin-top: -10px;
+            opacity: 0.45;
           }
         }
       `}</style>

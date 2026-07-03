@@ -12,11 +12,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: "Blog | VeXtiv",
   description:
-    "Insights, strategies, and deep dives on digital transformation, local SEO, and online growth for modern restaurants and local businesses in Hyderabad.",
+    "Insights on digital growth, local SEO, and online strategy for restaurants and local businesses in Hyderabad. Tips from the VeXtiv team.",
   openGraph: {
     title: "Blog | VeXtiv",
     description:
-      "Insights, strategies, and deep dives on digital transformation, local SEO, and online growth for modern restaurants and local businesses in Hyderabad.",
+      "Insights on digital growth, local SEO, and online strategy for restaurants and local businesses in Hyderabad. Tips from the VeXtiv team.",
     url: `${BASE_URL}/blog`,
     siteName: "VeXtiv",
     type: "website",

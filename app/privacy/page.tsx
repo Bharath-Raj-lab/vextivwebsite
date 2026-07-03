@@ -13,11 +13,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: "Privacy Policy | VeXtiv",
   description:
-    "Learn how VeXtiv collects, uses, and protects your personal data. Our privacy policy is fully compliant with India's Digital Personal Data Protection Act 2023.",
+    "Learn how VeXtiv collects, uses, and protects your personal data, in compliance with India's Digital Personal Data Protection Act 2023.",
   openGraph: {
     title: "Privacy Policy | VeXtiv",
     description:
-      "Learn how VeXtiv collects, uses, and protects your personal data. Our privacy policy is fully compliant with India's Digital Personal Data Protection Act 2023.",
+      "Learn how VeXtiv collects, uses, and protects your personal data, in compliance with India's Digital Personal Data Protection Act 2023.",
     url: `${BASE_URL}/privacy`,
     siteName: "VeXtiv",
     type: "website",
