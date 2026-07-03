@@ -120,7 +120,8 @@ export default function Footer() {
       <div className="footer__watermark" aria-hidden="true">
         <Image
           src="/logo.svg"
-          alt=""
+          alt="VeXtiv logo watermark"
+          role="presentation"
           width={180}
           height={180}
           className="footer__watermark-logo"
