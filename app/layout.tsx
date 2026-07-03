@@ -33,11 +33,11 @@ export const metadata: Metadata = {
   description: "Digital solutions crafted with precision — VeXtiv",
   icons: {
     icon: [
-      { url: '/favicons/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicons/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
-    apple: '/favicons/apple-touch-icon.png',
-    shortcut: '/favicons/favicon.ico',
+    apple: '/apple-touch-icon.png',
+    shortcut: '/favicon.ico',
   },
   openGraph: {
     images: [{ url: '/og-image.webp', width: 1200, height: 630 }],

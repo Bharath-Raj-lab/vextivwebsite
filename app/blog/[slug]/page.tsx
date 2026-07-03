@@ -129,7 +129,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       url: BASE_URL,
       logo: {
         '@type': 'ImageObject',
-        url: `${BASE_URL}/favicons/favicon-32x32.png`,
+        url: `${BASE_URL}/favicon-32x32.png`,
       },
     },
     mainEntityOfPage: {
