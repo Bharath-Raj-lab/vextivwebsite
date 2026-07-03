@@ -218,10 +218,10 @@ export default function Hero() {
           <span className="hero__scroll-mobile-label">Scroll</span>
           <div className="hero__scroll-chevron-wrap">
             <svg className="hero__scroll-chevron" width="28" height="28" viewBox="0 0 28 28" fill="none">
-              <polyline points="5,10 14,19 23,10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <polyline points="5,10 14,19 23,10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             <svg className="hero__scroll-chevron hero__scroll-chevron--delay" width="28" height="28" viewBox="0 0 28 28" fill="none">
-              <polyline points="5,10 14,19 23,10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <polyline points="5,10 14,19 23,10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
         </div>
@@ -558,7 +558,7 @@ export default function Hero() {
           }
 
           .hero__content {
-            padding: 100px 20px 72px;
+            padding: 90px 20px 140px;
           }
 
           .hero__headline-wrap {
@@ -613,7 +613,7 @@ export default function Hero() {
           }
 
           .hero__scroll-indicator {
-            bottom: 18px;
+            bottom: 52px;
             transform: translateX(-50%);
           }
 
