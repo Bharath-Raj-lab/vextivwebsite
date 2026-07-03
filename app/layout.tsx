@@ -30,7 +30,7 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "VeXtiv",
   metadataBase: new URL(BASE_URL),
-  description: "Digital solutions crafted with precision — VeXtiv",
+  description: "VeXtiv is a premier digital agency in Hyderabad, crafting bespoke websites, intuitive QR systems, and powerful branding solutions for modern businesses.",
   icons: {
     icon: [
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
