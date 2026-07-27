@@ -28,9 +28,13 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "VeXtiv",
+  title: {
+    default: "VeXtiv",
+    template: "%s | VeXtiv",
+  },
   metadataBase: new URL(BASE_URL),
-  description: "VeXtiv is a premier digital agency in Hyderabad, crafting bespoke websites, intuitive QR systems, and powerful branding solutions for modern businesses.",
+  description:
+    "VeXtiv builds fast websites, branding, local SEO, QR systems, and content for restaurants, cafes, startups, and local businesses in Hyderabad.",
   icons: {
     icon: [
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
@@ -40,7 +44,15 @@ export const metadata: Metadata = {
     shortcut: '/favicon.ico',
   },
   openGraph: {
+    title: "VeXtiv | Digital Growth Agency in Hyderabad",
+    description:
+      "VeXtiv builds fast websites, branding, local SEO, QR systems, and content for restaurants, cafes, startups, and local businesses in Hyderabad.",
     images: [{ url: '/og-image.webp', width: 1200, height: 630 }],
+    siteName: "VeXtiv",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
   },
 };
 

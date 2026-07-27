@@ -10,13 +10,13 @@ import { BASE_URL } from "@/lib/constants";
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "Services | VeXtiv",
+  title: "Website Design, Branding & Local SEO in Hyderabad",
   description:
-    "From websites to branding, QR ordering systems to local SEO — VeXtiv delivers end-to-end digital services for businesses across Hyderabad and beyond.",
+    "From websites to branding, QR ordering systems to local SEO, VeXtiv delivers practical digital services for Hyderabad businesses.",
   openGraph: {
-    title: "Services | VeXtiv",
+    title: "Website Design, Branding & Local SEO in Hyderabad",
     description:
-      "From websites to branding, QR ordering systems to local SEO — VeXtiv delivers end-to-end digital services for businesses across Hyderabad and beyond.",
+      "From websites to branding, QR ordering systems to local SEO, VeXtiv delivers practical digital services for Hyderabad businesses.",
     url: `${BASE_URL}/services`,
     siteName: "VeXtiv",
     type: "website",
@@ -93,6 +93,24 @@ function ServicesHero() {
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function ServicesPage() {
+  const servicesPageSchema: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Website Design, Branding & Local SEO in Hyderabad",
+    url: `${BASE_URL}/services`,
+    description:
+      "A collection of digital services for Hyderabad businesses, including websites, branding, content, social media, local SEO, and QR systems.",
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: SERVICES.map((service, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: service.name,
+        url: `${BASE_URL}/services#${service.id}`,
+      })),
+    },
+  };
+
   // Service schemas (PRD §8.2, §2.1) — one block per service
   const serviceSchemas: Record<string, unknown>[] = SERVICES.map((service) => ({
     '@context': 'https://schema.org',
@@ -122,6 +140,7 @@ export default function ServicesPage() {
 
   return (
     <>
+      <JsonLd schema={servicesPageSchema} />
       {/* Service structured data — one <script> block per service */}
       {serviceSchemas.map((schema, i) => (
         <JsonLd key={i} schema={schema} />

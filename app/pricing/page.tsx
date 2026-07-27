@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import JsonLd from "@/components/seo/JsonLd";
 import PricingFaqAccordion from "./PricingFaqAccordion";
 import {
   PricingCtaLink,
@@ -12,11 +13,11 @@ import { BASE_URL } from "@/lib/constants";
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "Pricing | VeXtiv",
+  title: "Pricing for Websites, Branding & Social Media",
   description:
     "Transparent pricing for websites, social media & branding in Hyderabad. No hidden fees, no lock-in — just clear deliverables and fair rates.",
   openGraph: {
-    title: "Pricing | VeXtiv",
+    title: "Pricing for Websites, Branding & Social Media",
     description:
       "Transparent pricing for websites, social media & branding in Hyderabad. No hidden fees, no lock-in — just clear deliverables and fair rates.",
     url: `${BASE_URL}/pricing`,
@@ -848,8 +849,18 @@ function BottomCta() {
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function PricingPage() {
+  const pricingPageSchema: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Pricing for Websites, Branding & Social Media",
+    url: `${BASE_URL}/pricing`,
+    description:
+      "Transparent pricing for websites, branding, social media management, and related digital services in Hyderabad.",
+  };
+
   return (
     <>
+      <JsonLd schema={pricingPageSchema} />
       {/* 1. Hero */}
       <PricingHero />
 

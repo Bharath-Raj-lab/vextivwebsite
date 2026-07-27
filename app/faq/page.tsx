@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import FaqAccordion from "@/components/sections/FaqAccordion";
+import JsonLd from "@/components/seo/JsonLd";
 import PageBackground from "@/components/ui/PageBackground";
+import { FAQ_CATEGORIES } from "@/lib/faq";
 
 // ─── SSG ──────────────────────────────────────────────────────────────────────
 export const dynamic = "force-static";
@@ -11,11 +13,11 @@ import { BASE_URL } from "@/lib/constants";
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "FAQ | VeXtiv — Hyderabad Digital Agency",
+  title: "FAQ: Website, Pricing & Process Questions",
   description:
     "Honest answers to common questions about working with VeXtiv — pricing, process, timelines, and post-launch support in Hyderabad.",
   openGraph: {
-    title: "FAQ | VeXtiv — Hyderabad Digital Agency",
+    title: "FAQ: Website, Pricing & Process Questions",
     description:
       "Honest answers to common questions about working with VeXtiv — pricing, process, timelines, and post-launch support in Hyderabad.",
     url: `${BASE_URL}/faq`,
@@ -122,8 +124,24 @@ function FaqCTA() {
 
 // ─── Page Root ────────────────────────────────────────────────────────────────
 export default function FaqPage() {
+  const faqPageSchema: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQ_CATEGORIES.flatMap((category) =>
+      category.items.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    ),
+  };
+
   return (
     <>
+      <JsonLd schema={faqPageSchema} />
       <FaqHero />
 
       {/* Main FAQ content */}

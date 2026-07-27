@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import JsonLd from "@/components/seo/JsonLd";
 import PageBackground from "@/components/ui/PageBackground";
 
 // ─── SSG: no dynamic segments, statically generated at build time ─────────────
@@ -10,11 +11,11 @@ import { BASE_URL } from "@/lib/constants";
 // ─── SEO Metadata ─────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "About VeXtiv | Hyderabad Digital Agency",
+  title: "About VeXtiv",
   description:
     "We're a digital studio founded in Hyderabad with one purpose: to give local businesses the online presence they deserve. Meet the team behind VeXtiv.",
   openGraph: {
-    title: "About VeXtiv | Hyderabad Digital Agency",
+    title: "About VeXtiv",
     description:
       "We're a digital studio founded in Hyderabad with one purpose: to give local businesses the online presence they deserve. Meet the team behind VeXtiv.",
     url: `${BASE_URL}/about`,
@@ -295,8 +296,23 @@ function AboutCTA() {
 
 // ─── Page Root ────────────────────────────────────────────────────────────────
 export default function AboutPage() {
+  const aboutPageSchema: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    name: "About VeXtiv",
+    url: `${BASE_URL}/about`,
+    description:
+      "VeXtiv is a Hyderabad digital studio focused on websites, branding, content, local SEO, and growth systems for local businesses.",
+    mainEntity: {
+      "@type": "Organization",
+      name: "VeXtiv",
+      url: BASE_URL,
+    },
+  };
+
   return (
     <>
+      <JsonLd schema={aboutPageSchema} />
       <AboutHero />
       <StudioStory />
       <TeamSection />

@@ -50,10 +50,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   return {
     metadataBase: new URL(BASE_URL),
-    title: post.title + " | VeXtiv",
+    title: post.title,
     description: desc,
     openGraph: {
-      title: post.title + " | VeXtiv",
+      title: post.title,
       description: desc,
       url: `${BASE_URL}/blog/${slug}`,
       siteName: "VeXtiv",

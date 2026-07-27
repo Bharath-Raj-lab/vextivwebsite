@@ -10,11 +10,11 @@ export const revalidate = 900; // ISR revalidate 900
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "Blog | VeXtiv",
+  title: "Insights & Articles",
   description:
     "Insights on digital growth, local SEO, and online strategy for restaurants and local businesses in Hyderabad. Tips from the VeXtiv team.",
   openGraph: {
-    title: "Blog | VeXtiv",
+    title: "Insights & Articles",
     description:
       "Insights on digital growth, local SEO, and online strategy for restaurants and local businesses in Hyderabad. Tips from the VeXtiv team.",
     url: `${BASE_URL}/blog`,
@@ -49,6 +49,24 @@ const breadcrumbSchema: Record<string, unknown> = {
   ],
 };
 
+const blogPageSchema: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Insights & Articles',
+  url: `${BASE_URL}/blog`,
+  description:
+    'Practical articles on digital growth, local SEO, websites, content, and online strategy for Hyderabad businesses.',
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: blogPosts.map((post, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: post.title,
+      url: `${BASE_URL}/blog/${post.slug}`,
+    })),
+  },
+};
+
 export default function BlogPage() {
   return (
     <div className="relative min-h-screen bg-[var(--bg-base)] pt-[calc(var(--navbar-height)+4rem)] pb-24">
@@ -57,6 +75,7 @@ export default function BlogPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[var(--bg-base)] pointer-events-none" />
       </div>
       <div className="relative z-10">
+        <JsonLd schema={blogPageSchema} />
         <JsonLd schema={breadcrumbSchema} />
       <div className="container mx-auto px-6 max-w-7xl">
         <header className="mb-16">

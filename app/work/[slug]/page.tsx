@@ -37,10 +37,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   return {
     metadataBase: new URL(BASE_URL),
-    title: study.title + " | VeXtiv",
+    title: study.title,
     description: desc,
     openGraph: {
-      title: study.title + " | VeXtiv",
+      title: study.title,
       description: desc,
       url: `${BASE_URL}/work/${slug}`,
       siteName: "VeXtiv",

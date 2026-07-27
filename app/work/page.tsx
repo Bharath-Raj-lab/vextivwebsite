@@ -10,11 +10,11 @@ export const revalidate = 3600; // SSG + ISR
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "Our Work | VeXtiv",
+  title: "Our Work",
   description:
     "Explore our portfolio of custom websites, branding & QR ordering systems for businesses in Hyderabad and beyond. Book a free consultation.",
   openGraph: {
-    title: "Our Work | VeXtiv",
+    title: "Our Work",
     description:
       "Explore our portfolio of custom websites, branding & QR ordering systems for businesses in Hyderabad and beyond. Book a free consultation.",
     url: `${BASE_URL}/work`,
@@ -49,6 +49,24 @@ const breadcrumbSchema: Record<string, unknown> = {
   ],
 };
 
+const workPageSchema: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Our Work',
+  url: `${BASE_URL}/work`,
+  description:
+    'A portfolio of websites, branding, and QR ordering systems built by VeXtiv for Hyderabad businesses.',
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: caseStudies.map((study, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: study.title,
+      url: `${BASE_URL}/work/${study.slug}`,
+    })),
+  },
+};
+
 export default function WorkPage() {
   return (
     <div className="relative min-h-screen bg-[var(--bg-base)] pt-[calc(var(--navbar-height)+4rem)] pb-24">
@@ -57,6 +75,7 @@ export default function WorkPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[var(--bg-base)] pointer-events-none" />
       </div>
       <div className="relative z-10">
+        <JsonLd schema={workPageSchema} />
         <JsonLd schema={breadcrumbSchema} />
       <div className="w-full">
         <header className="mb-16 px-4 md:px-8 lg:px-12">
