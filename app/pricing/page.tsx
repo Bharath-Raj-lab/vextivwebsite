@@ -1,25 +1,28 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/seo/JsonLd";
 import PricingFaqAccordion from "./PricingFaqAccordion";
+import PricingServiceExplorer from "./PricingServiceExplorer";
 import {
   PricingCtaLink,
   CustomSolutionCtaLink,
   BottomCtaLink,
 } from "./PricingCtaLinks";
 import PageBackground from "@/components/ui/PageBackground";
+import { SERVICES } from "../services/servicesData";
+import { FAQ_ITEMS } from "./pricingFaqData";
 
 import { BASE_URL } from "@/lib/constants";
 
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "Pricing for Websites, Branding & Social Media",
+  title: "Pricing & Service Packages in Hyderabad",
   description:
-    "Transparent pricing for websites, social media & branding in Hyderabad. No hidden fees, no lock-in — just clear deliverables and fair rates.",
+    "Professional website, branding, SEO, social media, and QR system pricing for Hyderabad businesses. Pricing varies by region and complexity.",
   openGraph: {
-    title: "Pricing for Websites, Branding & Social Media",
+    title: "Pricing & Service Packages in Hyderabad",
     description:
-      "Transparent pricing for websites, social media & branding in Hyderabad. No hidden fees, no lock-in — just clear deliverables and fair rates.",
+      "Professional website, branding, SEO, social media, and QR system pricing for Hyderabad businesses. Pricing varies by region and complexity.",
     url: `${BASE_URL}/pricing`,
     siteName: "VeXtiv",
     type: "website",
@@ -33,6 +36,8 @@ export const metadata: Metadata = {
 };
 
 export const dynamic = "force-static";
+
+const PRICING_NOTE = "Pricing varies by region and complexity. Contact us for a custom quote.";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface PricingTier {
@@ -57,8 +62,7 @@ const WEBSITE_TIERS: PricingTier[] = [
   {
     id: "web-starter",
     name: "Starter",
-    price: "₹14,999",
-    hostingLine: "₹999/month hosting & maintenance",
+    price: PRICING_NOTE,
     isMostChosen: false,
     tagline: "Get online and look credible fast.",
     whoIsThisFor: [
@@ -81,8 +85,7 @@ const WEBSITE_TIERS: PricingTier[] = [
   {
     id: "web-business",
     name: "Business",
-    price: "₹24,999",
-    hostingLine: "₹999/month hosting & maintenance",
+    price: PRICING_NOTE,
     isMostChosen: true,
     tagline: "A complete website built to generate leads.",
     whoIsThisFor: [
@@ -106,9 +109,7 @@ const WEBSITE_TIERS: PricingTier[] = [
   {
     id: "web-premium",
     name: "Premium",
-    price: "₹49,999+",
-    pricePrefix: "Starting from",
-    hostingLine: "₹999/month hosting & maintenance",
+    price: PRICING_NOTE,
     isMostChosen: false,
     tagline: "Bespoke digital experience for established brands.",
     whoIsThisFor: [
@@ -136,8 +137,7 @@ const SOCIAL_TIERS: PricingTier[] = [
   {
     id: "social-starter",
     name: "Starter",
-    price: "₹14,999",
-    priceSuffix: "/month",
+    price: PRICING_NOTE,
     isMostChosen: false,
     tagline: "Stay visible on social without the stress.",
     whoIsThisFor: [
@@ -158,8 +158,7 @@ const SOCIAL_TIERS: PricingTier[] = [
   {
     id: "social-business",
     name: "Business",
-    price: "₹19,999",
-    priceSuffix: "/month",
+    price: PRICING_NOTE,
     isMostChosen: true,
     tagline: "Consistent presence that attracts customers.",
     whoIsThisFor: [
@@ -181,8 +180,7 @@ const SOCIAL_TIERS: PricingTier[] = [
   {
     id: "social-scale",
     name: "Scale",
-    price: "₹34,999",
-    priceSuffix: "/month",
+    price: PRICING_NOTE,
     isMostChosen: false,
     tagline: "Full-stack social media for serious growth.",
     whoIsThisFor: [
@@ -208,7 +206,7 @@ const BRANDING_TIERS: PricingTier[] = [
   {
     id: "brand-starter",
     name: "Starter",
-    price: "₹5,999",
+    price: PRICING_NOTE,
     oneTimeNote: "One-time fee · no recurring charges",
     isMostChosen: false,
     tagline: "A professional identity to launch your brand.",
@@ -231,7 +229,7 @@ const BRANDING_TIERS: PricingTier[] = [
   {
     id: "brand-business",
     name: "Business",
-    price: "₹14,999",
+    price: PRICING_NOTE,
     oneTimeNote: "One-time fee · no recurring charges",
     isMostChosen: true,
     tagline: "A brand system people remember and trust.",
@@ -256,7 +254,7 @@ const BRANDING_TIERS: PricingTier[] = [
   {
     id: "brand-complete",
     name: "Complete",
-    price: "₹24,999",
+    price: PRICING_NOTE,
     oneTimeNote: "One-time fee · no recurring charges",
     isMostChosen: false,
     tagline: "The complete brand identity for ambitious companies.",
@@ -424,7 +422,7 @@ function FeaturedCard() {
           <div className="featured-card-right">
             <div className="featured-most-chosen">🔥 Most Chosen</div>
             <p className="featured-monthly-label">Monthly subscription</p>
-            <p className="featured-price">₹2,499<span className="featured-price-mo">/mo</span></p>
+              <p className="featured-price">{PRICING_NOTE}</p>
             <PricingCtaLink
               href="/contact"
               label="Start My Website"
@@ -438,7 +436,7 @@ function FeaturedCard() {
             </div>
             <div className="featured-onetime">
               <p className="featured-onetime-label">One-time purchase</p>
-              <p className="featured-onetime-price">₹24,999 + ₹999/mo</p>
+              <p className="featured-onetime-price">{PRICING_NOTE}</p>
               <PricingCtaLink
                 href="/contact"
                 label="Buy Outright"
@@ -473,18 +471,7 @@ function PricingCard({ tier }: { tier: PricingTier }) {
       </div>
 
       <div className="pricing-price-block">
-        {tier.pricePrefix && (
-          <p className="pricing-price-prefix">{tier.pricePrefix}</p>
-        )}
-        <div className="pricing-price-row">
-          <span className="pricing-price">{tier.price}</span>
-          {tier.priceSuffix && (
-            <span className="pricing-price-suffix">{tier.priceSuffix}</span>
-          )}
-        </div>
-        {tier.hostingLine && (
-          <p className="pricing-hosting-line">{tier.hostingLine}</p>
-        )}
+        <p className="pricing-price">{tier.price}</p>
         {tier.oneTimeNote && (
           <p className="pricing-one-time-note">{tier.oneTimeNote}</p>
         )}
@@ -540,7 +527,7 @@ function QuickLaunchCard() {
       </div>
       <div className="quick-launch-right">
         <p className="quick-launch-from">Starting from</p>
-        <p className="quick-launch-price">₹5,999</p>
+        <p className="quick-launch-price">{PRICING_NOTE}</p>
         <PricingCtaLink
           href="/contact"
           label="Get Started"
@@ -653,21 +640,21 @@ function WebsiteSection() {
         <div className="web-option-row web-option-row--header">
           <span className="web-option-cell web-option-label">Option</span>
           <span className="web-option-cell">Best For</span>
-          <span className="web-option-cell web-option-cell--hide-mobile">Entry Cost</span>
+          <span className="web-option-cell web-option-cell--hide-mobile">Note</span>
         </div>
         <div className="web-option-row">
           <span className="web-option-cell web-option-label">
             <span className="web-option-badge web-option-badge--fire">🔥 Subscription</span>
           </span>
           <span className="web-option-cell">Lower upfront cost, pay monthly</span>
-          <span className="web-option-cell web-option-cell--hide-mobile web-option-price">₹1,999–₹2,499/mo</span>
+          <span className="web-option-cell web-option-cell--hide-mobile web-option-price">{PRICING_NOTE}</span>
         </div>
         <div className="web-option-row">
           <span className="web-option-cell web-option-label">
             <span className="web-option-badge">One-Time</span>
           </span>
           <span className="web-option-cell">Long-term ownership, pay once</span>
-          <span className="web-option-cell web-option-cell--hide-mobile web-option-price">₹5,999–₹49,999+</span>
+          <span className="web-option-cell web-option-cell--hide-mobile web-option-price">{PRICING_NOTE}</span>
         </div>
       </div>
 
@@ -830,6 +817,62 @@ function PricingFaq() {
   );
 }
 
+function PricingPrinciples() {
+  const principles = [
+    {
+      step: "01",
+      title: "Region matters",
+      body: "Travel, on-site work, and local delivery requirements can change the scope of a project.",
+    },
+    {
+      step: "02",
+      title: "Complexity matters",
+      body: "A simple landing page is a different project from a multi-service system with integrations.",
+    },
+    {
+      step: "03",
+      title: "Speed matters",
+      body: "Short timelines and priority delivery can shift the quote because they change our production schedule.",
+    },
+    {
+      step: "04",
+      title: "Support matters",
+      body: "Ongoing updates, content support, and maintenance are priced separately when they change the scope.",
+    },
+  ];
+
+  return (
+    <section className="pricing-principles" aria-labelledby="pricing-principles-heading">
+      <div className="pricing-principles__inner">
+        <div className="pricing-principles__header">
+          <p className="pricing-section-eyebrow">How pricing works</p>
+          <h2 id="pricing-principles-heading" className="pricing-section-heading">
+            A simple quote process that clients can understand quickly.
+          </h2>
+          <p className="pricing-principles__lede">
+            If you&apos;re comparing options, use the service buttons above to understand the work first. Then we&apos;ll quote the actual project based on what you need.
+          </p>
+        </div>
+
+        <div className="pricing-principles__grid">
+          {principles.map((item) => (
+            <article key={item.title} className="pricing-principles__card">
+              <p className="pricing-principles__step">{item.step}</p>
+              <h3 className="pricing-principles__card-title">{item.title}</h3>
+              <p className="pricing-principles__card-body">{item.body}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className="pricing-principles__note">
+          <strong>Pricing varies by region and complexity.</strong>
+          <span>Share your goals, current website, and timeline, and we&apos;ll return a quote that matches the real scope.</span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ─── Bottom CTA ───────────────────────────────────────────────────────────────
 function BottomCta() {
   return (
@@ -852,52 +895,54 @@ export default function PricingPage() {
   const pricingPageSchema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "Pricing for Websites, Branding & Social Media",
+    name: "Pricing & Service Packages in Hyderabad",
     url: `${BASE_URL}/pricing`,
     description:
-      "Transparent pricing for websites, branding, social media management, and related digital services in Hyderabad.",
+      "Professional website, branding, SEO, social media, and QR system pricing for Hyderabad businesses.",
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: SERVICES.map((service, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: service.name,
+        url: `${BASE_URL}/pricing#service-${service.id}`,
+      })),
+    },
+  };
+
+  const pricingFaqSchema: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQ_ITEMS.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
   };
 
   return (
     <>
       <JsonLd schema={pricingPageSchema} />
+      <JsonLd schema={pricingFaqSchema} />
       {/* 1. Hero */}
       <PricingHero />
 
       {/* 2. Trust Indicators */}
       <TrustStrip />
 
-      {/* 3. Most Clients Start Here */}
-      <FeaturedCard />
+      {/* 3. Service explorer */}
+      <PricingServiceExplorer />
 
-      {/* 4. Service Pricing */}
-      <div className="pricing-main">
-        {/* Website — uses dedicated section with option table */}
-        <WebsiteSection />
-        <ServiceSection
-          id="social-media"
-          eyebrow="Social Growth"
-          heading="Social Media Management"
-          tiers={SOCIAL_TIERS}
-        />
-        <ServiceSection
-          id="branding"
-          eyebrow="Brand Strategy"
-          heading="Branding & Identity"
-          tiers={BRANDING_TIERS}
-        />
-      </div>
+      {/* 4. Pricing principles */}
+      <PricingPrinciples />
 
-      {/* 5. Custom Solutions */}
-      <CustomSolutions />
-
-      {/* 6. Why Businesses Choose Vextiv */}
-      <WhyChooseVextiv />
-
-      {/* 7. FAQ */}
+      {/* 5. FAQ */}
       <PricingFaq />
 
-      {/* 8. Bottom CTA */}
+      {/* 6. Bottom CTA */}
       <BottomCta />
 
       {/* ── Scoped styles ── */}
@@ -2302,6 +2347,108 @@ export default function PricingPage() {
           padding: clamp(72px, 8vw, 96px) 0;
           background-color: var(--bg-surface-1);
           border-top: 1px solid var(--border-subtle);
+        }
+
+        /* ── Pricing principles ─────────────────────────────── */
+
+        .pricing-principles {
+          padding: clamp(72px, 8vw, 96px) 0;
+          background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.03));
+          border-top: 1px solid var(--border-subtle);
+          border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .pricing-principles__inner {
+          max-width: 1240px;
+          margin: 0 auto;
+          padding: 0 clamp(24px, 5vw, 80px);
+          display: grid;
+          gap: 28px;
+        }
+
+        .pricing-principles__header {
+          max-width: 760px;
+        }
+
+        .pricing-principles__lede {
+          font-family: var(--font-body);
+          font-size: var(--text-base);
+          line-height: var(--leading-body);
+          color: var(--text-secondary);
+          max-width: 680px;
+        }
+
+        .pricing-principles__grid {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 16px;
+        }
+
+        .pricing-principles__card {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          padding: 22px;
+          background: var(--bg-surface-2);
+          border: 1px solid var(--border-default);
+          border-radius: 18px;
+          min-height: 180px;
+        }
+
+        .pricing-principles__step {
+          font-family: var(--font-body);
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          color: var(--text-accent);
+          text-transform: uppercase;
+        }
+
+        .pricing-principles__card-title {
+          font-family: var(--font-display);
+          font-size: 22px;
+          line-height: 1.15;
+          letter-spacing: var(--tracking-heading);
+          color: var(--text-primary);
+        }
+
+        .pricing-principles__card-body {
+          font-family: var(--font-body);
+          font-size: 14px;
+          line-height: 1.7;
+          color: var(--text-secondary);
+        }
+
+        .pricing-principles__note {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px 12px;
+          align-items: center;
+          padding: 16px 18px;
+          border-radius: 14px;
+          border: 1px solid var(--accent-border-card);
+          background: rgba(200, 240, 77, 0.08);
+          color: var(--text-secondary);
+          font-family: var(--font-body);
+          font-size: 14px;
+          line-height: 1.6;
+        }
+
+        .pricing-principles__note strong {
+          color: var(--text-primary);
+          font-weight: 700;
+        }
+
+        @media (max-width: 960px) {
+          .pricing-principles__grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+        }
+
+        @media (max-width: 640px) {
+          .pricing-principles__grid {
+            grid-template-columns: 1fr;
+          }
         }
 
         .pricing-faq-inner {
